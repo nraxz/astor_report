@@ -3,5 +3,5 @@
 .SC_SubMenuApp .scBtnGrpTextOver { background-color: #EFF2F7 }
 .SC_SubMenuApp .scBtnGrpLink { color: #6c757d; font-family: 'Nunito', sans-serif; font-size: 13px; text-shadow: 12px; text-decoration: none }
 .SC_SubMenuButton .scBtnGrpBackground { text-align: left }
-.SC_SubMenuButton { z-index: 999999 }
-.SC_SubMenuApp { z-index: 999999 }
+.SC_SubMenuButton { z-index: 1000 }
+.SC_SubMenuApp { z-index: 1000 }

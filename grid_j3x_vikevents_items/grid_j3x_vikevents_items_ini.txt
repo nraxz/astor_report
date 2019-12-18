@@ -1,7 +1,0 @@
-index.php
-AstorReport
-grid_j3x_vikevents_items
-NAO
-cons
-grid_j3x_vikevents_items
-LigMd5
