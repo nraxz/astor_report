@@ -323,6 +323,7 @@ class Sales_Snapshots_grid
    }
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dyn_search_aut_comp']))
    {
+       $Cmp_select2 = array("j3x_vikevents_items_title");
        $NM_func_aut_comp = "lookup_ajax_" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dyn_search_aut_comp']['cmp'];
        $parm = ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($_GET['q'])) ? sc_convert_encoding($_GET['q'], $_SESSION['scriptcase']['charset'], "UTF-8") : $_GET['q'];
        $nmgp_def_dados = $this->$NM_func_aut_comp($parm);
@@ -339,7 +340,14 @@ class Sales_Snapshots_grid
                   {
                       $Valor = $Cod . " - " . $Valor;
                   }
-                  $resp_aut_comp[] = array('label' => $Valor , 'value' => $Cod);
+                  if (in_array($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dyn_search_aut_comp']['cmp'], $Cmp_select2))
+                  {
+                      $resp_aut_comp[] = array('text' => $Valor , 'id' => $Cod);
+                  }
+                  else
+                  {
+                      $resp_aut_comp[] = array('label' => $Valor , 'value' => $Cod);
+                  }
                   $count_aut_comp++;
               }
           }
@@ -349,7 +357,14 @@ class Sales_Snapshots_grid
           }
        }
        $oJson = new Services_JSON();
-       echo $oJson->encode($resp_aut_comp);
+       if (in_array($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dyn_search_aut_comp']['cmp'], $Cmp_select2))
+       {
+           echo $oJson->encode(array('results' => $resp_aut_comp));
+       }
+       else
+       {
+           echo $oJson->encode($resp_aut_comp);
+       }
        unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dyn_search_aut_comp']);
        exit;
    }
@@ -1463,6 +1478,8 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/malsup-blockui/jquery.blockUI.js\"></script>\r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->Ini->str_schema_filter . "_calendar.css\" />\r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->Ini->str_schema_filter . "_calendar" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\" />\r\n");
+           $nm_saida->saida("   <link rel=\"stylesheet\" href=\"" . $this->Ini->path_prod . "/third/jquery_plugin/select2/css/select2.min.css\" type=\"text/css\" />\r\n");
+           $nm_saida->saida("   <script type=\"text/javascript\" src=\"" . $this->Ini->path_prod . "/third/jquery_plugin/select2/js/select2.full.min.js\"></script>\r\n");
            $nm_saida->saida("        <script type=\"text/javascript\">\r\n");
            $nm_saida->saida("          var sc_pathToTB = '" . $this->Ini->path_prod . "/third/jquery_plugin/thickbox/';\r\n");
            $nm_saida->saida("          var sc_tbLangClose = \"" . html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) . "\";\r\n");
@@ -3575,8 +3592,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf'])
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_j3x_vikevents_orders_persons_grid_line . "\"  style=\"" . $this->Css_Cmp['css_j3x_vikevents_orders_persons_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
  if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Ind_lig_mult']++;
-       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons_@scinf_grid_j3x_vikevents_orderseats']) ? $this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons_@scinf_grid_j3x_vikevents_orderseats'] : (isset($this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons']) ? $this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons'] : null);
-       if (isset($this->Ini->sc_lig_md5["grid_j3x_vikevents_orderseats"]) && $this->Ini->sc_lig_md5["grid_j3x_vikevents_orderseats"] == "S") {
+       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons_@scinf_tickets']) ? $this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons_@scinf_tickets'] : (isset($this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons']) ? $this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons'] : null);
+       if (isset($this->Ini->sc_lig_md5["tickets"]) && $this->Ini->sc_lig_md5["tickets"] == "S") {
            $Parms_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_items_id) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_orders_id) . "*scoutNMSC_modal*scinok*scout";
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dashboard_info']['under_dashboard'] && isset($linkTarget))
            {
@@ -3591,7 +3608,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf'])
        } else {
            $Md5_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_items_id) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_orders_id) . "*scoutNMSC_modal*scinok*scout";
        }
-   $nm_saida->saida("<a id=\"id_sc_field_j3x_vikevents_orders_persons_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_grid_j3x_vikevents_orderseats_cons . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : 'modal') . "', 'inicio', '440', '630', '', 'grid_j3x_vikevents_orderseats', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_j3x_vikevents_orders_persons_grid_line . "\" style=\"" . $this->Css_Cmp['css_j3x_vikevents_orders_persons_grid_line'] . "\">" . $conteudo . "</a>\r\n");
+   $nm_saida->saida("<a id=\"id_sc_field_j3x_vikevents_orders_persons_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_tickets_cons . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : 'modal') . "', 'inicio', '440', '630', '', 'tickets', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_j3x_vikevents_orders_persons_grid_line . "\" style=\"" . $this->Css_Cmp['css_j3x_vikevents_orders_persons_grid_line'] . "\">" . $conteudo . "</a>\r\n");
 } else {
    $nm_saida->saida(" <span id=\"id_sc_field_j3x_vikevents_orders_persons_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
        } 
@@ -5400,9 +5417,17 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf'])
    function grid_search_tag_ini($cmp, $def, $seq)
    {
        global $nm_saida;
+       $this->Cmps_select2_grid = array();
        $lin_obj  = "";
        $lin_obj .= "<div class='scGridFilterTagListItem' id='grid_search_" . $cmp . "'>";
-       $lin_obj .= "<span class='scGridFilterTagListItemLabel' id='grid_search_label_" . $cmp . "' title='" . NM_encode_input($def['hint']) . "' style='cursor:pointer;' onclick=\"closeAllTags();$('#grid_search_" . $cmp . " .scGridFilterTagListFilter').toggle();\">" . NM_encode_input($def['descr']) . "</span>";
+       if (in_array($cmp, $this->Cmps_select2_grid))
+       {
+           $lin_obj .= "<span class='scGridFilterTagListItemLabel' id='grid_search_label_" . $cmp . "' title='" . NM_encode_input($def['hint']) . "' style='cursor:pointer;' onclick=\"closeAllTags();$('#grid_search_" . $cmp . " .scGridFilterTagListFilter').toggle(); Sc_carga_select2_grid_" . $cmp . "(" . $seq . "); \">" . NM_encode_input($def['descr']) . "</span>";
+       }
+       else
+       {
+           $lin_obj .= "<span class='scGridFilterTagListItemLabel' id='grid_search_label_" . $cmp . "' title='" . NM_encode_input($def['hint']) . "' style='cursor:pointer;' onclick=\"closeAllTags();$('#grid_search_" . $cmp . " .scGridFilterTagListFilter').toggle();\">" . NM_encode_input($def['descr']) . "</span>";
+       }
        $lin_obj .= "<span class='scGridFilterTagListItemClose' onclick=\"$(this).parent().remove();checkLastTag(false);setTimeout(function() {nm_proc_grid_search('" . $seq . "', 'del_grid_search', 'grid_search'); return false;}, 200); return false;
     \"></span>";
        return $lin_obj;
@@ -5671,7 +5696,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf'])
            $val_cmp = substr($val_cmp, ($tmp_pos + 4));
            $sAutocompValue = substr($sAutocompValue, ($tmp_pos + 4));
        }
-       $lin_obj .= "     <input class='sc-js-input " . $this->css_scAppDivToolbarInput . "' type='text' id='id_ac_grid_j3x_vikevents_items_title" . $ind . "' name='val_grid_search_j3x_vikevents_items_title_autocomp" . $ind . "' size='50' value='" . NM_encode_input($sAutocompValue) . "' alt=\"{datatype: 'text', maxLength: 50, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}\">";
+       $lin_obj .= "     <select class='sc-ui-autocomp-j3x_vikevents_items_title " . $this->css_scAppDivToolbarInput . "' id='id_ac_grid_j3x_vikevents_items_title" . $ind . "' name='val_grid_search_j3x_vikevents_items_title_autocomp" . $ind . "'>";
+       if ('' !=  $j3x_vikevents_items_title) {
+           $lin_obj .= "     <option value='" . $j3x_vikevents_items_title . "'  selected>" . $sAutocompValue . "</option>";
+       }
+       $lin_obj .= "     </select>";
        $lin_obj .= "       </span>";
        $lin_obj .= "          </div>";
        $lin_obj .= "          <div class='scGridFilterTagListFilterBar'>";
@@ -5960,45 +5989,54 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf'])
        $nm_saida->saida("                 if (tmp == 'j3x_vikevents_items_title')\r\n");
        $nm_saida->saida("                 {\r\n");
        $nm_saida->saida("                      var x_j3x_vikevents_items_title = i;\r\n");
-       $nm_saida->saida("                      $(\"#id_ac_grid_j3x_vikevents_items_title\" + i).autocomplete({\r\n");
-       $nm_saida->saida("                        minLength: 1,\r\n");
-       $nm_saida->saida("                        source: function (request, response) {\r\n");
-       $nm_saida->saida("                        $.ajax({\r\n");
+       $nm_saida->saida("                        $(\".sc-ui-autocomp-j3x_vikevents_items_title\").on(\"focus\", function() {\r\n");
+       $nm_saida->saida("                        }).on(\"blur\", function() {\r\n");
+       $nm_saida->saida("                        }).on(\"keydown\", function(e) {\r\n");
+       $nm_saida->saida("                         if(e.keyCode == $.ui.keyCode.TAB && $(\".ui-autocomplete\").filter(\":visible\").length) {\r\n");
+       $nm_saida->saida("                          e.keyCode = $.ui.keyCode.DOWN;\r\n");
+       $nm_saida->saida("                          $(this).trigger(e);\r\n");
+       $nm_saida->saida("                          e.keyCode = $.ui.keyCode.ENTER;\r\n");
+       $nm_saida->saida("                          $(this).trigger(e);\r\n");
+       $nm_saida->saida("                         }\r\n");
+       $nm_saida->saida("                        }).select2({\r\n");
+       $nm_saida->saida("                         minimumInputLength: 1,\r\n");
+       $nm_saida->saida("                         language: {\r\n");
+       $nm_saida->saida("                          inputTooShort: function() {\r\n");
+       $nm_saida->saida("                           return \"" . sprintf($this->Ini->Nm_lang['lang_autocomp_tooshort'], 1) . "\";\r\n");
+       $nm_saida->saida("                          },\r\n");
+       $nm_saida->saida("                          noResults: function() {\r\n");
+       $nm_saida->saida("                           return \"" . $this->Ini->Nm_lang['lang_autocomp_notfound'] . "\";\r\n");
+       $nm_saida->saida("                          },\r\n");
+       $nm_saida->saida("                          searching: function() {\r\n");
+       $nm_saida->saida("                           return \"" . $this->Ini->Nm_lang['lang_autocomp_searching'] . "\";\r\n");
+       $nm_saida->saida("                          }\r\n");
+       $nm_saida->saida("                        },\r\n");
+       $nm_saida->saida("                         width: \"300px\",\r\n");
+       $nm_saida->saida("                         ajax: {\r\n");
        $nm_saida->saida("                          url: \"index.php\",\r\n");
        $nm_saida->saida("                          dataType: \"json\",\r\n");
-       $nm_saida->saida("                          data: {\r\n");
-       $nm_saida->saida("                             q: request.term,\r\n");
-       $nm_saida->saida("                             nmgp_opcao: \"ajax_aut_comp_dyn_search\",\r\n");
-       $nm_saida->saida("                             origem: \"grid\",\r\n");
-       $nm_saida->saida("                             field: \"j3x_vikevents_items_title\",\r\n");
-       $nm_saida->saida("                             max_itens: \"10\",\r\n");
-       $nm_saida->saida("                             cod_desc: \"N\",\r\n");
-       $nm_saida->saida("                             script_case_init: " . $this->Ini->sc_page . "\r\n");
-       $nm_saida->saida("                           },\r\n");
-       $nm_saida->saida("                          success: function (data) {\r\n");
+       $nm_saida->saida("                          processResults: function (data) {\r\n");
        $nm_saida->saida("                            if (data == \"ss_time_out\") {\r\n");
        $nm_saida->saida("                                nm_move();\r\n");
        $nm_saida->saida("                            }\r\n");
-       $nm_saida->saida("                            response(data);\r\n");
+       $nm_saida->saida("                            return data;\r\n");
+       $nm_saida->saida("                          },\r\n");
+       $nm_saida->saida("                          data: function (params) {\r\n");
+       $nm_saida->saida("                           var query = {\r\n");
+       $nm_saida->saida("                            q: params.term,\r\n");
+       $nm_saida->saida("                            nmgp_opcao: \"ajax_aut_comp_dyn_search\",\r\n");
+       $nm_saida->saida("                            origem: \"grid\",\r\n");
+       $nm_saida->saida("                            field: \"j3x_vikevents_items_title\",\r\n");
+       $nm_saida->saida("                            max_itens: \"10\",\r\n");
+       $nm_saida->saida("                            cod_desc: \"N\",\r\n");
+       $nm_saida->saida("                            script_case_init: " . $this->Ini->sc_page . "\r\n");
+       $nm_saida->saida("                           }\r\n");
+       $nm_saida->saida("                           return query;\r\n");
        $nm_saida->saida("                          }\r\n");
-       $nm_saida->saida("                         });\r\n");
-       $nm_saida->saida("                        },\r\n");
-       $nm_saida->saida("                        select: function (event, ui) {\r\n");
-       $nm_saida->saida("                          $(\"#grid_search_j3x_vikevents_items_title_val_\" + x_j3x_vikevents_items_title).val(ui.item.value);\r\n");
-       $nm_saida->saida("                          $(this).val(ui.item.label);\r\n");
-       $nm_saida->saida("                          event.preventDefault();\r\n");
-       $nm_saida->saida("                        },\r\n");
-       $nm_saida->saida("                        focus: function (event, ui) {\r\n");
-       $nm_saida->saida("                          $(\"#grid_search_j3x_vikevents_items_title_val_\" + x_j3x_vikevents_items_title).val(ui.item.value);\r\n");
-       $nm_saida->saida("                          $(this).val(ui.item.label);\r\n");
-       $nm_saida->saida("                          event.preventDefault();\r\n");
-       $nm_saida->saida("                        },\r\n");
-       $nm_saida->saida("                        change: function (event, ui) {\r\n");
-       $nm_saida->saida("                          if (null == ui.item) {\r\n");
-       $nm_saida->saida("                             $(\"#grid_search_j3x_vikevents_items_title_val_\" + x_j3x_vikevents_items_title).val( $(this).val() );\r\n");
-       $nm_saida->saida("                          }\r\n");
-       $nm_saida->saida("                        }\r\n");
-       $nm_saida->saida("                      });\r\n");
+       $nm_saida->saida("                         }\r\n");
+       $nm_saida->saida("                        }).on(\"select2:select\", function(e) {;\r\n");
+       $nm_saida->saida("                         $(\"#grid_search_j3x_vikevents_items_title_val_\" + x_j3x_vikevents_items_title).val(e.params.data.id);\r\n");
+       $nm_saida->saida("                        });\r\n");
        $nm_saida->saida("                 }\r\n");
        $nm_saida->saida("             }\r\n");
        $nm_saida->saida("         }\r\n");

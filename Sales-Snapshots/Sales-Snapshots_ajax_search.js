@@ -247,6 +247,7 @@ function ajax_select_filter(parm)
               }
            }
         }
+        Sc_carga_select2('all');
         nmAjaxProcOff();
     });
 }

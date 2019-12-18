@@ -99,7 +99,7 @@ class Sales_Snapshots_ini
    var $path_atual;
    var $Gd_missing;
    var $sc_site_ssl;
-   var $link_grid_j3x_vikevents_orderseats_cons;
+   var $link_tickets_cons;
    var $nm_cont_lin;
    var $nm_limite_lin;
    var $nm_limite_lin_prt;
@@ -214,7 +214,7 @@ class Sales_Snapshots_ini
       $this->nm_hr_criacao   = "092851"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20191218"; 
-      $this->nm_hr_ult_alt   = "145852"; 
+      $this->nm_hr_ult_alt   = "151423"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -454,25 +454,25 @@ class Sales_Snapshots_ini
       {
           $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
       }
-      $Tmp_apl_lig = "grid_j3x_vikevents_orderseats";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_j3x_vikevents_orderseats_ini.txt"))
+      $Tmp_apl_lig = "tickets";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/tickets_ini.txt"))
       {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_j3x_vikevents_orderseats_ini.txt");
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/tickets_ini.txt");
           if (isset($Friendly[0]) && !empty($Friendly[0]))
           {
               $Tmp_apl_lig = trim($Friendly[0]);
           }
       }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_j3x_vikevents_orderseats_ini.txt"))
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/tickets_ini.txt"))
       {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_j3x_vikevents_orderseats_ini.txt");
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/tickets_ini.txt");
           if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
           {
-              $this->sc_lig_md5["grid_j3x_vikevents_orderseats"] = 'S';
+              $this->sc_lig_md5["tickets"] = 'S';
           }
       }
       $this->sc_lig_target["C_@scinf_j3x_vikevents_orders_persons"] = 'modal';
-      $this->sc_lig_target["C_@scinf_j3x_vikevents_orders_persons_@scinf_grid_j3x_vikevents_orderseats"] = 'modal';
+      $this->sc_lig_target["C_@scinf_j3x_vikevents_orders_persons_@scinf_tickets"] = 'modal';
       if ($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['under_dashboard'])
       {
           $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['dashboard_app'];
@@ -487,7 +487,7 @@ class Sales_Snapshots_ini
               }
           }
       }
-      $this->link_grid_j3x_vikevents_orderseats_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_j3x_vikevents_orderseats') . "/" ; 
+      $this->link_tickets_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('tickets') . "/" ; 
       if ($Tp_init == "Path_sub")
       {
           return;
@@ -897,7 +897,7 @@ class Sales_Snapshots_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZSX7HArYVWJsHgrwZSJqDur/DoX7DcNmZ1F7HIBOD5BOHgvCHEXeHEFqZuXGDcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKHArCDurmDoXGHQFYDQFaHIBOD5F7HgrwVcXKH5XCHMraHQNwZ1FGHINaV5X7HgNOHErsH5FGZuB/DcBiDQBqD1NKD5F7DMzGVIBsHEX7HIXGDcFYZ1FGD1NaD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIvsVWFaDMvOZSNiDWJeHIX7HQNmZSBOD1NaV5X7HgNOVkJqH5FYHMJwHQNwZ9F7HAvCD5F7DMrYVcBUDWBmVEraHQBiZ1BOD1zGV5X7HgBYHEJqH5F/HIXGHQJKZ9F7HIvsV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgNKHENiDWXCHMBiHQJeDQFaHIvsD5F7DMBOV9FeDWBmVENUDcFYH9BqD1zGV5X7HgNOVkJqH5FYHIBiHQXsZ9XGHAvmD5F7DMvODkBsHEFGVENUHQNwH9BODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgBeDkB/HEB3DoB/HQFYDQJwHANOV5JwHgrKDkFCDWJeVoB/D9BsZkFUHArKHQraDEBeHEXeDuFYVoB/D9NwZ9rqHANKD5BOHuBOVcBUDurGVErqHQNGZkFUZ1BeHuXGDMzGHEJGH5F/HMBqDcJeDQX7DSrwD5JwDMrwDkFCDWBmVEFGHQFYH9FaHIBeZMBODEvsZSJGDWr/DoB/D9XsZSFGD1NKV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raDMBYVIBsDWFaHIJeHQBsZ1BOD1rwHQF7HgvCHArsDWBmDoBOHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiDcBqVINUHAvCD5BOHgveVkXeHEFaHIBiHQXODQFaDSBYHuBOHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSJqH5FYDoraD9XsDQJsHABYV5BqDMrwVcB/H5FqDoJsDcBqZ1FaHArKD5JeDEBeHEFiV5FaZuFaD9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuNODkBODWXKDoXGDcJUZ1FGDSBeZMFaDEBeHEXeDuFaHIXGHQNwDuFaDSN7HuraDMvmVcFKV5BmVoBqD9BsZkFGHArKD5BqDMzGHEJqV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiDuBqDSzGV5XGDMvOZSNiDWXKVEX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMFGHQFYZ9F7D1BeHQJeDMBOVcXKDuX7VoX7DcNmZ1BOHArKV5JwDEvsHEJqV5XKZuXGDcBiDQFaZ1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1NOD5NUDErKVkXeDWFqDoXGD9JKDQBOHAveHQF7HuvmVcFKDWFaDoX7D9JmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiH9FUDSBYHuNUDMvOVcFeV5FYVoBOHQXGZ1F7HABYHuX7HgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMveHErsDWX7DoB/HQJeDQBqD1veHuNUDMzGVIFCDWFYVoFGD9XGZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NwDQJsHABYV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwDMBODkBODWFaDoJeDcJUZ1FaD1NaV5X7HgNOZSXeV5XCDoraD9NwDQJwD1BeD5BOHuNODkFCH5XCVoFGHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrYDkBsDuX7HMFUHQBsH9BqDSBeZMJeDMBYVkXeDuFaHIrqHQFYH9X7DSrwHQJsDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWFqHIrqHQBiZSFUHAveHQJeDMrwVcB/H5XCHIJsDcFYZkBiD1rKHuBqHgvCHEJqDWBmZuB/HQXODQFUHIvsVWJsDMrwV9FeHEF/HIraHQXGH9BOD1rKHQX7DMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuX7DMvsZSNiDWrmVoX7HQBiVINUHAN7HuX7HgvCHEJqDWr/HMFGHQFYDuFaDSNaVWJeDMrwV9BUH5B3VErqHQNwZkFGZ1rYHQFaHgvCHArsHEFqHMBiDcBiDuFaD1BOVWBOHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKH5F/HIBODcXGDQBqHIrKHuX7DMrwVcB/DWFaHMFaHQNwZ1X7HIBeHQBiHgvCHEJqDWr/HMFGHQXsDQFaHAvCV5BODMrwV9BUH5FqHIraHQNwZ1BiHIBeHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKZSJ3H5X/ZuJsHQXGZSFUHAveV5BOHuNODkBODuX7VoX7DcBqZ1B/Z1vOD5raHgBOVkXeHEFqVoX7DcBwDQFGD1BOV5BiDMNaVcrsDurGVEX7HQNwVIraDSvOD5FaHgvsVkXeDWFqZuFaHQNmDQX7HArYD5B/HgrKV9FiV5X7VErqHQBqZkFUZ1BeZMBODEvsZSJGDuFaDoJeD9XsZSX7Z1rwVWJsDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBsV5F/HMFUHQXGZSBqHArYHuX7HgrKHEFKV5B7DoBOHQBiDQBqHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveHArsHEB7DoBqHQBiZ9XGHAvOVWBODMvmVcFKV5BmVoBqD9BsZkFGHArKV5FGHgBOHEBUDWX7HIrqD9NmDQJsHABYD5XGDMvODkBOHEFYHIXGDcFYZSBOHINKZMJeHgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVIBODWFaVoX7DcJUZ1FaD1rwV5XGDMrYHENiH5FYVoJeDcJeDQX7HIrKD5BqDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))

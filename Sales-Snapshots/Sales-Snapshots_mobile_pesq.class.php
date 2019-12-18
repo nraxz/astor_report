@@ -316,7 +316,7 @@ class Sales_Snapshots_pesq
                      {
                          $Valor = $Cod . " - " . $Valor;
                      }
-                     $resp_aut_comp[] = array('label' => $Valor , 'value' => $Cod);
+                     $resp_aut_comp[] = array('text' => $Valor , 'id' => $Cod);
                      $count_aut_comp++;
                  }
              }
@@ -326,7 +326,7 @@ class Sales_Snapshots_pesq
              }
           }
           $oJson = new Services_JSON();
-          echo $oJson->encode($resp_aut_comp);
+          echo $oJson->encode(array('results' => $resp_aut_comp));
           $this->Db->Close(); 
           exit;
       }
@@ -1546,6 +1546,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <script type="text/javascript" src="../_lib/lib/js/scInput.js"></script>
  <script type="text/javascript" src="../_lib/lib/js/jquery.scInput.js"></script>
  <script type="text/javascript" src="../_lib/lib/js/jquery.scInput2.js"></script>
+ <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/css/select2.min.css" type="text/css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/select2/js/select2.full.min.js"></SCRIPT>
  <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_error.css" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_error<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -1879,6 +1881,7 @@ function scJQCalendarAdd() {
    SC_carga_evt_jquery();
    scLoadScInput('input:text.sc-js-input');
    scJQCalendarAdd('');
+   Sc_carga_select2('all');
  });
  function nm_campos_between(nm_campo, nm_cond, nm_nome_obj)
  {
@@ -1935,7 +1938,7 @@ function scJQCalendarAdd() {
   str_out += 'SC_start_at_input_2_seg#NMF#' + search_get_sel_txt('SC_start_at_input_2_seg') + '@NMF@';
   str_out += 'SC_j3x_vikevents_items_title_cond#NMF#' + search_get_sel_txt('SC_j3x_vikevents_items_title_cond') + '@NMF@';
   str_out += 'SC_j3x_vikevents_items_title#NMF#' + search_get_text('SC_j3x_vikevents_items_title') + '@NMF@';
-  str_out += 'id_ac_j3x_vikevents_items_title#NMF#' + search_get_text('id_ac_j3x_vikevents_items_title') + '@NMF@';
+  str_out += 'id_ac_j3x_vikevents_items_title#NMF#' + search_get_title('select2-id_ac_j3x_vikevents_items_title-container') + '@NMF@';
   str_out += 'SC_j3x_vikevents_items_price_cond#NMF#' + search_get_sel_txt('SC_j3x_vikevents_items_price_cond') + '@NMF@';
   str_out += 'SC_j3x_vikevents_items_price#NMF#' + search_get_text('SC_j3x_vikevents_items_price') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
@@ -2070,44 +2073,52 @@ function nm_open_popup(parms)
  </SCRIPT>
 <script type="text/javascript">
  $(function() {
-   $("#id_ac_j3x_vikevents_items_title").autocomplete({
-     minLength: 1,
-     source: function (request, response) {
-     $.ajax({
-       url: "index.php",
-       dataType: "json",
-       data: {
-          q: request.term,
-          nmgp_opcao: "ajax_autocomp",
-          nmgp_parms: "NM_ajax_opcao?#?autocomp_j3x_vikevents_items_title",
-          max_itens: "10",
-          cod_desc: "N",
-          script_case_init: <?php echo $this->Ini->sc_page ?>
-        },
-       success: function (data) {
-         if (data == "ss_time_out") {
-             nm_move();
-         }
-         response(data);
-       }
-      });
+  $(".sc-ui-autocomp-j3x_vikevents_items_title").on("focus", function() {
+  }).on("blur", function() {
+  }).on("keydown", function(e) {
+   if(e.keyCode == $.ui.keyCode.TAB && $(".ui-autocomplete").filter(":visible").length) {
+    e.keyCode = $.ui.keyCode.DOWN;
+    $(this).trigger(e);
+    e.keyCode = $.ui.keyCode.ENTER;
+    $(this).trigger(e);
+   }
+  }).select2({
+   minimumInputLength: 1,
+   language: {
+    inputTooShort: function() {
+     return "<?php echo sprintf($this->Ini->Nm_lang['lang_autocomp_tooshort'], 1) ?>";
     },
-     select: function (event, ui) {
-       $("#SC_j3x_vikevents_items_title").val(ui.item.value);
-       $(this).val(ui.item.label);
-       event.preventDefault();
-     },
-     focus: function (event, ui) {
-       $("#SC_j3x_vikevents_items_title").val(ui.item.value);
-       $(this).val(ui.item.label);
-       event.preventDefault();
-     },
-     change: function (event, ui) {
-       if (null == ui.item) {
-          $("#SC_j3x_vikevents_items_title").val( $(this).val() );
-       }
+    noResults: function() {
+     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+    },
+    searching: function() {
+     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+    }
+   },
+   width: "300px",
+   ajax: {
+    url: "index.php",
+    dataType: "json",
+    processResults: function (data) {
+      if (data == "ss_time_out") {
+          nm_move();
+      }
+      return data;
+    },
+    data: function (params) {
+     var query = {
+      q: params.term,
+      nmgp_opcao: "ajax_autocomp",
+      nmgp_parms: "NM_ajax_opcao?#?autocomp_j3x_vikevents_items_title",
+      max_itens: "10",
+      script_case_init: <?php echo $this->Ini->sc_page ?>
      }
-   });
+     return query;
+    }
+   }
+  }).on("select2:select", function(e) {;
+   $("#SC_j3x_vikevents_items_title").val(e.params.data.id);
+  });
  });
 </script>
  <FORM name="F1" action="./" method="post" target="_self"> 
@@ -2548,8 +2559,7 @@ foreach ($Arr_format as $Part_date)
       }
 ?>
 <INPUT  type="text" id="SC_j3x_vikevents_items_title" name="j3x_vikevents_items_title" value="<?php echo NM_encode_input($j3x_vikevents_items_title) ?>"  size=50 alt="{datatype: 'text', maxLength: 128, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
-<input class="sc-js-input scFilterObjectEven" type="text" id="id_ac_j3x_vikevents_items_title" name="j3x_vikevents_items_title_autocomp" size="50"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'text', maxLength: 128, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}">
-
+<select class="sc-js-input scFilterObjectEven sc-ui-autocomp-j3x_vikevents_items_title" id="id_ac_j3x_vikevents_items_title" name="j3x_vikevents_items_title_autocomp"><?php if ('' !=  $j3x_vikevents_items_title) { ?><option value="<?php echo $j3x_vikevents_items_title ?>" selected><?php echo $sAutocompValue ?></option><?php } ?></select>
  </TD>
    
 
@@ -3103,6 +3113,10 @@ foreach ($Arr_format as $Part_date)
    document.F1.j3x_vikevents_items_price_cond.value = 'gt';
    nm_campos_between(document.getElementById('id_vis_j3x_vikevents_items_price'), document.F1.j3x_vikevents_items_price_cond, 'j3x_vikevents_items_price');
    document.F1.j3x_vikevents_items_price.value = "";
+   Sc_carga_select2('all');
+ }
+ function Sc_carga_select2(Field)
+ {
  }
  function SC_carga_evt_jquery()
  {
@@ -3299,7 +3313,7 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_start_at_input_2_seg'] = 'text';
       $tp_fields['SC_j3x_vikevents_items_title_cond'] = 'cond';
       $tp_fields['SC_j3x_vikevents_items_title'] = 'text_aut';
-      $tp_fields['id_ac_j3x_vikevents_items_title'] = 'text_aut';
+      $tp_fields['id_ac_j3x_vikevents_items_title'] = 'select2_aut';
       $tp_fields['SC_j3x_vikevents_items_price_cond'] = 'cond';
       $tp_fields['SC_j3x_vikevents_items_price'] = 'text';
       $tp_fields['SC_NM_operador'] = 'text';

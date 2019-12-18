@@ -1,5 +1,5 @@
 <?php
-	$str_apl = 'Sales-Snapshots';
+	$str_apl = 'Sales-Details';
 	if(is_file("_lib/friendly_url/" . $str_apl . '_ini.txt'))
 	{
 		$str_apl = file_get_contents("_lib/friendly_url/" . $str_apl . '_ini.txt');
