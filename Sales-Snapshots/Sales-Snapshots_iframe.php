@@ -1,16 +1,16 @@
 <?php
-include_once('grid_j3x_vikevents_orders_session.php');
+include_once('Sales-Snapshots_session.php');
 @session_start() ;
 
-$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp']  = "";
+$_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp']  = "";
 //check tmp
-if(empty($_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp']))
+if(empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp']))
 {
     $str_path_apl_url = $_SERVER['PHP_SELF'];
     $str_path_apl_url = str_replace("\\", '/', $str_path_apl_url);
     $str_path_apl_url = substr($str_path_apl_url, 0, strrpos($str_path_apl_url, "/"));
     $str_path_apl_url = substr($str_path_apl_url, 0, strrpos($str_path_apl_url, "/")+1);
-    /*check tmp*/$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
+    /*check tmp*/$_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
 }
 if (!isset($_SESSION['sc_session']))
 {
@@ -29,7 +29,7 @@ if (!isset($_SESSION['sc_session']))
     $str_path_web    = str_replace("\\", '/', $str_path_web);
     $str_path_web    = str_replace('//', '/', $str_path_web);
     $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
-    if (is_file($root . $_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp'] . "/sc_apl_default_AstorReport.txt"))
+    if (is_file($root . $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] . "/sc_apl_default_AstorReport.txt"))
     {
 ?>
 <html>
@@ -46,10 +46,10 @@ if (!isset($_SESSION['sc_session']))
     }
 }
 ini_set('default_charset', $_SESSION['scriptcase']['charset']);
-$oExportPdf = new grid_j3x_vikevents_orders_export_pdf;
+$oExportPdf = new Sales_Snapshots_export_pdf;
 $oExportPdf->exportPdf();
 
-class grid_j3x_vikevents_orders_export_pdf {
+class Sales_Snapshots_export_pdf {
 
 function exportPdf() {
 
@@ -121,43 +121,43 @@ $STR_prod           = '';
 $STR_btn            = '';
 $STR_lang           = '';
 $str_google_fonts   = '';
-if (isset($_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['grid_j3x_vikevents_orders_iframe_params']))
+if (isset($_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['Sales-Snapshots_iframe_params']))
 {
-    $STR_schema         = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['grid_j3x_vikevents_orders_iframe_params']['str_schema'];
-    $STR_tmp            = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['grid_j3x_vikevents_orders_iframe_params']['str_tmp'];
-    $STR_prod           = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['grid_j3x_vikevents_orders_iframe_params']['str_prod'];
-    $STR_btn            = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['grid_j3x_vikevents_orders_iframe_params']['str_btn'];
-    $STR_lang           = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['grid_j3x_vikevents_orders_iframe_params']['str_lang'];
-    $str_google_fonts   = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['grid_j3x_vikevents_orders_iframe_params']['str_google_fonts'];
+    $STR_schema         = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['Sales-Snapshots_iframe_params']['str_schema'];
+    $STR_tmp            = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['Sales-Snapshots_iframe_params']['str_tmp'];
+    $STR_prod           = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['Sales-Snapshots_iframe_params']['str_prod'];
+    $STR_btn            = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['Sales-Snapshots_iframe_params']['str_btn'];
+    $STR_lang           = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['Sales-Snapshots_iframe_params']['str_lang'];
+    $str_google_fonts   = $_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['Sales-Snapshots_iframe_params']['str_google_fonts'];
 }
 if (isset($aParams['sc_create_charts'])) {
-    $_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['skip_charts'] = 'N' == $aParams['sc_create_charts'];
+    $_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['skip_charts'] = 'N' == $aParams['sc_create_charts'];
 }
 if (isset($aParams['chart_level'])) {
-    $_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['chart_level'] = $aParams['chart_level'];
+    $_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['chart_level'] = $aParams['chart_level'];
 }
-elseif (isset($_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['chart_level'])) {
-    unset($_SESSION['sc_session'][ $aParams['script_case_init'] ]['grid_j3x_vikevents_orders']['chart_level']);
+elseif (isset($_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['chart_level'])) {
+    unset($_SESSION['sc_session'][ $aParams['script_case_init'] ]['Sales-Snapshots']['chart_level']);
 }
 if (isset($aParams['page_break_pdf']) && $aParams['page_break_pdf'] != "_NO_")
 {
     $Arr_page_pdf = explode("_BRK_", $aParams['page_break_pdf']);
-    foreach ($_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['Page_break_PDF'] as $cmp => $opt)
+    foreach ($_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['Page_break_PDF'] as $cmp => $opt)
     {
         if (in_array($cmp, $Arr_page_pdf))
         {
-            $_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['Page_break_PDF'][$cmp] = "S";
+            $_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['Page_break_PDF'][$cmp] = "S";
         }
         else
         {
-            $_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['Page_break_PDF'][$cmp] = "N";
+            $_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['Page_break_PDF'][$cmp] = "N";
         }
     }
 }
-$_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['opc_pdf']['all_cab']     = (isset($aParams['pdf_all_cab']))     ? $aParams['pdf_all_cab']     : "S";
-$_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['opc_pdf']['all_label']   = (isset($aParams['pdf_all_label']))   ? $aParams['pdf_all_label']   : "S";
-$_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['opc_pdf']['label_group'] = (isset($aParams['pdf_label_group'])) ? $aParams['pdf_label_group'] : "N";
-$_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['opc_pdf']['pdf_zip']     = (isset($aParams['pdf_zip']))         ? $aParams['pdf_zip']         : "N";
+$_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['opc_pdf']['all_cab']     = (isset($aParams['pdf_all_cab']))     ? $aParams['pdf_all_cab']     : "S";
+$_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['opc_pdf']['all_label']   = (isset($aParams['pdf_all_label']))   ? $aParams['pdf_all_label']   : "S";
+$_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['opc_pdf']['label_group'] = (isset($aParams['pdf_label_group'])) ? $aParams['pdf_label_group'] : "N";
+$_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['opc_pdf']['pdf_zip']     = (isset($aParams['pdf_zip']))         ? $aParams['pdf_zip']         : "N";
 $Nm_lang     = array();
 $this->path_botoes = '../_lib/img';
 if (@is_file("../_lib/lang/" . $STR_lang . ".lang.php"))
@@ -191,7 +191,7 @@ if (@is_file($_str_btn_file))
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <head>
- <title><?php echo $Nm_lang['lang_othr_grid_title'] ?> j3x_vikevents_orders :: PDF</title>
+ <title>Snapshot of the Sales :: PDF</title>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
  if ($_SESSION['scriptcase']['proc_mobile'])
@@ -235,7 +235,7 @@ if (@is_file($_str_btn_file))
   $("#" + buttonId).prop("disabled", false).removeClass("disabled");
  }
  function checkPDF() {
-  $.get(nm_url_rand("grid_j3x_vikevents_orders_gauge_ctrl.php"), {
+  $.get(nm_url_rand("Sales-Snapshots_gauge_ctrl.php"), {
    pbfile    : "<?php echo base64_encode($aParams['pbfile']) ?>",
    sc_apbgcol: "<?php echo NM_encode_input($aParams['sc_apbgcol']) ?>",
    str_lang  : "<?php echo base64_encode($aParams['str_lang']); ?>",
@@ -284,10 +284,10 @@ if (@is_file($_str_btn_file))
 </head>
 <body class="scExportPage">
 <?php
-$NM_pdfbase = (isset($_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['pdf_name'])) ? $_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['pdf_name'] : 'sc_pdf_' . date('YmdHis') . '_' . rand(0, 1000) . '_grid_j3x_vikevents_orders.pdf';
-$NM_tit_doc = (isset($_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['pdf_name'])) ? $_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['pdf_name'] : "grid_j3x_vikevents_orders.pdf";
+$NM_pdfbase = (isset($_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['pdf_name'])) ? $_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['pdf_name'] : 'sc_pdf_' . date('YmdHis') . '_' . rand(0, 1000) . '_Sales-Snapshots.pdf';
+$NM_tit_doc = (isset($_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['pdf_name'])) ? $_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['pdf_name'] : "Sales-Snapshots.pdf";
 $NM_pdf_output = $NM_pdfbase;
-if (isset($_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['opc_pdf']['pdf_zip']) && $_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders']['opc_pdf']['pdf_zip'] == "S")
+if (isset($_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['opc_pdf']['pdf_zip']) && $_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots']['opc_pdf']['pdf_zip'] == "S")
  {
     $NM_pdf_output = str_replace(".pdf", ".zip", $NM_pdf_output);
     $NM_tit_doc    = str_replace(".pdf", ".zip", $NM_tit_doc);
@@ -295,19 +295,18 @@ if (isset($_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikeve
 $NM_pdfurl  = $STR_tmp;
 $NM_target  = "_self";
 $path_doc_md5 = md5($NM_pdfurl . "/" . $NM_pdf_output);
-$_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders'][$path_doc_md5][0] = $NM_pdfurl . "/" . $NM_pdf_output;
-$_SESSION['sc_session'][$aParams['script_case_init']]['grid_j3x_vikevents_orders'][$path_doc_md5][1] = $NM_tit_doc;
+$_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots'][$path_doc_md5][0] = $NM_pdfurl . "/" . $NM_pdf_output;
+$_SESSION['sc_session'][$aParams['script_case_init']]['Sales-Snapshots'][$path_doc_md5][1] = $NM_tit_doc;
 $NM_volta   = "volta_grid";
-$NM_volta   = (!isset($aParams['nmgp_opcao']) || 'pdf_res' != $aParams['nmgp_opcao']) ? "volta_grid" : "resumo";
 ?>
 <form name="F0" method="post" action="./" target="<?php echo $NM_target; ?>" style="display: none"> 
 <input type="hidden" name="nmgp_opcao" value="<?php echo NM_encode_input($NM_volta); ?>"> 
 <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($aParams['script_case_init']); ?>"> 
 <input type="hidden" name="script_case_session" value="<?php echo NM_encode_input(session_id()); ?>"> 
 </form>
-<form name="Fdown" method="get" action="grid_j3x_vikevents_orders_download.php" target="_blank" style="display: none"> 
+<form name="Fdown" method="get" action="Sales-Snapshots_download.php" target="_blank" style="display: none"> 
 <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($aParams['script_case_init']); ?>"> 
-<input type="hidden" name="nm_tit_doc" value="grid_j3x_vikevents_orders"> 
+<input type="hidden" name="nm_tit_doc" value="Sales-Snapshots"> 
 <input type="hidden" name="nm_name_doc" value="<?php echo $path_doc_md5 ?>"> 
 </form>
 <form name="Fview" method="get" action="<?php echo $NM_pdfurl . "/" . $NM_pdf_output;?>" target="_blank" style="display: none"> 

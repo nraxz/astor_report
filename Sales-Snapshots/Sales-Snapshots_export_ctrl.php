@@ -1,12 +1,12 @@
 <?php
 @session_start() ;
-$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['sc_process_barr'] = true;
-require_once('../grid_j3x_vikevents_orders/index.php');
-unset($_SESSION['scriptcase']['grid_j3x_vikevents_orders']['sc_process_barr']);
-$ExportCtrl = new grid_j3x_vikevents_orders_export_control;
+$_SESSION['scriptcase']['Sales-Snapshots']['sc_process_barr'] = true;
+require_once('../Sales-Snapshots/index.php');
+unset($_SESSION['scriptcase']['Sales-Snapshots']['sc_process_barr']);
+$ExportCtrl = new Sales_Snapshots_export_control;
 $ExportCtrl->Export_barr();
 
-class grid_j3x_vikevents_orders_export_control
+class Sales_Snapshots_export_control
 {
    function Export_barr()
    {
@@ -32,8 +32,8 @@ class grid_j3x_vikevents_orders_export_control
       $this->path_lib_php   = $this->root . $this->path_link . "_lib/lib/php";
       $this->path_botoes    = $this->path_link . "_lib/img";
       $this->path_lang      = "../_lib/lang/";
-      $this->path_prod      = $_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_prod'];
-      $this->path_imag_temp = $_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp'];
+      $this->path_prod      = $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_prod'];
+      $this->path_imag_temp = $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'];
       $script_case_init     = $_REQUEST['script_case_init'];
       if (!isset($_SESSION['scriptcase']['str_lang']) || empty($_SESSION['scriptcase']['str_lang']))
       {
@@ -95,7 +95,7 @@ class grid_j3x_vikevents_orders_export_control
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo $this->Nm_lang['lang_othr_grid_title'] ?> j3x_vikevents_orders :: Excel</TITLE>
+ <TITLE>Snapshot of the Sales :: Excel</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -138,9 +138,9 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 </iframe>
 <form name="Fview" method="get" action="" target="_blank" style="display: none"> 
 </form>
-<form name="Fdown" method="get" action="grid_j3x_vikevents_orders_download.php" target="_blank" style="display: none"> 
+<form name="Fdown" method="get" action="Sales-Snapshots_download.php" target="_blank" style="display: none"> 
 <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($script_case_init); ?>"> 
-<input type="hidden" name="nm_tit_doc" value="grid_j3x_vikevents_orders"> 
+<input type="hidden" name="nm_tit_doc" value="Sales-Snapshots"> 
 <input type="hidden" name="nm_name_doc" value=""> 
 </form>
 <FORM name="F0" method=post action=""> 

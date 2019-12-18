@@ -49,6 +49,7 @@ class grid_j3x_vikevents_orders_resumo
       $this->NM_export       = false;
       $this->NM_totaliz_hrz  = false;
       $this->link_graph_tot  = array();
+      $this->proc_res_grid   = false;
       $this->array_final     = array();
       $this->array_links     = array();
       $this->array_links_tit = array();
@@ -2728,7 +2729,14 @@ class grid_j3x_vikevents_orders_resumo
        $nm_saida->saida("</td>\r\n");
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['ajax_nav'])
        { 
-           $this->Ini->Arr_result['setValue'][] = array('field' => 'summary_body', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+           if ($this->proc_res_grid)
+           { 
+               $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_res_grid', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+           } 
+           else 
+           { 
+               $this->Ini->Arr_result['setValue'][] = array('field' => 'summary_body', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+           } 
            $_SESSION['scriptcase']['saida_html'] = "";
        } 
        $nm_saida->saida("</tr>\r\n");

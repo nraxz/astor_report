@@ -48,7 +48,7 @@ class grid_j3x_vikevents_orders_res_xls
    //----- 
    function inicializa_vars()
    {
-      $this->Use_phpspreadsheet = (phpversion() >=  "7.3.9") ? true : false;
+      $this->Use_phpspreadsheet = false;
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 

@@ -3122,6 +3122,10 @@ function nm_open_popup(parms)
       $C_formatado = true;
       if ($this->NM_ajax_flag && ($this->NM_ajax_opcao == "ajax_grid_search" || $this->NM_ajax_opcao == "ajax_grid_search_change_fil"))
       {
+          if ($this->NM_ajax_opcao == "ajax_grid_search")
+          {
+              $C_formatado = false;
+          }
           $Temp_Busca  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'];
           if ($_SESSION['scriptcase']['charset'] != "UTF-8" && $this->NM_ajax_opcao != "ajax_grid_search_change_fil")
           {

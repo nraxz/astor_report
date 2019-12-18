@@ -1,6 +1,6 @@
 <?php
 
-class grid_j3x_vikevents_orders_pesq
+class Sales_Snapshots_pesq
 {
    var $Db;
    var $Erro;
@@ -43,7 +43,7 @@ class grid_j3x_vikevents_orders_pesq
       $this->Str_btn_filter_css  = trim($str_button) . "/" . trim($str_button) . ".css";
       $this->Ini->str_google_fonts = (isset($str_google_fonts) && !empty($str_google_fonts))?$str_google_fonts:'';
       include($this->Ini->path_btn . $this->Ini->Str_btn_filter);
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['path_libs_php'] = $this->Ini->path_lib_php;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['path_libs_php'] = $this->Ini->path_lib_php;
       $this->Img_sep_filter = "/" . trim($str_toolbar_separator);
       $this->Block_img_col  = trim($str_block_col);
       $this->Block_img_exp  = trim($str_block_exp);
@@ -53,7 +53,7 @@ class grid_j3x_vikevents_orders_pesq
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search_change_fil")
       {
           $arr_new_fil = $this->recupera_filtro($this->NM_ajax_grid_fil);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'] = array(); 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'] = array(); 
           foreach ($arr_new_fil as $tp)
           {
               foreach ($tp as $ind => $cada_dado)
@@ -81,17 +81,17 @@ class grid_j3x_vikevents_orders_pesq
                               $arr_tmp[] = $dados;
                           }
                       }
-                      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'][$field] = $arr_tmp; 
+                      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$field] = $arr_tmp; 
                   }
                   else
                   {
-                      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'][$field] = $cada_dado['value']; 
+                      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$field] = $cada_dado['value']; 
                   }
               }
           }
           if ($_SESSION['scriptcase']['charset'] != "UTF-8")
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
           }
           $this->processa_busca();
           if (!empty($this->Campos_Mens_erro)) 
@@ -199,7 +199,7 @@ class grid_j3x_vikevents_orders_pesq
       $this->nm_data = new nm_data("en_us");
       $pos_path = strrpos($this->Ini->path_prod, "/");
       $this->NM_path_filter = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/filters/";
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['opcao'] = "igual";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "igual";
    }
 
    function processa_ajax()
@@ -223,9 +223,9 @@ class grid_j3x_vikevents_orders_pesq
               if ($Tipo_filter[1] != $Nome_filter)
               {
                   $Nome_filter = $Tipo_filter[1];
-                  $Opt_filter .= "<option value=\"\">" . grid_j3x_vikevents_orders_pack_protect_string($Nome_filter) . "</option>\r\n";
+                  $Opt_filter .= "<option value=\"\">" . Sales_Snapshots_pack_protect_string($Nome_filter) . "</option>\r\n";
               }
-              $Opt_filter .= "<option value=\"" . grid_j3x_vikevents_orders_pack_protect_string($Tipo_filter[0]) . "\">.." . grid_j3x_vikevents_orders_pack_protect_string($Cada_filter) .  "</option>\r\n";
+              $Opt_filter .= "<option value=\"" . Sales_Snapshots_pack_protect_string($Tipo_filter[0]) . "\">.." . Sales_Snapshots_pack_protect_string($Cada_filter) .  "</option>\r\n";
           }
           if (isset($nmgp_save_origem) && $nmgp_save_origem == "grid")
           {
@@ -266,9 +266,9 @@ class grid_j3x_vikevents_orders_pesq
               if ($Tipo_filter[1] != $Nome_filter)
               {
                   $Nome_filter  = $Tipo_filter[1];
-                  $Opt_filter .= "<option value=\"\">" .  grid_j3x_vikevents_orders_pack_protect_string($Nome_filter) . "</option>\r\n";
+                  $Opt_filter .= "<option value=\"\">" .  Sales_Snapshots_pack_protect_string($Nome_filter) . "</option>\r\n";
               }
-              $Opt_filter .= "<option value=\"" . grid_j3x_vikevents_orders_pack_protect_string($Tipo_filter[0]) . "\">.." . grid_j3x_vikevents_orders_pack_protect_string($Cada_filter) .  "</option>\r\n";
+              $Opt_filter .= "<option value=\"" . Sales_Snapshots_pack_protect_string($Tipo_filter[0]) . "\">.." . Sales_Snapshots_pack_protect_string($Cada_filter) .  "</option>\r\n";
           }
           if (isset($nmgp_save_origem) && $nmgp_save_origem == "grid")
           {
@@ -298,7 +298,67 @@ class grid_j3x_vikevents_orders_pesq
           $this->Arr_result = $this->recupera_filtro($NM_filters);
       }
 
+      if ($this->NM_ajax_opcao == 'autocomp_j3x_vikevents_items_title')
+      {
+          $j3x_vikevents_items_title = ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($_GET['q'])) ? sc_convert_encoding($_GET['q'], $_SESSION['scriptcase']['charset'], "UTF-8") : $_GET['q'];
+          $nmgp_def_dados = $this->lookup_ajax_j3x_vikevents_items_title($j3x_vikevents_items_title);
+          ob_end_clean();
+          ob_end_clean();
+          $count_aut_comp = 0;
+          $resp_aut_comp  = array();
+          foreach ($nmgp_def_dados as $Ind => $Lista)
+          {
+             if (is_array($Lista))
+             {
+                 foreach ($Lista as $Cod => $Valor)
+                 {
+                     if ($_GET['cod_desc'] == "S")
+                     {
+                         $Valor = $Cod . " - " . $Valor;
+                     }
+                     $resp_aut_comp[] = array('label' => $Valor , 'value' => $Cod);
+                     $count_aut_comp++;
+                 }
+             }
+             if ($count_aut_comp == $_GET['max_itens'])
+             {
+                 break;
+             }
+          }
+          $oJson = new Services_JSON();
+          echo $oJson->encode($resp_aut_comp);
+          $this->Db->Close(); 
+          exit;
+      }
    }
+   function lookup_ajax_j3x_vikevents_items_title($j3x_vikevents_items_title)
+   {
+      $j3x_vikevents_items_title = substr($this->Db->qstr($j3x_vikevents_items_title), 1, -1);
+            $j3x_vikevents_items_title_look = substr($this->Db->qstr($j3x_vikevents_items_title), 1, -1); 
+      $nmgp_def_dados = array(); 
+      $nm_comando = "select distinct j3x_vikevents_items.title from " . $this->Ini->nm_tabela . " where  j3x_vikevents_items.title like '%" . $j3x_vikevents_items_title . "%' order by j3x_vikevents_items.title"; 
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
+            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+
+      return $nmgp_def_dados;
+   }
+   
 
    /**
     * @access  public
@@ -378,23 +438,23 @@ class grid_j3x_vikevents_orders_pesq
       $nm_esp_postgres = array();
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $Nm_numeric[] = "id";$Nm_numeric[] = "uid";$Nm_numeric[] = "iditem";$Nm_numeric[] = "persons";$Nm_numeric[] = "ts";$Nm_numeric[] = "idpayment";$Nm_numeric[] = "totpaid";$Nm_numeric[] = "tot";$Nm_numeric[] = "lastupdts";$Nm_numeric[] = "donation";$Nm_numeric[] = "elder";
+      $Nm_datas[] = "FROM_UNIXTIME(j3x_vikevents_items.tsinit)";$Nm_numeric[] = "j3x_vikevents_items_id";$Nm_numeric[] = "j3x_vikevents_items_price";$Nm_numeric[] = "j3x_vikevents_orders_iditem";$Nm_numeric[] = "j3x_vikevents_orders_persons";$Nm_numeric[] = "j3x_vikevents_orders_totpaid";$Nm_numeric[] = "j3x_vikevents_orders_tot";$Nm_numeric[] = "j3x_vikevents_orders_id";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       if (in_array($campo_join, $Nm_numeric))
       {
           if ($condicao == "EP" || $condicao == "NE")
           {
-              unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$campo_join]);
+              unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$campo_join]);
               return;
           }
-         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['decimal_db'] == ".")
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['decimal_db'] == ".")
          {
             $nm_aspas  = "";
             $nm_aspas1 = "";
          }
          if ($condicao != "IN")
          {
-            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['decimal_db'] == ".")
+            if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['decimal_db'] == ".")
             {
                $campo  = str_replace(",", ".", $campo);
                $campo2 = str_replace(",", ".", $campo2);
@@ -409,7 +469,7 @@ class grid_j3x_vikevents_orders_pesq
             }
          }
       }
-      $Nm_datas[] = "FROM_UNIXTIME(daytsattend)";
+      $Nm_datas[] = "FROM_UNIXTIME(j3x_vikevents_items.tsinit)";
       if (in_array($campo_join, $Nm_datas))
       {
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -417,10 +477,10 @@ class grid_j3x_vikevents_orders_pesq
              $nm_aspas  = "#";
              $nm_aspas1 = "#";
           }
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['SC_sep_date']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date']))
           {
-              $nm_aspas  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['SC_sep_date'];
-              $nm_aspas1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['SC_sep_date1'];
+              $nm_aspas  = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date'];
+              $nm_aspas1 = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date1'];
           }
       }
       if ($campo == "" && $condicao != "NU" && $condicao != "NN" && $condicao != "EP" && $condicao != "NE")
@@ -451,7 +511,7 @@ class grid_j3x_vikevents_orders_pesq
          $this->and_or();
          $campo  = substr($this->Db->qstr($campo), 1, -1);
          $campo2 = substr($this->Db->qstr($campo2), 1, -1);
-         $nome_sum = "j3x_vikevents_orders.$nome";
+         $nome_sum = "$nome";
          if ($tp_campo == "TIMESTAMP")
          {
              $tp_campo = "DATETIME";
@@ -512,19 +572,19 @@ class grid_j3x_vikevents_orders_pesq
                $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " = " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . " = " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower. " = " . $nm_aspas . $campo . $nm_aspas1;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_equl'] . " " . $this->cmp_formatado[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_equl'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_equl'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_equl'] . " " . $this->cmp_formatado[$nome_campo];
             break;
             case "II":     // 
                $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " like '" . $campo . "%'";
                $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . " like '" . $campo . "%'";
                $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower . " like '" . $campo . "%'";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_strt'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_strt'] . " " . $this->cmp_formatado[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_strt'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_strt'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_strt'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_strt'] . " " . $this->cmp_formatado[$nome_campo];
             break;
              case "QP";     // 
              case "NP";     // 
@@ -875,10 +935,10 @@ class grid_j3x_vikevents_orders_pesq
                        $this->comando        .= $NM_cmd;
                        $this->comando_sum    .= $NM_cmd_sum;
                        $this->comando_filtro .= $NM_cmd;
-                       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . ": " . $NM_cond . "##*@@";
-                       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-                       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $NM_cond;
-                       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $NM_cond;
+                       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . ": " . $NM_cond . "##*@@";
+                       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+                       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $NM_cond;
+                       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $NM_cond;
                    }
                }
                else
@@ -886,65 +946,65 @@ class grid_j3x_vikevents_orders_pesq
                    $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . $op_all . "'%" . $campo . "%'";
                    $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . $op_all . "'%" . $campo . "%'";
                    $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower . $op_all . "'%" . $campo . "%'";
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $lang_like . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $lang_like . " " . $this->cmp_formatado[$nome_campo];
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $lang_like . " " . $this->cmp_formatado[$nome_campo];
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $lang_like . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $lang_like . " " . $this->cmp_formatado[$nome_campo];
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $lang_like . " " . $this->cmp_formatado[$nome_campo];
                }
             break;
             case "DF":     // 
                $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " <> " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . " <> " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower . " <> " . $nm_aspas . $campo . $nm_aspas1;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_diff'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_diff'] . " " . $this->cmp_formatado[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_diff'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_diff'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_diff'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_diff'] . " " . $this->cmp_formatado[$nome_campo];
             break;
             case "GT":     // 
                $this->comando        .= " $nome > " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_sum    .= " $nome_sum > " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_filtro .= " $nome > " . $nm_aspas . $campo . $nm_aspas1;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_grtr'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_grtr'] . " " . $this->cmp_formatado[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_grtr'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_grtr'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_grtr'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_grtr'] . " " . $this->cmp_formatado[$nome_campo];
             break;
             case "GE":     // 
                $this->comando        .= " $nome >= " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_sum    .= " $nome_sum >= " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_filtro .= " $nome >= " . $nm_aspas . $campo . $nm_aspas1;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_grtr_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_grtr_equl'] . " " . $this->cmp_formatado[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_grtr_equl'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_grtr_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_grtr_equl'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_grtr_equl'] . " " . $this->cmp_formatado[$nome_campo];
             break;
             case "LT":     // 
                $this->comando        .= " $nome < " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_sum    .= " $nome_sum < " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_filtro .= " $nome < " . $nm_aspas . $campo . $nm_aspas1;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_less'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_less'] . " " . $this->cmp_formatado[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_less'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_less'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_less'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_less'] . " " . $this->cmp_formatado[$nome_campo];
             break;
             case "LE":     // 
                $this->comando        .= " $nome <= " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_sum    .= " $nome_sum <= " . $nm_aspas . $campo . $nm_aspas1;
                $this->comando_filtro .= " $nome <= " . $nm_aspas . $campo . $nm_aspas1;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_less_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_less_equl'] . " " . $this->cmp_formatado[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_less_equl'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_less_equl'] . " " . $this->cmp_formatado[$nome_campo] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_less_equl'] . " " . $this->cmp_formatado[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_less_equl'] . " " . $this->cmp_formatado[$nome_campo];
             break;
             case "BW":     // 
                $this->comando        .= " $nome between " . $nm_aspas . $campo . $nm_aspas1 . " and " . $nm_aspas . $campo2 . $nm_aspas1;
                $this->comando_sum    .= " $nome_sum between " . $nm_aspas . $campo . $nm_aspas1 . " and " . $nm_aspas . $campo2 . $nm_aspas1;
                $this->comando_filtro .= " $nome between " . $nm_aspas . $campo . $nm_aspas1 . " and " . $nm_aspas . $campo2 . $nm_aspas1;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_betw'] . " " . $this->cmp_formatado[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " " . $this->cmp_formatado[$nome_campo . "_input_2"] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_betw'] . " " . $this->cmp_formatado[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " " . $this->cmp_formatado[$nome_campo . "_input_2"];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_betw'] . " " . $this->cmp_formatado[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " " . $this->cmp_formatado[$nome_campo . "_input_2"];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_betw'] . " " . $this->cmp_formatado[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " " . $this->cmp_formatado[$nome_campo . "_input_2"] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_betw'] . " " . $this->cmp_formatado[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " " . $this->cmp_formatado[$nome_campo . "_input_2"];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_betw'] . " " . $this->cmp_formatado[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_and_cond'] . " " . $this->cmp_formatado[$nome_campo . "_input_2"];
             break;
             case "IN":     // 
                $nm_sc_valores = explode(",", $campo);
@@ -986,46 +1046,46 @@ class grid_j3x_vikevents_orders_pesq
                $this->comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " in (" . $cond_str . ")";
                $this->comando_sum    .= $nm_ini_lower . $nome_sum . $nm_fim_lower . " in (" . $cond_str . ")";
                $this->comando_filtro .= $nm_ini_lower . $nome . $nm_fim_lower . " in (" . $cond_str . ")";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_like'] . " " . $nm_cond . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_like'] . " " . $cond_descr;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_like'] . " " . $nm_cond;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_like'] . " " . $nm_cond . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_like'] . " " . $cond_descr;
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_like'] . " " . $nm_cond;
             break;
             case "NU":     // 
                $this->comando        .= " $nome IS NULL ";
                $this->comando_sum    .= " $nome_sum IS NULL ";
                $this->comando_filtro .= " $nome IS NULL ";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_null'] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_null'];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_null'];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_null'] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_null'];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_null'];
             break;
             case "NN":     // 
                $this->comando        .= " $nome IS NOT NULL ";
                $this->comando_sum    .= " $nome_sum IS NOT NULL ";
                $this->comando_filtro .= " $nome IS NOT NULL ";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_nnul'] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_nnul'];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_nnul'];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_nnul'] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_nnul'];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_nnul'];
             break;
             case "EP":     // 
                $this->comando        .= " $nome = '' ";
                $this->comando_sum    .= " $nome_sum = '' ";
                $this->comando_filtro .= " $nome = '' ";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_empty'] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_empty'];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_empty'];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_empty'] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_empty'];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_empty'];
             break;
             case "NE":     // 
                $this->comando        .= " $nome <> '' ";
                $this->comando_sum    .= " $nome_sum <> '' ";
                $this->comando_filtro .= " $nome <> '' ";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_nempty'] . "##*@@";
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_nempty'];
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_nempty'];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $nmgp_tab_label[$nome_campo] . " " . $this->Ini->Nm_lang['lang_srch_nempty'] . "##*@@";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['label'] = $nmgp_tab_label[$nome_campo];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['descr'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_nempty'];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$nome_campo]['hint'] = $nmgp_tab_label[$nome_campo] . ": " . $this->Ini->Nm_lang['lang_srch_nempty'];
             break;
          }
       }
@@ -1423,7 +1483,7 @@ class grid_j3x_vikevents_orders_pesq
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 <HEAD>
- <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_srch_title'] ?> j3x_vikevents_orders</TITLE>
+ <TITLE>Snapshot of the Sales</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -1464,7 +1524,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo $this->Ini->Nm_lang['lang_othr_srch_title'] ?> j3x_vikevents_orders</TITLE>
+ <TITLE>Snapshot of the Sales</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -1504,7 +1564,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
   <?php 
   } 
   ?> 
- <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>grid_j3x_vikevents_orders/grid_j3x_vikevents_orders_fil_<?php echo strtolower($_SESSION['scriptcase']['reg_conf']['css_dir']) ?>.css" />
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>Sales-Snapshots/Sales-Snapshots_fil_<?php echo strtolower($_SESSION['scriptcase']['reg_conf']['css_dir']) ?>.css" />
 </HEAD>
 <BODY class="scFilterPage">
 <?php echo $this->Ini->Ajax_result_set ?>
@@ -1556,8 +1616,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
- <script type="text/javascript" src="grid_j3x_vikevents_orders_ajax_search.js"></script>
- <script type="text/javascript" src="grid_j3x_vikevents_orders_ajax.js"></script>
+ <script type="text/javascript" src="Sales-Snapshots_ajax_search.js"></script>
+ <script type="text/javascript" src="Sales-Snapshots_ajax.js"></script>
  <script type="text/javascript">
    function sc_session_redir(url_redir)
    {
@@ -1583,6 +1643,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    var sc_ajaxBordS = '<?php echo $this->Ini->Border_s_ajax ?>';
    var sc_ajaxBordW = '<?php echo $this->Ini->Border_w_ajax ?>';
  </script>
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_calendar.css" />
+ <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_calendar<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
 <?php
 $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()", "nmAjaxHideDebug()", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
@@ -1590,10 +1652,10 @@ $Cod_Btn = nmButtonOutput($this->arr_buttons, "berrm_clse", "nmAjaxHideDebug()",
 <tr><td class="scFormMessageTitle"><?php echo $Cod_Btn ?>&nbsp;&nbsp;Output</td></tr>
 <tr><td class="scFormMessageMessage" style="padding: 0px; vertical-align: top"><div style="padding: 2px; height: 200px; width: 350px; overflow: auto" id="id_debug_text"></div></td></tr>
 </table></div>
-<script type="text/javascript" src="grid_j3x_vikevents_orders_message.js"></script>
+<script type="text/javascript" src="Sales-Snapshots_message.js"></script>
 <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_filter ?>_sweetalert.css" />
-<script type="text/javascript" src="<?php echo $_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_prod']; ?>/third/sweetalert/sweetalert2.all.min.js"></script>
-<script type="text/javascript" src="<?php echo $_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_prod']; ?>/third/sweetalert/polyfill.min.js"></script>
+<script type="text/javascript" src="<?php echo $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_prod']; ?>/third/sweetalert/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="<?php echo $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_prod']; ?>/third/sweetalert/polyfill.min.js"></script>
 <script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
 <?php
 $confirmButtonClass = '';
@@ -1698,7 +1760,7 @@ if (count($this->nm_mens_alert) || count($this->Ini->nm_mens_alert)) {
                }
            }
            $jsonParams = json_encode($alertParams);
-           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['ajax_nav'])
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['ajax_nav'])
            { 
                $this->Ini->Arr_result['AlertJS'][] = NM_charset_to_utf8($mensagem);
                $this->Ini->Arr_result['AlertJSParam'][] = $alertParams;
@@ -1726,7 +1788,7 @@ $(function() {
 <?php
 }
 ?>
-<script type="text/javascript" src="grid_j3x_vikevents_orders_message.js"></script>
+<script type="text/javascript" src="Sales-Snapshots_message.js"></script>
  <SCRIPT type="text/javascript">
 
 <?php
@@ -1750,10 +1812,73 @@ if (is_file($this->Ini->root . $this->Ini->path_link . "_lib/js/tab_erro_" . $th
 var SC_crit_inv = "<?php echo $Msg_Inval ?>";
 var nmdg_Form = "F1";
 
+function scJQCalendarAdd() {
+  $("#sc_start_at_jq").datepicker({
+    beforeShow: function(input, inst) {
+          var_dt_ini  = '01/';
+          var_dt_ini += document.getElementById('SC_start_at_mes').value + '/';
+          var_dt_ini += document.getElementById('SC_start_at_ano').value;
+          document.getElementById('sc_start_at_jq').value = var_dt_ini;
+    },
+    onClose: function(dateText, inst) {
+          aParts  = dateText.split("/");
+          document.getElementById('SC_start_at_mes').value = aParts[1];
+          document.getElementById('SC_start_at_ano').value = aParts[2];
+    },
+    showWeek: true,
+    numberOfMonths: 1,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: 'c-5:c+5',
+    dayNames: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    dayNamesMin: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sem"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>",
+    firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
+    dateFormat: "<?php echo $this->jqueryCalendarDtFormat("ddmmyyyy", "/"); ?>",
+    showOtherMonths: true,
+    showOn: "button",
+    buttonImage: "<?php echo $this->Ini->path_botoes . "/" . $this->arr_buttons['bcalendario']['image']; ?>",
+    buttonImageOnly: true
+  });
+
+  $("#sc_start_at_jq2").datepicker({
+    beforeShow: function(input, inst) {
+          var_dt_ini  = '01/';
+          var_dt_ini += document.getElementById('SC_start_at_input_2_mes').value + '/';
+          var_dt_ini += document.getElementById('SC_start_at_input_2_ano').value;
+          document.getElementById('sc_start_at_jq2').value = var_dt_ini;
+    },
+    onClose: function(dateText, inst) {
+          aParts  = dateText.split("/");
+          document.getElementById('SC_start_at_input_2_mes').value = aParts[1];
+          document.getElementById('SC_start_at_input_2_ano').value = aParts[2];
+    },
+    showWeek: true,
+    numberOfMonths: 1,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: 'c-5:c+5',
+    dayNames: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    dayNamesMin: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_sund"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_mond"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_tued"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_wend"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_thud"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_frid"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_substr_days_satd"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>"],
+    weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_shrt_days_sem"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>",
+    firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
+    dateFormat: "<?php echo $this->jqueryCalendarDtFormat("ddmmyyyy", "/"); ?>",
+    showOtherMonths: true,
+    showOn: "button",
+    buttonImage: "<?php echo $this->Ini->path_botoes . "/" . $this->arr_buttons['bcalendario']['image']; ?>",
+    buttonImageOnly: true
+  });
+
+} // scJQCalendarAdd
+
+
  $(function() {
 
    SC_carga_evt_jquery();
    scLoadScInput('input:text.sc-js-input');
+   scJQCalendarAdd('');
  });
  function nm_campos_between(nm_campo, nm_cond, nm_nome_obj)
  {
@@ -1795,14 +1920,24 @@ var nmdg_Form = "F1";
       return;
   }
   var str_out = "";
-  str_out += 'SC_id_cond#NMF#' + search_get_sel_txt('SC_id_cond') + '@NMF@';
-  str_out += 'SC_id#NMF#' + search_get_text('SC_id') + '@NMF@';
-  str_out += 'SC_uid_cond#NMF#' + search_get_sel_txt('SC_uid_cond') + '@NMF@';
-  str_out += 'SC_uid#NMF#' + search_get_text('SC_uid') + '@NMF@';
-  str_out += 'SC_iditem_cond#NMF#' + search_get_sel_txt('SC_iditem_cond') + '@NMF@';
-  str_out += 'SC_iditem#NMF#' + search_get_text('SC_iditem') + '@NMF@';
-  str_out += 'SC_persons_cond#NMF#' + search_get_sel_txt('SC_persons_cond') + '@NMF@';
-  str_out += 'SC_persons#NMF#' + search_get_text('SC_persons') + '@NMF@';
+  str_out += 'SC_start_at_cond#NMF#' + search_get_sel_txt('SC_start_at_cond') + '@NMF@';
+  str_out += 'SC_start_at_dia#NMF#' + search_get_sel_txt('SC_start_at_dia') + '@NMF@';
+  str_out += 'SC_start_at_mes#NMF#' + search_get_sel_txt('SC_start_at_mes') + '@NMF@';
+  str_out += 'SC_start_at_ano#NMF#' + search_get_sel_txt('SC_start_at_ano') + '@NMF@';
+  str_out += 'SC_start_at_input_2_dia#NMF#' + search_get_sel_txt('SC_start_at_input_2_dia') + '@NMF@';
+  str_out += 'SC_start_at_input_2_mes#NMF#' + search_get_sel_txt('SC_start_at_input_2_mes') + '@NMF@';
+  str_out += 'SC_start_at_input_2_ano#NMF#' + search_get_sel_txt('SC_start_at_input_2_ano') + '@NMF@';
+  str_out += 'SC_start_at_hor#NMF#' + search_get_sel_txt('SC_start_at_hor') + '@NMF@';
+  str_out += 'SC_start_at_min#NMF#' + search_get_sel_txt('SC_start_at_min') + '@NMF@';
+  str_out += 'SC_start_at_seg#NMF#' + search_get_sel_txt('SC_start_at_seg') + '@NMF@';
+  str_out += 'SC_start_at_input_2_hor#NMF#' + search_get_sel_txt('SC_start_at_input_2_hor') + '@NMF@';
+  str_out += 'SC_start_at_input_2_min#NMF#' + search_get_sel_txt('SC_start_at_input_2_min') + '@NMF@';
+  str_out += 'SC_start_at_input_2_seg#NMF#' + search_get_sel_txt('SC_start_at_input_2_seg') + '@NMF@';
+  str_out += 'SC_j3x_vikevents_items_title_cond#NMF#' + search_get_sel_txt('SC_j3x_vikevents_items_title_cond') + '@NMF@';
+  str_out += 'SC_j3x_vikevents_items_title#NMF#' + search_get_text('SC_j3x_vikevents_items_title') + '@NMF@';
+  str_out += 'id_ac_j3x_vikevents_items_title#NMF#' + search_get_text('id_ac_j3x_vikevents_items_title') + '@NMF@';
+  str_out += 'SC_j3x_vikevents_items_price_cond#NMF#' + search_get_sel_txt('SC_j3x_vikevents_items_price_cond') + '@NMF@';
+  str_out += 'SC_j3x_vikevents_items_price#NMF#' + search_get_text('SC_j3x_vikevents_items_price') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -1935,6 +2070,44 @@ function nm_open_popup(parms)
  </SCRIPT>
 <script type="text/javascript">
  $(function() {
+   $("#id_ac_j3x_vikevents_items_title").autocomplete({
+     minLength: 1,
+     source: function (request, response) {
+     $.ajax({
+       url: "index.php",
+       dataType: "json",
+       data: {
+          q: request.term,
+          nmgp_opcao: "ajax_autocomp",
+          nmgp_parms: "NM_ajax_opcao?#?autocomp_j3x_vikevents_items_title",
+          max_itens: "10",
+          cod_desc: "N",
+          script_case_init: <?php echo $this->Ini->sc_page ?>
+        },
+       success: function (data) {
+         if (data == "ss_time_out") {
+             nm_move();
+         }
+         response(data);
+       }
+      });
+    },
+     select: function (event, ui) {
+       $("#SC_j3x_vikevents_items_title").val(ui.item.value);
+       $(this).val(ui.item.label);
+       event.preventDefault();
+     },
+     focus: function (event, ui) {
+       $("#SC_j3x_vikevents_items_title").val(ui.item.value);
+       $(this).val(ui.item.label);
+       event.preventDefault();
+     },
+     change: function (event, ui) {
+       if (null == ui.item) {
+          $("#SC_j3x_vikevents_items_title").val( $(this).val() );
+       }
+     }
+   });
  });
 </script>
  <FORM name="F1" action="./" method="post" target="_self"> 
@@ -1962,7 +2135,7 @@ function nm_open_popup(parms)
     */
    function monta_cabecalho()
    {
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['dashboard_info']['compact_mode'])
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dashboard_info']['compact_mode'])
       {
           return;
       }
@@ -1997,7 +2170,7 @@ function nm_open_popup(parms)
     .scMenuTHeaderFont img, .scGridHeaderFont img , .scFormHeaderFont img , .scTabHeaderFont img , .scContainerHeaderFont img , .scFilterHeaderFont img { height:23px;}
 </style>
 <div class="scFilterHeader" style="height: 54px; padding: 17px 15px; box-sizing: border-box;margin: -1px 0px 0px 0px;width: 100%;">
-    <div class="scFilterHeaderFont" style="float: left; text-transform: uppercase;"><?php echo $this->Ini->Nm_lang['lang_othr_srch_title'] ?> j3x_vikevents_orders</div>
+    <div class="scFilterHeaderFont" style="float: left; text-transform: uppercase;">Snapshot of the Sales</div>
     <div class="scFilterHeaderFont" style="float: right;"><?php echo $nm_data_fixa; ?></div>
 </div>  </TD>
  </TR>
@@ -2014,17 +2187,16 @@ function nm_open_popup(parms)
    function monta_form()
    {
       global 
-             $id_cond, $id,
-             $uid_cond, $uid,
-             $iditem_cond, $iditem,
-             $persons_cond, $persons,
+             $start_at_cond, $start_at, $start_at_dia, $start_at_mes, $start_at_ano, $start_at_hor, $start_at_min, $start_at_seg, $start_at_input_2_dia, $start_at_input_2_mes, $start_at_input_2_ano, $start_at_input_2_min, $start_at_input_2_hor, $start_at_input_2_seg,
+             $j3x_vikevents_items_title_cond, $j3x_vikevents_items_title, $j3x_vikevents_items_title_autocomp,
+             $j3x_vikevents_items_price_cond, $j3x_vikevents_items_price,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
       $this->nmgp_botoes['save'] = "on";
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['btn_display']))
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['btn_display']))
       {
-          foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
           {
               $this->nmgp_botoes[$NM_cada_btn] = $NM_cada_opc;
           }
@@ -2034,132 +2206,114 @@ function nm_open_popup(parms)
       {
           foreach ($_SESSION['scriptcase']['sc_aba_iframe'] as $aba => $apls_aba)
           {
-              if (in_array("grid_j3x_vikevents_orders", $apls_aba))
+              if (in_array("Sales-Snapshots", $apls_aba))
               {
                   $this->aba_iframe = true;
                   break;
               }
           }
       }
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['iframe_menu'] && (!isset($_SESSION['scriptcase']['menu_mobile']) || empty($_SESSION['scriptcase']['menu_mobile'])))
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['iframe_menu'] && (!isset($_SESSION['scriptcase']['menu_mobile']) || empty($_SESSION['scriptcase']['menu_mobile'])))
       {
           $this->aba_iframe = true;
       }
       $nmgp_tab_label = "";
       $delimitador = "##@@";
-      if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']) && $bprocessa != "recarga" && $bprocessa != "save_form" && $bprocessa != "filter_save" && $bprocessa != "filter_delete")
+      if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']) && $bprocessa != "recarga" && $bprocessa != "save_form" && $bprocessa != "filter_save" && $bprocessa != "filter_delete")
       {
       }
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']) && $bprocessa != "recarga" && $bprocessa != "save_form" && $bprocessa != "filter_save" && $bprocessa != "filter_delete")
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']) && $bprocessa != "recarga" && $bprocessa != "save_form" && $bprocessa != "filter_save" && $bprocessa != "filter_delete")
       { 
           if ($_SESSION['scriptcase']['charset'] != "UTF-8")
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
           }
-          $id = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['id']; 
-          $id_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['id_cond']; 
-          $uid = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['uid']; 
-          $uid_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['uid_cond']; 
-          $iditem = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['iditem']; 
-          $iditem_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['iditem_cond']; 
-          $persons = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['persons']; 
-          $persons_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['persons_cond']; 
-          $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['NM_operador']; 
-          if (strtoupper($id_cond) != "II" && strtoupper($id_cond) != "QP" && strtoupper($id_cond) != "NP" && strtoupper($id_cond) != "IN") 
+          $start_at_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_dia']; 
+          $start_at_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_mes']; 
+          $start_at_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_ano']; 
+          $start_at_input_2_dia = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_dia']; 
+          $start_at_input_2_mes = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_mes']; 
+          $start_at_input_2_ano = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_ano']; 
+          $start_at_hor = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_hor']; 
+          $start_at_min = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_min']; 
+          $start_at_seg = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_seg']; 
+          $start_at_input_2_hor = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_hor']; 
+          $start_at_input_2_min = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_min']; 
+          $start_at_input_2_seg = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_seg']; 
+          $start_at_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_cond']; 
+          $j3x_vikevents_items_title = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['j3x_vikevents_items_title']; 
+          $j3x_vikevents_items_title_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['j3x_vikevents_items_title_cond']; 
+          $j3x_vikevents_items_price = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['j3x_vikevents_items_price']; 
+          $j3x_vikevents_items_price_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['j3x_vikevents_items_price_cond']; 
+          $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['NM_operador']; 
+          if (strtoupper($j3x_vikevents_items_price_cond) != "II" && strtoupper($j3x_vikevents_items_price_cond) != "QP" && strtoupper($j3x_vikevents_items_price_cond) != "NP" && strtoupper($j3x_vikevents_items_price_cond) != "IN") 
           { 
-              nmgp_Form_Num_Val($id, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-          } 
-          if (strtoupper($uid_cond) != "II" && strtoupper($uid_cond) != "QP" && strtoupper($uid_cond) != "NP" && strtoupper($uid_cond) != "IN") 
-          { 
-              nmgp_Form_Num_Val($uid, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-          } 
-          if (strtoupper($iditem_cond) != "II" && strtoupper($iditem_cond) != "QP" && strtoupper($iditem_cond) != "NP" && strtoupper($iditem_cond) != "IN") 
-          { 
-              nmgp_Form_Num_Val($iditem, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-          } 
-          if (strtoupper($persons_cond) != "II" && strtoupper($persons_cond) != "QP" && strtoupper($persons_cond) != "NP" && strtoupper($persons_cond) != "IN") 
-          { 
-              nmgp_Form_Num_Val($persons, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+              nmgp_Form_Num_Val($j3x_vikevents_items_price, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "2", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
           } 
       } 
-      if (!isset($id_cond) || empty($id_cond))
+      if (!isset($start_at_cond) || empty($start_at_cond))
       {
-         $id_cond = "gt";
+         $start_at_cond = "bw";
       }
-      if (!isset($uid_cond) || empty($uid_cond))
+      if (!isset($j3x_vikevents_items_title_cond) || empty($j3x_vikevents_items_title_cond))
       {
-         $uid_cond = "gt";
+         $j3x_vikevents_items_title_cond = "qp";
       }
-      if (!isset($iditem_cond) || empty($iditem_cond))
+      if (!isset($j3x_vikevents_items_price_cond) || empty($j3x_vikevents_items_price_cond))
       {
-         $iditem_cond = "gt";
-      }
-      if (!isset($persons_cond) || empty($persons_cond))
-      {
-         $persons_cond = "gt";
+         $j3x_vikevents_items_price_cond = "gt";
       }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
-      $str_hide_id = (in_array($id_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
-      $str_hide_uid = (in_array($uid_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
-      $str_hide_iditem = (in_array($iditem_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
-      $str_hide_persons = (in_array($persons_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_start_at = (in_array($start_at_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_j3x_vikevents_items_title = (in_array($j3x_vikevents_items_title_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_j3x_vikevents_items_price = (in_array($j3x_vikevents_items_price_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
-      if (!isset($id) || $id == "")
+      $str_display_start_at = ('bw' == $start_at_cond) ? $display_aberto : $display_fechado;
+      $str_display_j3x_vikevents_items_title = ('bw' == $j3x_vikevents_items_title_cond) ? $display_aberto : $display_fechado;
+      $str_display_j3x_vikevents_items_price = ('bw' == $j3x_vikevents_items_price_cond) ? $display_aberto : $display_fechado;
+
+      if (!isset($start_at) || $start_at == "")
       {
-          $id = "";
+          $start_at = "";
       }
-      if (isset($id) && !empty($id))
+      if (isset($start_at) && !empty($start_at))
       {
-         $tmp_pos = strpos($id, "##@@");
+         $tmp_pos = strpos($start_at, "##@@");
          if ($tmp_pos === false)
          { }
          else
          {
-         $id = substr($id, 0, $tmp_pos);
+         $start_at = substr($start_at, 0, $tmp_pos);
          }
       }
-      if (!isset($uid) || $uid == "")
+      if (!isset($j3x_vikevents_items_title) || $j3x_vikevents_items_title == "")
       {
-          $uid = "";
+          $j3x_vikevents_items_title = "";
       }
-      if (isset($uid) && !empty($uid))
+      if (isset($j3x_vikevents_items_title) && !empty($j3x_vikevents_items_title))
       {
-         $tmp_pos = strpos($uid, "##@@");
+         $tmp_pos = strpos($j3x_vikevents_items_title, "##@@");
          if ($tmp_pos === false)
          { }
          else
          {
-         $uid = substr($uid, 0, $tmp_pos);
+         $j3x_vikevents_items_title = substr($j3x_vikevents_items_title, 0, $tmp_pos);
          }
       }
-      if (!isset($iditem) || $iditem == "")
+      if (!isset($j3x_vikevents_items_price) || $j3x_vikevents_items_price == "")
       {
-          $iditem = "";
+          $j3x_vikevents_items_price = "";
       }
-      if (isset($iditem) && !empty($iditem))
+      if (isset($j3x_vikevents_items_price) && !empty($j3x_vikevents_items_price))
       {
-         $tmp_pos = strpos($iditem, "##@@");
+         $tmp_pos = strpos($j3x_vikevents_items_price, "##@@");
          if ($tmp_pos === false)
          { }
          else
          {
-         $iditem = substr($iditem, 0, $tmp_pos);
-         }
-      }
-      if (!isset($persons) || $persons == "")
-      {
-          $persons = "";
-      }
-      if (isset($persons) && !empty($persons))
-      {
-         $tmp_pos = strpos($persons, "##@@");
-         if ($tmp_pos === false)
-         { }
-         else
-         {
-         $persons = substr($persons, 0, $tmp_pos);
+         $j3x_vikevents_items_price = substr($j3x_vikevents_items_price, 0, $tmp_pos);
          }
       }
 ?>
@@ -2173,137 +2327,259 @@ function nm_open_popup(parms)
 
 
 
+   
+      <INPUT type="hidden" id="SC_start_at_cond" name="start_at_cond" value="bw">
 
-
-      <TD class="scFilterLabelOdd"><?php echo (isset($this->New_label['id'])) ? $this->New_label['id'] : "Order ID"; ?></TD>
-     <TD class="scFilterFieldOdd"> 
-      <SELECT class="scFilterObjectOdd" id="SC_id_cond" name="id_cond" onChange="nm_campos_between(document.getElementById('id_vis_id'), this, 'id')">
-       <OPTION value="gt" <?php if ("gt" == $id_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_grtr'] ?></OPTION>
-       <OPTION value="lt" <?php if ("lt" == $id_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_less'] ?></OPTION>
-       <OPTION value="eq" <?php if ("eq" == $id_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_exac'] ?></OPTION>
-      </SELECT>
-       </TD>
-     <TD  class="scFilterFieldOdd">
-      <TABLE  border="0" cellpadding="0" cellspacing="0">
-       <TR id="id_hide_id" <?php echo $str_hide_id?> valign="top">
-        <TD class="scFilterFieldFontOdd">
-           <?php
- $SC_Label = (isset($this->New_label['id'])) ? $this->New_label['id'] : "Order ID";
- $nmgp_tab_label .= "id?#?" . $SC_Label . "?@?";
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['start_at'])) ? $this->New_label['start_at'] : "Start At";
+ $nmgp_tab_label .= "start_at?#?" . $SC_Label . "?@?";
  $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
  {
      $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
-<INPUT  type="text" id="SC_id" name="id" value="<?php echo NM_encode_input($id) ?>" size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}" class="sc-js-input scFilterObjectOdd">
+<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br><span id="id_hide_start_at"  <?php echo $str_hide_start_at?>>
+<?php
+  $Form_base = "mmyyyy";
+  $date_format_show = "";
+  $Str_date = str_replace("a", "y", strtolower($_SESSION['scriptcase']['reg_conf']['date_format']));
+  $Lim   = strlen($Str_date);
+  $Str   = "";
+  $Ult   = "";
+  $Arr_D = array();
+  for ($I = 0; $I < $Lim; $I++)
+  {
+      $Char = substr($Str_date, $I, 1);
+      if ($Char != $Ult && "" != $Str)
+      {
+          $Arr_D[] = $Str;
+          $Str     = $Char;
+      }
+      else
+      {
+          $Str    .= $Char;
+      }
+      $Ult = $Char;
+  }
+  $Arr_D[] = $Str;
+  $Prim = true;
+  foreach ($Arr_D as $Cada_d)
+  {
+      if (strpos($Form_base, $Cada_d) !== false)
+      {
+          $date_format_show .= (!$Prim) ? $_SESSION['scriptcase']['reg_conf']['date_sep'] : "";
+          $date_format_show .= $Cada_d;
+          $Prim = false;
+      }
+  }
+  $date_format_show .= " ";
+  $Str_time = strtolower($_SESSION['scriptcase']['reg_conf']['time_format']);
+  $Lim   = strlen($Str_time);
+  $Str   = "";
+  $Ult   = "";
+  $Arr_T = array();
+  for ($I = 0; $I < $Lim; $I++)
+  {
+      $Char = substr($Str_time, $I, 1);
+      if ($Char != $Ult && "" != $Str)
+      {
+          $Arr_T[] = $Str;
+          $Str     = $Char;
+      }
+      else
+      {
+          $Str    .= $Char;
+      }
+      $Ult = $Char;
+  }
+  $Arr_T[] = $Str;
+  $Prim = true;
+  foreach ($Arr_T as $Cada_t)
+  {
+      if (strpos($Form_base, $Cada_t) !== false)
+      {
+          $date_format_show .= (!$Prim) ? $_SESSION['scriptcase']['reg_conf']['time_sep'] : "";
+          $date_format_show .= $Cada_t;
+          $Prim = false;
+      }
+  }
+  $Arr_format = array_merge($Arr_D, $Arr_T);
+  $date_format_show = str_replace("dd",   $this->Ini->Nm_lang['lang_othr_date_days'], $date_format_show);
+  $date_format_show = str_replace("mm",   $this->Ini->Nm_lang['lang_othr_date_mnth'], $date_format_show);
+  $date_format_show = str_replace("yyyy", $this->Ini->Nm_lang['lang_othr_date_year'], $date_format_show);
+  $date_format_show = str_replace("aaaa", $this->Ini->Nm_lang['lang_othr_date_year'], $date_format_show);
+  $date_format_show = str_replace("hh",   $this->Ini->Nm_lang['lang_othr_date_hour'], $date_format_show);
+  $date_format_show = str_replace("ii",   $this->Ini->Nm_lang['lang_othr_date_mint'], $date_format_show);
+  $date_format_show = str_replace("ss",   $this->Ini->Nm_lang['lang_othr_date_scnd'], $date_format_show);
+  $date_format_show = "" . $date_format_show .  "";
 
-        </TD>
-       </TR>
-      </TABLE>
-     </TD>
+?>
+
+         <?php
+
+foreach ($Arr_format as $Part_date)
+{
+?>
+<?php
+  if (substr($Part_date, 0,1) == "m")
+  {
+?>
+<span id='id_date_part_start_at_MM' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_start_at_mes" name="start_at_mes" value="<?php echo NM_encode_input($start_at_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "y")
+  {
+?>
+<span id='id_date_part_start_at_AAAA' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_start_at_ano" name="start_at_ano" value="<?php echo NM_encode_input($start_at_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
+ <INPUT type="hidden" id="sc_start_at_jq">
+</span>
+
+<?php
+  }
+?>
+
+<?php
+
+}
+
+?>
+        <SPAN id="id_css_start_at"  class="scFilterFieldFontOdd">
+ <?php echo $date_format_show ?>         </SPAN>
+                  <br />
+        <SPAN id="id_vis_start_at"  <?php echo $str_display_start_at; ?> class="scFilterFieldFontOdd">
+         <?php echo $date_sep_bw ?> 
+         <BR>
+         
+         <?php
+
+foreach ($Arr_format as $Part_date)
+{
+?>
+<?php
+  if (substr($Part_date, 0,1) == "m")
+  {
+?>
+<span id='id_date_part_start_at_input_2_MM' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_start_at_input_2_mes" name="start_at_input_2_mes" value="<?php echo NM_encode_input($start_at_input_2_mes); ?>" size="2" alt="{datatype: 'mask', maskList: '99', alignRight: true, maxLength: 2, autoTab: true, enterTab: false}">
+</span>
+
+<?php
+  }
+?>
+<?php
+  if (substr($Part_date, 0,1) == "y")
+  {
+?>
+<span id='id_date_part_start_at_input_2_AAAA' style='display: inline-block'>
+<INPUT class="sc-js-input scFilterObjectOdd" type="text" id="SC_start_at_input_2_ano" name="start_at_input_2_ano" value="<?php echo NM_encode_input($start_at_input_2_ano); ?>" size="4" alt="{datatype: 'mask', maskList: '9999', alignRight: true, maxLength: 4, autoTab: true, enterTab: false}">
+ <INPUT type="hidden" id="sc_start_at_jq2">
+</span>
+
+<?php
+  }
+?>
+
+<?php
+
+}
+
+?>
+         </SPAN>
+          </TD>
+   
+
+
 
    </tr><tr>
 
 
 
+   
+      <INPUT type="hidden" id="SC_j3x_vikevents_items_title_cond" name="j3x_vikevents_items_title_cond" value="qp">
 
-
-      <TD class="scFilterLabelEven"><?php echo (isset($this->New_label['uid'])) ? $this->New_label['uid'] : "Uid"; ?></TD>
-     <TD class="scFilterFieldEven"> 
-      <SELECT class="scFilterObjectEven" id="SC_uid_cond" name="uid_cond" onChange="nm_campos_between(document.getElementById('id_vis_uid'), this, 'uid')">
-       <OPTION value="gt" <?php if ("gt" == $uid_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_grtr'] ?></OPTION>
-       <OPTION value="lt" <?php if ("lt" == $uid_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_less'] ?></OPTION>
-       <OPTION value="eq" <?php if ("eq" == $uid_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_exac'] ?></OPTION>
-      </SELECT>
-       </TD>
-     <TD  class="scFilterFieldEven">
-      <TABLE  border="0" cellpadding="0" cellspacing="0">
-       <TR id="id_hide_uid" <?php echo $str_hide_uid?> valign="top">
-        <TD class="scFilterFieldFontEven">
-           <?php
- $SC_Label = (isset($this->New_label['uid'])) ? $this->New_label['uid'] : "Uid";
- $nmgp_tab_label .= "uid?#?" . $SC_Label . "?@?";
+    <TD nowrap class="scFilterLabelEven" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['j3x_vikevents_items_title'])) ? $this->New_label['j3x_vikevents_items_title'] : "Title";
+ $nmgp_tab_label .= "j3x_vikevents_items_title?#?" . $SC_Label . "?@?";
  $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
  {
      $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
-<INPUT  type="text" id="SC_uid" name="uid" value="<?php echo NM_encode_input($uid) ?>" size=10 alt="{datatype: 'integer', maxLength: 10, thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}" class="sc-js-input scFilterObjectEven">
+<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br><span id="id_hide_j3x_vikevents_items_title"  <?php echo $str_hide_j3x_vikevents_items_title?>><?php
+      if ($j3x_vikevents_items_title != "")
+      {
+      $j3x_vikevents_items_title_look = substr($this->Db->qstr($j3x_vikevents_items_title), 1, -1); 
+      $nmgp_def_dados = array(); 
+      $nm_comando = "select distinct j3x_vikevents_items.title from " . $this->Ini->nm_tabela . " where j3x_vikevents_items.title = '$j3x_vikevents_items_title_look' order by j3x_vikevents_items.title"; 
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
+      { 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = trim($rs->fields[0]);
+            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
+      } 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
+      } 
+      }
+      if (isset($nmgp_def_dados[0][$j3x_vikevents_items_title]))
+      {
+          $sAutocompValue = $nmgp_def_dados[0][$j3x_vikevents_items_title];
+      }
+      else
+      {
+          $sAutocompValue = $j3x_vikevents_items_title;
+      }
+?>
+<INPUT  type="text" id="SC_j3x_vikevents_items_title" name="j3x_vikevents_items_title" value="<?php echo NM_encode_input($j3x_vikevents_items_title) ?>"  size=50 alt="{datatype: 'text', maxLength: 128, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}" style="display: none">
+<input class="sc-js-input scFilterObjectEven" type="text" id="id_ac_j3x_vikevents_items_title" name="j3x_vikevents_items_title_autocomp" size="50"  value="<?php echo NM_encode_input($sAutocompValue); ?>" alt="{datatype: 'text', maxLength: 128, allowedChars: '', lettersCase: '', autoTab: false, enterTab: false}">
 
-        </TD>
-       </TR>
-      </TABLE>
-     </TD>
+ </TD>
+   
+
+
 
    </tr><tr>
 
 
 
-
-
-      <TD class="scFilterLabelOdd"><?php echo (isset($this->New_label['iditem'])) ? $this->New_label['iditem'] : "Iditem"; ?></TD>
-     <TD class="scFilterFieldOdd"> 
-      <SELECT class="scFilterObjectOdd" id="SC_iditem_cond" name="iditem_cond" onChange="nm_campos_between(document.getElementById('id_vis_iditem'), this, 'iditem')">
-       <OPTION value="gt" <?php if ("gt" == $iditem_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_grtr'] ?></OPTION>
-       <OPTION value="lt" <?php if ("lt" == $iditem_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_less'] ?></OPTION>
-       <OPTION value="eq" <?php if ("eq" == $iditem_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_exac'] ?></OPTION>
-      </SELECT>
-       </TD>
-     <TD  class="scFilterFieldOdd">
-      <TABLE  border="0" cellpadding="0" cellspacing="0">
-       <TR id="id_hide_iditem" <?php echo $str_hide_iditem?> valign="top">
-        <TD class="scFilterFieldFontOdd">
-           <?php
- $SC_Label = (isset($this->New_label['iditem'])) ? $this->New_label['iditem'] : "Iditem";
- $nmgp_tab_label .= "iditem?#?" . $SC_Label . "?@?";
+   
+    <TD nowrap class="scFilterLabelOdd" style="vertical-align: top" > <?php
+ $SC_Label = (isset($this->New_label['j3x_vikevents_items_price'])) ? $this->New_label['j3x_vikevents_items_price'] : "Price";
+ $nmgp_tab_label .= "j3x_vikevents_items_price?#?" . $SC_Label . "?@?";
  $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
  {
      $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
-<INPUT  type="text" id="SC_iditem" name="iditem" value="<?php echo NM_encode_input($iditem) ?>" size=10 alt="{datatype: 'integer', maxLength: 10, thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}" class="sc-js-input scFilterObjectOdd">
-
-        </TD>
-       </TR>
-      </TABLE>
-     </TD>
-
-   </tr><tr>
-
-
-
-
-
-      <TD class="scFilterLabelEven"><?php echo (isset($this->New_label['persons'])) ? $this->New_label['persons'] : "# of Tickets"; ?></TD>
-     <TD class="scFilterFieldEven"> 
-      <SELECT class="scFilterObjectEven" id="SC_persons_cond" name="persons_cond" onChange="nm_campos_between(document.getElementById('id_vis_persons'), this, 'persons')">
-       <OPTION value="gt" <?php if ("gt" == $persons_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_grtr'] ?></OPTION>
-       <OPTION value="lt" <?php if ("lt" == $persons_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_less'] ?></OPTION>
-       <OPTION value="eq" <?php if ("eq" == $persons_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_exac'] ?></OPTION>
+<span class="SC_Field_label_Mob"><?php echo $SC_Label ?></span><br>
+      <SELECT class="SC_Cond_Selector scFilterObjectOdd" id="SC_j3x_vikevents_items_price_cond" name="j3x_vikevents_items_price_cond" onChange="nm_campos_between(document.getElementById('id_vis_j3x_vikevents_items_price'), this, 'j3x_vikevents_items_price')">
+       <OPTION value="gt" <?php if ("gt" == $j3x_vikevents_items_price_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_grtr'] ?></OPTION>
+       <OPTION value="lt" <?php if ("lt" == $j3x_vikevents_items_price_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_less'] ?></OPTION>
+       <OPTION value="eq" <?php if ("eq" == $j3x_vikevents_items_price_cond) { echo "selected"; } ?>><?php echo $this->Ini->Nm_lang['lang_srch_exac'] ?></OPTION>
       </SELECT>
-       </TD>
-     <TD  class="scFilterFieldEven">
-      <TABLE  border="0" cellpadding="0" cellspacing="0">
-       <TR id="id_hide_persons" <?php echo $str_hide_persons?> valign="top">
-        <TD class="scFilterFieldFontEven">
-           <?php
- $SC_Label = (isset($this->New_label['persons'])) ? $this->New_label['persons'] : "# of Tickets";
- $nmgp_tab_label .= "persons?#?" . $SC_Label . "?@?";
- $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
- if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
- {
-     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
- }
-?>
-<INPUT  type="text" id="SC_persons" name="persons" value="<?php echo NM_encode_input($persons) ?>" size=10 alt="{datatype: 'integer', maxLength: 10, thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}" class="sc-js-input scFilterObjectEven">
+      <br><span id="id_hide_j3x_vikevents_items_price"  <?php echo $str_hide_j3x_vikevents_items_price?>><INPUT  type="text" id="SC_j3x_vikevents_items_price" name="j3x_vikevents_items_price" value="<?php echo NM_encode_input($j3x_vikevents_items_price) ?>" size=12 alt="{datatype: 'decimal', maxLength: 12, precision: 2, decimalSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['dec_num'] ?>', thousandsSep: '<?php echo $_SESSION['scriptcase']['reg_conf']['grup_num'] ?>', allowNegative: false, onlyNegative: false, enterTab: false}" class="sc-js-input scFilterObjectOdd">
+ </TD>
+   
 
-        </TD>
-       </TR>
-      </TABLE>
-     </TD>
+
 
    </tr>
    </TABLE>
@@ -2319,7 +2595,7 @@ function nm_open_popup(parms)
    <INPUT type="hidden" name="nmgp_tab_label" value="<?php echo NM_encode_input($nmgp_tab_label); ?>"> 
    <INPUT type="hidden" name="bprocessa" value="pesq"> 
 <?php
-    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['pesq_tab_label'] = $nmgp_tab_label;
+    $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pesq_tab_label'] = $nmgp_tab_label;
 ?>
  <?php
      if ($_SESSION['scriptcase']['proc_mobile'])
@@ -2394,9 +2670,9 @@ function nm_open_popup(parms)
    }
 ?>
 <?php
-   if (is_file("grid_j3x_vikevents_orders_help.txt"))
+   if (is_file("Sales-Snapshots_help.txt"))
    {
-      $Arq_WebHelp = file("grid_j3x_vikevents_orders_help.txt"); 
+      $Arq_WebHelp = file("Sales-Snapshots_help.txt"); 
       if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
       {
           $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
@@ -2416,7 +2692,7 @@ function nm_open_popup(parms)
    }
 ?>
 <?php
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['start'] == 'filter' && $nm_apl_dependente != 1)
+   if (isset($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['start'] == 'filter' && $nm_apl_dependente != 1)
    {
 ?>
        <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -2601,9 +2877,9 @@ function nm_open_popup(parms)
    }
 ?>
 <?php
-   if (is_file("grid_j3x_vikevents_orders_help.txt"))
+   if (is_file("Sales-Snapshots_help.txt"))
    {
-      $Arq_WebHelp = file("grid_j3x_vikevents_orders_help.txt"); 
+      $Arq_WebHelp = file("Sales-Snapshots_help.txt"); 
       if (isset($Arq_WebHelp[0]) && !empty($Arq_WebHelp[0]))
       {
           $Arq_WebHelp[0] = str_replace("\r\n" , "", trim($Arq_WebHelp[0]));
@@ -2623,7 +2899,7 @@ function nm_open_popup(parms)
    }
 ?>
 <?php
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['start'] == 'filter' && $nm_apl_dependente != 1)
+   if (isset($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['start'] == 'filter' && $nm_apl_dependente != 1)
    {
 ?>
        <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
@@ -2749,7 +3025,7 @@ function nm_open_popup(parms)
    <INPUT type="hidden" name="form_condicao" value="3">
 </FORM> 
 <?php
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['start'] == 'filter')
+   if (isset($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['start'] == 'filter')
    {
 ?>
    <FORM style="display:none;" name="form_cancel"  method="POST" action="<?php echo $nm_url_saida; ?>" target="_self"> 
@@ -2765,7 +3041,7 @@ function nm_open_popup(parms)
    <INPUT type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
    <INPUT type="hidden" name="script_case_session" value="<?php echo NM_encode_input(session_id()); ?>"> 
 <?php
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['orig_pesq'] == "grid")
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq'] == "grid")
    {
        $Ret_cancel_pesq = "volta_grid";
    }
@@ -2814,21 +3090,34 @@ function nm_open_popup(parms)
        document.F1.NM_filters.selectedIndex = -1;
    }
    document.getElementById('Salvar_filters_bot').style.display = 'none';
-   document.F1.id_cond.value = 'gt';
-   nm_campos_between(document.getElementById('id_vis_id'), document.F1.id_cond, 'id');
-   document.F1.id.value = "";
-   document.F1.uid_cond.value = 'gt';
-   nm_campos_between(document.getElementById('id_vis_uid'), document.F1.uid_cond, 'uid');
-   document.F1.uid.value = "";
-   document.F1.iditem_cond.value = 'gt';
-   nm_campos_between(document.getElementById('id_vis_iditem'), document.F1.iditem_cond, 'iditem');
-   document.F1.iditem.value = "";
-   document.F1.persons_cond.value = 'gt';
-   nm_campos_between(document.getElementById('id_vis_persons'), document.F1.persons_cond, 'persons');
-   document.F1.persons.value = "";
+   document.F1.start_at_cond.value = 'bw';
+   nm_campos_between(document.getElementById('id_vis_start_at'), document.F1.start_at_cond, 'start_at');
+   document.F1.start_at_mes.value = "";
+   document.F1.start_at_ano.value = "";
+   document.F1.start_at_input_2_mes.value = "";
+   document.F1.start_at_input_2_ano.value = "";
+   document.F1.j3x_vikevents_items_title_cond.value = 'qp';
+   nm_campos_between(document.getElementById('id_vis_j3x_vikevents_items_title'), document.F1.j3x_vikevents_items_title_cond, 'j3x_vikevents_items_title');
+   document.F1.j3x_vikevents_items_title.value = "";
+   document.F1.j3x_vikevents_items_title_autocomp.value = "";
+   document.F1.j3x_vikevents_items_price_cond.value = 'gt';
+   nm_campos_between(document.getElementById('id_vis_j3x_vikevents_items_price'), document.F1.j3x_vikevents_items_price_cond, 'j3x_vikevents_items_price');
+   document.F1.j3x_vikevents_items_price.value = "";
  }
  function SC_carga_evt_jquery()
  {
+    $('#SC_start_at_input_2_mes').bind('change', function() {sc_Sales_Snapshots_valida_mes(this)});
+    $('#SC_start_at_mes').bind('change', function() {sc_Sales_Snapshots_valida_mes(this)});
+ }
+ function sc_Sales_Snapshots_valida_mes(obj)
+ {
+     if (obj.value != "" && (obj.value < 1 || obj.value > 12))
+     {
+         if (confirm (Nm_erro['lang_jscr_ivdt'] +  " " + Nm_erro['lang_jscr_mnth'] +  " " + Nm_erro['lang_jscr_wfix']))
+         {
+            Xfocus = setTimeout(function() { obj.focus(); }, 10);
+         }
+     }
  }
    function process_hotkeys(hotkey)
    {
@@ -2863,7 +3152,7 @@ function nm_open_popup(parms)
    function gera_array_filtros()
    {
        $this->NM_fil_ant = array();
-       $NM_patch   = "AstorReport/grid_j3x_vikevents_orders";
+       $NM_patch   = "AstorReport/Sales-Snapshots";
        if (is_dir($this->NM_path_filter . $NM_patch))
        {
            $NM_dir = @opendir($this->NM_path_filter . $NM_patch);
@@ -2911,10 +3200,10 @@ function nm_open_popup(parms)
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz;
       $this->Campos_Mens_erro = ""; 
       $this->nm_data = new nm_data("en_us");
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] = "";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] = "";
       if ($this->NM_ajax_flag && ($this->NM_ajax_opcao == "ajax_grid_search" || $this->NM_ajax_opcao == "ajax_grid_search_change_fil"))
       {
-          $nmgp_tab_label = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['pesq_tab_label'];
+          $nmgp_tab_label = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pesq_tab_label'];
       }
       if (!empty($nmgp_tab_label))
       {
@@ -2926,9 +3215,9 @@ function nm_open_popup(parms)
              $nmgp_tab_label[$parte_campo[0]] = $parte_campo[1];
          }
       }
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_orig']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig']))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_orig'] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'] = "";
       }
       if ($this->NM_ajax_flag && ($this->NM_ajax_opcao == "ajax_grid_search" || $this->NM_ajax_opcao == "ajax_grid_search_change_fil"))
       {
@@ -2936,7 +3225,7 @@ function nm_open_popup(parms)
       }
       else
       {
-          $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_orig'];
+          $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'];
       }
       $this->comando_sum    = "";
       $this->comando_filtro = "";
@@ -2968,7 +3257,7 @@ function nm_open_popup(parms)
           {
               $NMdir = mkdir($NM_patch, 0755);
           }
-          $NM_patch .= "grid_j3x_vikevents_orders/";
+          $NM_patch .= "Sales-Snapshots/";
           if (!is_dir($NM_patch))
           {
               $NMdir = mkdir($NM_patch, 0755);
@@ -2995,14 +3284,24 @@ function nm_open_popup(parms)
       $tp_fields     = array();
       $tb_fields_esp = array();
       $old_bi_opcs   = array("TP","HJ","OT","U7","SP","US","MM","UM","AM","PS","SS","P3","PM","P7","CY","LY","YY","M6","M3","M18","M24");
-      $tp_fields['SC_id_cond'] = 'cond';
-      $tp_fields['SC_id'] = 'text';
-      $tp_fields['SC_uid_cond'] = 'cond';
-      $tp_fields['SC_uid'] = 'text';
-      $tp_fields['SC_iditem_cond'] = 'cond';
-      $tp_fields['SC_iditem'] = 'text';
-      $tp_fields['SC_persons_cond'] = 'cond';
-      $tp_fields['SC_persons'] = 'text';
+      $tp_fields['SC_start_at_cond'] = 'cond';
+      $tp_fields['SC_start_at_dia'] = 'text';
+      $tp_fields['SC_start_at_mes'] = 'text';
+      $tp_fields['SC_start_at_ano'] = 'text';
+      $tp_fields['SC_start_at_input_2_dia'] = 'text';
+      $tp_fields['SC_start_at_input_2_mes'] = 'text';
+      $tp_fields['SC_start_at_input_2_ano'] = 'text';
+      $tp_fields['SC_start_at_hor'] = 'text';
+      $tp_fields['SC_start_at_min'] = 'text';
+      $tp_fields['SC_start_at_seg'] = 'text';
+      $tp_fields['SC_start_at_input_2_hor'] = 'text';
+      $tp_fields['SC_start_at_input_2_min'] = 'text';
+      $tp_fields['SC_start_at_input_2_seg'] = 'text';
+      $tp_fields['SC_j3x_vikevents_items_title_cond'] = 'cond';
+      $tp_fields['SC_j3x_vikevents_items_title'] = 'text_aut';
+      $tp_fields['id_ac_j3x_vikevents_items_title'] = 'text_aut';
+      $tp_fields['SC_j3x_vikevents_items_price_cond'] = 'cond';
+      $tp_fields['SC_j3x_vikevents_items_price'] = 'text';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -3146,10 +3445,9 @@ function nm_open_popup(parms)
     */
    function trata_campos()
    {
-      global $id_cond, $id,
-             $uid_cond, $uid,
-             $iditem_cond, $iditem,
-             $persons_cond, $persons, $nmgp_tab_label;
+      global $start_at_cond, $start_at, $start_at_dia, $start_at_mes, $start_at_ano, $start_at_hor, $start_at_min, $start_at_seg, $start_at_input_2_dia, $start_at_input_2_mes, $start_at_input_2_ano, $start_at_input_2_min, $start_at_input_2_hor, $start_at_input_2_seg,
+             $j3x_vikevents_items_title_cond, $j3x_vikevents_items_title, $j3x_vikevents_items_title_autocomp,
+             $j3x_vikevents_items_price_cond, $j3x_vikevents_items_price, $nmgp_tab_label;
 
       $C_formatado = true;
       if ($this->NM_ajax_flag && ($this->NM_ajax_opcao == "ajax_grid_search" || $this->NM_ajax_opcao == "ajax_grid_search_change_fil"))
@@ -3158,12 +3456,12 @@ function nm_open_popup(parms)
           {
               $C_formatado = false;
           }
-          $Temp_Busca  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'];
+          $Temp_Busca  = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'];
           if ($_SESSION['scriptcase']['charset'] != "UTF-8" && $this->NM_ajax_opcao != "ajax_grid_search_change_fil")
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'], $_SESSION['scriptcase']['charset'], "UTF-8");
           }
-          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'] as $Cmps => $Vals)
+          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'] as $Cmps => $Vals)
           {
               $$Cmps = $Vals;
           }
@@ -3171,234 +3469,302 @@ function nm_open_popup(parms)
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_conv_dados.php", "F", "nm_conv_limpa_dado") ; 
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_edit.php", "F", "nmgp_Form_Num_Val") ; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq'] = array();
-      $id_cond_salva = $id_cond; 
-      if (!isset($id_input_2) || $id_input_2 == "")
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'] = array();
+      if (!empty($j3x_vikevents_items_title_autocomp) && empty($j3x_vikevents_items_title))
       {
-          $id_input_2 = $id;
+          $j3x_vikevents_items_title = $j3x_vikevents_items_title_autocomp;
       }
-      $uid_cond_salva = $uid_cond; 
-      if (!isset($uid_input_2) || $uid_input_2 == "")
+      $start_at_cond_salva = $start_at_cond; 
+      if (!isset($start_at_input_2_dia) || $start_at_input_2_dia == "")
       {
-          $uid_input_2 = $uid;
+          $start_at_input_2_dia = $start_at_dia;
       }
-      $iditem_cond_salva = $iditem_cond; 
-      if (!isset($iditem_input_2) || $iditem_input_2 == "")
+      if (!isset($start_at_input_2_mes) || $start_at_input_2_mes == "")
       {
-          $iditem_input_2 = $iditem;
+          $start_at_input_2_mes = $start_at_mes;
       }
-      $persons_cond_salva = $persons_cond; 
-      if (!isset($persons_input_2) || $persons_input_2 == "")
+      if (!isset($start_at_input_2_ano) || $start_at_input_2_ano == "")
       {
-          $persons_input_2 = $persons;
+          $start_at_input_2_ano = $start_at_ano;
       }
-      if ($id_cond != "in")
+      if (!isset($start_at_input_2_hor) || $start_at_input_2_hor == "")
       {
-          nm_limpa_numero($id, $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
+          $start_at_input_2_hor = $start_at_hor;
+      }
+      if (!isset($start_at_input_2_min) || $start_at_input_2_min == "")
+      {
+          $start_at_input_2_min = $start_at_min;
+      }
+      if (!isset($start_at_input_2_seg) || $start_at_input_2_seg == "")
+      {
+          $start_at_input_2_seg = $start_at_seg;
+      }
+      $j3x_vikevents_items_title_cond_salva = $j3x_vikevents_items_title_cond; 
+      if (!isset($j3x_vikevents_items_title_input_2) || $j3x_vikevents_items_title_input_2 == "")
+      {
+          $j3x_vikevents_items_title_input_2 = $j3x_vikevents_items_title;
+      }
+      $j3x_vikevents_items_price_cond_salva = $j3x_vikevents_items_price_cond; 
+      if (!isset($j3x_vikevents_items_price_input_2) || $j3x_vikevents_items_price_input_2 == "")
+      {
+          $j3x_vikevents_items_price_input_2 = $j3x_vikevents_items_price;
+      }
+      if ($j3x_vikevents_items_price_cond != "in")
+      {
+          if ($C_formatado)
+          {
+              nm_limpa_valor($j3x_vikevents_items_price, $_SESSION['scriptcase']['reg_conf']['dec_num'], $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
+          }
       }
       else
       {
-          $Nm_sc_valores = explode(",", $id);
+          if ($_SESSION['scriptcase']['reg_conf']['dec_num'] == ",")
+          {
+              $j3x_vikevents_items_price = str_replace(" ,", ", ", $j3x_vikevents_items_price);
+              $Nm_sc_valores = explode(", ", $j3x_vikevents_items_price);
+          }
+          else
+          {
+              $Nm_sc_valores = explode(",", $j3x_vikevents_items_price);
+          }
           foreach ($Nm_sc_valores as $II => $Nm_sc_valor)
           {
               $Nm_sc_valor = trim($Nm_sc_valor);
-              nm_limpa_numero($Nm_sc_valor, $_SESSION['scriptcase']['reg_conf']['grup_num']); 
+              if ($C_formatado)
+              {
+                  nm_limpa_valor($Nm_sc_valor, $_SESSION['scriptcase']['reg_conf']['dec_num'], $_SESSION['scriptcase']['reg_conf']['grup_num']); 
+               }
               $Nm_sc_valores[$II] = $Nm_sc_valor;
           }
-          $id = implode(",", $Nm_sc_valores);
+          $j3x_vikevents_items_price = implode(",", $Nm_sc_valores);
       }
-      if ($uid_cond != "in")
-      {
-          nm_limpa_numero($uid, $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
-      }
-      else
-      {
-          $Nm_sc_valores = explode(",", $uid);
-          foreach ($Nm_sc_valores as $II => $Nm_sc_valor)
-          {
-              $Nm_sc_valor = trim($Nm_sc_valor);
-              nm_limpa_numero($Nm_sc_valor, $_SESSION['scriptcase']['reg_conf']['grup_num']); 
-              $Nm_sc_valores[$II] = $Nm_sc_valor;
-          }
-          $uid = implode(",", $Nm_sc_valores);
-      }
-      if ($iditem_cond != "in")
-      {
-          nm_limpa_numero($iditem, $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
-      }
-      else
-      {
-          $Nm_sc_valores = explode(",", $iditem);
-          foreach ($Nm_sc_valores as $II => $Nm_sc_valor)
-          {
-              $Nm_sc_valor = trim($Nm_sc_valor);
-              nm_limpa_numero($Nm_sc_valor, $_SESSION['scriptcase']['reg_conf']['grup_num']); 
-              $Nm_sc_valores[$II] = $Nm_sc_valor;
-          }
-          $iditem = implode(",", $Nm_sc_valores);
-      }
-      if ($persons_cond != "in")
-      {
-          nm_limpa_numero($persons, $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
-      }
-      else
-      {
-          $Nm_sc_valores = explode(",", $persons);
-          foreach ($Nm_sc_valores as $II => $Nm_sc_valor)
-          {
-              $Nm_sc_valor = trim($Nm_sc_valor);
-              nm_limpa_numero($Nm_sc_valor, $_SESSION['scriptcase']['reg_conf']['grup_num']); 
-              $Nm_sc_valores[$II] = $Nm_sc_valor;
-          }
-          $persons = implode(",", $Nm_sc_valores);
-      }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']  = array(); 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search']  = array(); 
       $I_Grid = 0;
       $Dyn_ok = false;
       $Grid_ok = false;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['id'] = $id; 
-      if (is_array($id) && !empty($id))
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_dia'] = $start_at_dia; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_mes'] = $start_at_mes; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_ano'] = $start_at_ano; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_dia'] = $start_at_input_2_dia; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_mes'] = $start_at_input_2_mes; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_ano'] = $start_at_input_2_ano; 
+      if (!empty($start_at_dia) || !empty($start_at_mes) || !empty($start_at_ano) || $start_at_cond_salva == "nu" || $start_at_cond_salva == "nn" || $start_at_cond_salva == "ep" || $start_at_cond_salva == "ne")
       {
           $Grid_ok = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['val'][0] = $id;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0][] = "D:" . $start_at_dia;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0][] = "M:" . $start_at_mes;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0][] = "Y:" . $start_at_ano;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][1][] = "D:" . $start_at_input_2_dia;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][1][] = "M:" . $start_at_input_2_mes;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][1][] = "Y:" . $start_at_input_2_ano;
       }
-      elseif ($id_cond_salva == "nu" || $id_cond_salva == "nn" || $id_cond_salva == "ep" || $id_cond_salva == "ne" ||  !empty($id))
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_hor'] = $start_at_hor; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_min'] = $start_at_min; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_seg'] = $start_at_seg; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_hor'] = $start_at_input_2_hor; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_min'] = $start_at_input_2_min; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2_seg'] = $start_at_input_2_seg; 
+      if (!empty($start_at_hor) || !empty($start_at_min) || !empty($start_at_seg) || $start_at_cond_salva == "nu" || $start_at_cond_salva == "nn" || $start_at_cond_salva == "ep" || $start_at_cond_salva == "ne")
       {
           $Grid_ok = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['val'][0][0] = $id;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0][] = "H:" . $start_at_hor;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0][] = "I:" . $start_at_min;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0][] = "S:" . $start_at_seg;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][1][] = "H:" . $start_at_input_2_hor;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][1][] = "I:" . $start_at_input_2_min;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][1][] = "S:" . $start_at_input_2_seg;
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['id_cond'] = $id_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_cond'] = $start_at_cond_salva; 
       if ($Grid_ok)
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['cmp'] = "id"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['opc'] = $id_cond_salva; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq']['id'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['cmp'] = "start_at"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['opc'] = $start_at_cond_salva; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq']['start_at'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid];
           $I_Grid++;
       }
       $Dyn_ok = false;
       $Grid_ok = false;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['uid'] = $uid; 
-      if (is_array($uid) && !empty($uid))
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['j3x_vikevents_items_title'] = $j3x_vikevents_items_title; 
+      if (is_array($j3x_vikevents_items_title) && !empty($j3x_vikevents_items_title))
       {
           $Grid_ok = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['val'][0] = $uid;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0] = $j3x_vikevents_items_title;
       }
-      elseif ($uid_cond_salva == "nu" || $uid_cond_salva == "nn" || $uid_cond_salva == "ep" || $uid_cond_salva == "ne" ||  !empty($uid))
+      elseif ($j3x_vikevents_items_title_cond_salva == "nu" || $j3x_vikevents_items_title_cond_salva == "nn" || $j3x_vikevents_items_title_cond_salva == "ep" || $j3x_vikevents_items_title_cond_salva == "ne" ||  !empty($j3x_vikevents_items_title))
       {
           $Grid_ok = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['val'][0][0] = $uid;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0][0] = $j3x_vikevents_items_title;
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['uid_cond'] = $uid_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['j3x_vikevents_items_title_cond'] = $j3x_vikevents_items_title_cond_salva; 
       if ($Grid_ok)
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['cmp'] = "uid"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['opc'] = $uid_cond_salva; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq']['uid'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['cmp'] = "j3x_vikevents_items_title"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['opc'] = $j3x_vikevents_items_title_cond_salva; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq']['j3x_vikevents_items_title'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid];
           $I_Grid++;
       }
       $Dyn_ok = false;
       $Grid_ok = false;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['iditem'] = $iditem; 
-      if (is_array($iditem) && !empty($iditem))
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['j3x_vikevents_items_price'] = $j3x_vikevents_items_price; 
+      if (is_array($j3x_vikevents_items_price) && !empty($j3x_vikevents_items_price))
       {
           $Grid_ok = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['val'][0] = $iditem;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0] = $j3x_vikevents_items_price;
       }
-      elseif ($iditem_cond_salva == "nu" || $iditem_cond_salva == "nn" || $iditem_cond_salva == "ep" || $iditem_cond_salva == "ne" ||  !empty($iditem))
+      elseif ($j3x_vikevents_items_price_cond_salva == "nu" || $j3x_vikevents_items_price_cond_salva == "nn" || $j3x_vikevents_items_price_cond_salva == "ep" || $j3x_vikevents_items_price_cond_salva == "ne" ||  !empty($j3x_vikevents_items_price))
       {
           $Grid_ok = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['val'][0][0] = $iditem;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['val'][0][0] = $j3x_vikevents_items_price;
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['iditem_cond'] = $iditem_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['j3x_vikevents_items_price_cond'] = $j3x_vikevents_items_price_cond_salva; 
       if ($Grid_ok)
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['cmp'] = "iditem"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['opc'] = $iditem_cond_salva; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq']['iditem'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['cmp'] = "j3x_vikevents_items_price"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid]['opc'] = $j3x_vikevents_items_price_cond_salva; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq']['j3x_vikevents_items_price'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Grid_search'][$I_Grid];
           $I_Grid++;
       }
-      $Dyn_ok = false;
-      $Grid_ok = false;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['persons'] = $persons; 
-      if (is_array($persons) && !empty($persons))
-      {
-          $Grid_ok = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['val'][0] = $persons;
-      }
-      elseif ($persons_cond_salva == "nu" || $persons_cond_salva == "nn" || $persons_cond_salva == "ep" || $persons_cond_salva == "ne" ||  !empty($persons))
-      {
-          $Grid_ok = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['val'][0][0] = $persons;
-      }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['persons_cond'] = $persons_cond_salva; 
-      if ($Grid_ok)
-      {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['cmp'] = "persons"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid]['opc'] = $persons_cond_salva; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['grid_pesq']['persons'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['Grid_search'][$I_Grid];
-          $I_Grid++;
-      }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']['NM_operador'] = $this->NM_operador; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'] = $Temp_Busca;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'] = $Temp_Busca;
+      }
+      if ($j3x_vikevents_items_price_cond != "in" && $j3x_vikevents_items_price_cond != "bw" && !empty($j3x_vikevents_items_price) && !is_numeric($j3x_vikevents_items_price))
+      {
+          if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Price";
+      }
+      if ($j3x_vikevents_items_price_cond == "bw" && ((!empty($j3x_vikevents_items_price) && !is_numeric($j3x_vikevents_items_price)) || (!empty($j3x_vikevents_items_price_input_2) && !is_numeric($j3x_vikevents_items_price_input_2)) ))
+      {
+          if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->Ini->Nm_lang['lang_errm_ajax_data'] . " : Price";
       }
       if (!empty($this->Campos_Mens_erro)) 
       {
           return;
       }
-      $Conteudo = $id;
-      if (strtoupper($id_cond) != "II" && strtoupper($id_cond) != "QP" && strtoupper($id_cond) != "NP" && strtoupper($id_cond) != "IN") 
+      $j3x_vikevents_items_title_look = substr($this->Db->qstr($j3x_vikevents_items_title), 1, -1); 
+      $nmgp_def_dados = array(); 
+      $nm_comando = "select distinct j3x_vikevents_items.title from " . $this->Ini->nm_tabela . " where j3x_vikevents_items.title = '$j3x_vikevents_items_title_look' order by j3x_vikevents_items.title"; 
+      unset($cmp1,$cmp2);
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
       { 
-          nmgp_Form_Num_Val($Conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         while (!$rs->EOF) 
+         { 
+            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
+            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
+            $rs->MoveNext() ; 
+         } 
+         $rs->Close() ; 
       } 
-      $this->cmp_formatado['id'] = $Conteudo;
-      $Conteudo = $uid;
-      if (strtoupper($uid_cond) != "II" && strtoupper($uid_cond) != "QP" && strtoupper($uid_cond) != "NP" && strtoupper($uid_cond) != "IN") 
-      { 
-          nmgp_Form_Num_Val($Conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+      else  
+      {  
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit; 
       } 
-      $this->cmp_formatado['uid'] = $Conteudo;
-      $Conteudo = $iditem;
-      if (strtoupper($iditem_cond) != "II" && strtoupper($iditem_cond) != "QP" && strtoupper($iditem_cond) != "NP" && strtoupper($iditem_cond) != "IN") 
-      { 
-          nmgp_Form_Num_Val($Conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-      } 
-      $this->cmp_formatado['iditem'] = $Conteudo;
-      $Conteudo = $persons;
-      if (strtoupper($persons_cond) != "II" && strtoupper($persons_cond) != "QP" && strtoupper($persons_cond) != "NP" && strtoupper($persons_cond) != "IN") 
-      { 
-          nmgp_Form_Num_Val($Conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-      } 
-      $this->cmp_formatado['persons'] = $Conteudo;
 
-      //----- $id
-      $this->Date_part = false;
-      if (isset($id) || $id_cond == "nu" || $id_cond == "nn" || $id_cond == "ep" || $id_cond == "ne")
+      if (!empty($nmgp_def_dados) && isset($cmp2) && !empty($cmp2))
       {
-         $this->monta_condicao("id", $id_cond, $id, "", "id");
+          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+          {
+             $cmp2 = NM_conv_charset($cmp2, $_SESSION['scriptcase']['charset'], "UTF-8");
+          }
+          $this->cmp_formatado['j3x_vikevents_items_title'] = $cmp2;
+      }
+      elseif (!empty($nmgp_def_dados) && isset($cmp1) && !empty($cmp1))
+      {
+          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+          {
+             $cmp1 = NM_conv_charset($cmp1, $_SESSION['scriptcase']['charset'], "UTF-8");
+          }
+          $this->cmp_formatado['j3x_vikevents_items_title'] = $cmp1;
+      }
+      else
+      {
+          $this->cmp_formatado['j3x_vikevents_items_title'] = $j3x_vikevents_items_title;
+      }
+      $Conteudo = $j3x_vikevents_items_price;
+      if (strtoupper($j3x_vikevents_items_price_cond) != "II" && strtoupper($j3x_vikevents_items_price_cond) != "QP" && strtoupper($j3x_vikevents_items_price_cond) != "NP" && strtoupper($j3x_vikevents_items_price_cond) != "IN") 
+      { 
+          nmgp_Form_Num_Val($Conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "2", "S", "1", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+      } 
+      $this->cmp_formatado['j3x_vikevents_items_price'] = $Conteudo;
+
+      //----- $start_at
+      $this->Date_part = false;
+      if ($start_at_cond != "bi_TP")
+      {
+          $start_at_cond = strtoupper($start_at_cond);
+          $Dtxt = "";
+          $val  = array();
+          $Dtxt .= $start_at_ano;
+          $Dtxt .= $start_at_mes;
+          $Dtxt .= $start_at_dia;
+          $Dtxt .= $start_at_hor;
+          $Dtxt .= $start_at_min;
+          $Dtxt .= $start_at_seg;
+          $val[0]['ano'] = $start_at_ano;
+          $val[0]['mes'] = $start_at_mes;
+          $val[0]['dia'] = $start_at_dia;
+          $val[0]['hor'] = $start_at_hor;
+          $val[0]['min'] = $start_at_min;
+          $val[0]['seg'] = $start_at_seg;
+          if ($start_at_cond == "BW")
+          {
+              $val[1]['ano'] = $start_at_input_2_ano;
+              $val[1]['mes'] = $start_at_input_2_mes;
+              $val[1]['dia'] = $start_at_input_2_dia;
+              $val[1]['hor'] = $start_at_input_2_hor;
+              $val[1]['min'] = $start_at_input_2_min;
+              $val[1]['seg'] = $start_at_input_2_seg;
+          }
+          $this->Operador_date_part = "";
+          $this->Lang_date_part     = "";
+          $this->nm_prep_date($val, "DH", "DATETIME", $start_at_cond, "", "datahora");
+          if (!$this->Date_part) {
+              $val[0] = $this->Ini->sc_Date_Protect($val[0]);
+          }
+          $start_at = $val[0];
+          $this->cmp_formatado['start_at'] = $val[0];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at'] = $val[0];
+          $this->nm_data->SetaData($this->cmp_formatado['start_at'], "YYYY-MM-DD HH:II:SS");
+          $this->cmp_formatado['start_at'] = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DH", "mY"));
+          if ($start_at_cond == "BW")
+          {
+              if (!$this->Date_part) {
+                  $val[1] = $this->Ini->sc_Date_Protect($val[1]);
+              }
+              $start_at_input_2     = $val[1];
+              $this->cmp_formatado['start_at_input_2'] = $val[1];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']['start_at_input_2'] = $val[1];
+              $this->nm_data->SetaData($this->cmp_formatado['start_at_input_2'], "YYYY-MM-DD HH:II:SS");
+              $this->cmp_formatado['start_at_input_2'] = $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DH", "mY"));
+          }
+          if (!empty($Dtxt) || $start_at_cond == "NU" || $start_at_cond == "NN"|| $start_at_cond == "EP"|| $start_at_cond == "NE")
+          {
+              $this->monta_condicao("FROM_UNIXTIME(j3x_vikevents_items.tsinit)", $start_at_cond, $start_at, $start_at_input_2, 'start_at', 'DATETIME');
+          }
+      }
+      else
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq']['start_at']['label'] = $nmgp_tab_label['start_at'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq']['start_at']['descr'] = $nmgp_tab_label['start_at'] . " " . $this->Ini->Nm_lang['lang_srch_ever'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq']['start_at']['hint']  = $nmgp_tab_label['start_at'] . " " . $this->Ini->Nm_lang['lang_srch_ever'];
       }
 
-      //----- $uid
+      //----- $j3x_vikevents_items_title
       $this->Date_part = false;
-      if (isset($uid) || $uid_cond == "nu" || $uid_cond == "nn" || $uid_cond == "ep" || $uid_cond == "ne")
+      if (isset($j3x_vikevents_items_title) || $j3x_vikevents_items_title_cond == "nu" || $j3x_vikevents_items_title_cond == "nn" || $j3x_vikevents_items_title_cond == "ep" || $j3x_vikevents_items_title_cond == "ne")
       {
-         $this->monta_condicao("uid", $uid_cond, $uid, "", "uid");
+         $this->monta_condicao("j3x_vikevents_items.title", $j3x_vikevents_items_title_cond, $j3x_vikevents_items_title, "", "j3x_vikevents_items_title");
       }
 
-      //----- $iditem
+      //----- $j3x_vikevents_items_price
       $this->Date_part = false;
-      if (isset($iditem) || $iditem_cond == "nu" || $iditem_cond == "nn" || $iditem_cond == "ep" || $iditem_cond == "ne")
+      if (isset($j3x_vikevents_items_price) || $j3x_vikevents_items_price_cond == "nu" || $j3x_vikevents_items_price_cond == "nn" || $j3x_vikevents_items_price_cond == "ep" || $j3x_vikevents_items_price_cond == "ne")
       {
-         $this->monta_condicao("iditem", $iditem_cond, $iditem, "", "iditem");
-      }
-
-      //----- $persons
-      $this->Date_part = false;
-      if (isset($persons) || $persons_cond == "nu" || $persons_cond == "nn" || $persons_cond == "ep" || $persons_cond == "ne")
-      {
-         $this->monta_condicao("persons", $persons_cond, $persons, "", "persons");
+         $this->monta_condicao("j3x_vikevents_items.price", $j3x_vikevents_items_price_cond, $j3x_vikevents_items_price, "", "j3x_vikevents_items_price");
       }
    }
 
@@ -3408,72 +3774,85 @@ function nm_open_popup(parms)
    function finaliza_resultado_ajax()
    {
        $this->comando = substr($this->comando, 8);
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_grid'] = $this->comando;
+       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_grid'] = $this->comando;
        if (empty($this->comando)) 
        {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_filtro'] = "";
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_orig'];
+           $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] = "";
+           $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'];
        }
        else
        {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_filtro'] = "( " . $this->comando . " )";
-           if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_orig'])) 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] = "( " . $this->comando . " )";
+           if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'])) 
            {
-               $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_orig'] . " and (" . $this->comando . ")"; 
+               $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'] . " and (" . $this->comando . ")"; 
            }
            else
            {
                $this->comando = " where " . $this->comando; 
            }
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq'] = $this->comando;
+           $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] = $this->comando;
        }
-       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_fast'])) 
+       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'])) 
        {
-           if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq'])) 
+           if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'])) 
            {
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq'] .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_fast'] . ")";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'] . ")";
            }
            else 
            {
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq'] = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_fast'] . ")";
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'] . ")";
+           }
+       }
+       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'])) 
+       {
+           if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'])) 
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] . ")";
+           }
+           else 
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] = " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'];
            }
        }
    }
    function finaliza_resultado()
    {
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['dyn_search']      = array();
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_dyn_search'] = "";
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_fast'] = "";
-      unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['fast_search']);
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dyn_search']      = array();
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_dyn_search'] = "";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'] = "";
+      unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['fast_search']);
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] = "";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'] = array();
       if ("" == $this->comando_filtro)
       {
-          $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_orig'];
+          $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'];
       }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca']) && $_SESSION['scriptcase']['charset'] != "UTF-8")
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca']) && $_SESSION['scriptcase']['charset'] != "UTF-8")
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['campos_busca'], "UTF-8", $_SESSION['scriptcase']['charset']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'], "UTF-8", $_SESSION['scriptcase']['charset']);
       }
 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_grid']    = $this->comando_filtro;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_lookup']  = $this->comando_sum . $this->comando_fim;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq']         = $this->comando . $this->comando_fim;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['opcao']              = "pesq";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_grid']    = $this->comando_filtro;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_lookup']  = $this->comando_sum . $this->comando_fim;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq']         = $this->comando . $this->comando_fim;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao']              = "pesq";
       if ("" == $this->comando_filtro)
       {
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_filtro'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] = "";
       }
       else
       {
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_filtro'] = " (" . $this->comando_filtro . ")";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] = " (" . $this->comando_filtro . ")";
       }
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq'] != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_ant'])
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] != $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant'])
       {
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['cond_pesq'] .= $this->NM_operador;
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['contr_array_resumo'] = "NAO";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['contr_total_geral']  = "NAO";
-         unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['tot_geral']);
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] .= $this->NM_operador;
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_array_resumo'] = "NAO";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_total_geral']  = "NAO";
+         unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tot_geral']);
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_orders']['where_pesq'];
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'];
 
       if ($this->NM_ajax_flag && ($this->NM_ajax_opcao == "ajax_grid_search" || $this->NM_ajax_opcao == "ajax_grid_search_change_fil"))
       {
@@ -3481,6 +3860,31 @@ function nm_open_popup(parms)
       }
       $this->retorna_pesq();
    }
+   function jqueryCalendarDtFormat($sFormat, $sSep)
+   {
+       $sFormat = chunk_split(str_replace('yyyy', 'yy', $sFormat), 2, $sSep);
+
+       if ($sSep == substr($sFormat, -1))
+       {
+           $sFormat = substr($sFormat, 0, -1);
+       }
+
+       return $sFormat;
+   } // jqueryCalendarDtFormat
+
+   function jqueryCalendarWeekInit($sDay)
+   {
+       switch ($sDay) {
+           case 'MO': return 1; break;
+           case 'TU': return 2; break;
+           case 'WE': return 3; break;
+           case 'TH': return 4; break;
+           case 'FR': return 5; break;
+           case 'SA': return 6; break;
+           default  : return 7; break;
+       }
+   } // jqueryCalendarWeekInit
+
    function nm_gera_mask(&$nm_campo, $nm_mask)
    { 
       $trab_campo = $nm_campo;
@@ -3609,76 +4013,6 @@ function nm_open_popup(parms)
        nm_conv_form_data($dt_out, $form_in, $form_out);
        return $dt_out;
    }
-function extract_emails_from($string)
-{
-$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['contr_erro'] = 'on';
-  
- preg_match_all("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+/i", $string, $matches);
-         return $matches[0];
-
-$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['contr_erro'] = 'off';
-}
-function ticketname($tick_id)
-{
-$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['contr_erro'] = 'on';
-  
-
-$check_sql = "SELECT Concat(name, ' ', descr)"
-   . " FROM j3x_vikevents_multiprices"
-   . " WHERE id = '" . $tick_id . "'";
- 
-      $nm_select = $check_sql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $rs = array();
-      if ($rx = $this->Db->Execute($nm_select)) 
-      { 
-          $y = 0; 
-          $nm_count = $rx->FieldCount();
-          while (!$rx->EOF)
-          { 
-                 for ($x = 0; $x < $nm_count; $x++)
-                 { 
-                        $rs[$y] [$x] = $rx->fields[$x];
-                 }
-                 $y++; 
-                 $rx->MoveNext();
-          } 
-          $rx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $rs = false;
-          $rs_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-if (isset($rs[0][0]))     
-{
-    return $name = $rs[0][0];
-   
-}
-$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['contr_erro'] = 'off';
-}
-function ticketsDetails($tickets)
-{
-$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['contr_erro'] = 'on';
-  
-$a = array();
-foreach($tickets as $ticket){
-	$disc = explode("=", $ticket);
-	array_push($a, $this->ticketname($disc[1]));
-	}
-$bs = array_count_values($a);
-$html='';
-foreach($bs as $k=>$v){
-	$html .= $k. ' '. $v.'<br>';
-	}
-
-return $html;
-
-$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['contr_erro'] = 'off';
-}
 }
 
 ?>

@@ -1,15 +1,15 @@
 <?php
-   include_once('grid_j3x_vikevents_orders_session.php');
+   include_once('Sales-Snapshots_session.php');
    session_start();
-   $_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp']  = "";
+   $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp']  = "";
    //check tmp
-   if(empty($_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp']))
+   if(empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp']))
    {
        $str_path_apl_url = $_SERVER['PHP_SELF'];
        $str_path_apl_url = str_replace("\\", '/', $str_path_apl_url);
        $str_path_apl_url = substr($str_path_apl_url, 0, strrpos($str_path_apl_url, "/"));
        $str_path_apl_url = substr($str_path_apl_url, 0, strrpos($str_path_apl_url, "/")+1);
-       /*check tmp*/$_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
+       /*check tmp*/$_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
    }
    if (!isset($_SESSION['sc_session']))
    {
@@ -28,7 +28,7 @@
        $str_path_web    = str_replace("\\", '/', $str_path_web);
        $str_path_web    = str_replace('//', '/', $str_path_web);
        $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
-       if (is_file($root . $_SESSION['scriptcase']['grid_j3x_vikevents_orders']['glo_nm_path_imag_temp'] . "/sc_apl_default_AstorReport.txt"))
+       if (is_file($root . $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] . "/sc_apl_default_AstorReport.txt"))
        {
 ?>
            <script language="javascript">
@@ -42,10 +42,10 @@
    {
        include_once("../_lib/lib/php/nm_utf8.php");
    }
-   $Ord_Cmp = new grid_j3x_vikevents_orders_Ord_cmp(); 
+   $Ord_Cmp = new Sales_Snapshots_Ord_cmp(); 
    $Ord_Cmp->Ord_cmp_init();
    
-class grid_j3x_vikevents_orders_Ord_cmp
+class Sales_Snapshots_Ord_cmp
 {
 function Ord_cmp_init()
 {
@@ -81,60 +81,72 @@ function Ord_cmp_init()
    {
        include_once($NM_arq_lang);
    }
-   if (!isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select_orig']))
+   if (!isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select_orig']))
    {
-       $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select_orig'] = array();
+       $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select_orig'] = array();
    }
    $this->restore = isset($_POST['restore']) ? true : false;
    if ($this->restore && !class_exists('Services_JSON')) {
-       include_once("grid_j3x_vikevents_orders_json.php");
+       include_once("Sales-Snapshots_json.php");
    }
    $this->Arr_result = array();
    
    $tab_ger_campos = array();
    $tab_def_campos = array();
    $tab_labels     = array();
-   $tab_ger_campos['id'] = "on";
-   $tab_def_campos['id'] = "id";
-   $tab_labels["id"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["id"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["id"] : "Order ID";
-   $tab_ger_campos['nominative'] = "on";
-   $tab_def_campos['nominative'] = "nominative";
-   $tab_labels["nominative"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["nominative"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["nominative"] : "Nominative";
-   $tab_ger_campos['custdata'] = "on";
-   $tab_def_campos['custdata'] = "custdata";
-   $tab_labels["custdata"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["custdata"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["custdata"] : "Custdata";
-   $tab_ger_campos['membdata'] = "on";
-   $tab_def_campos['membdata'] = "membdata";
-   $tab_labels["membdata"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["membdata"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["membdata"] : "Membdata";
-   $tab_ger_campos['persons'] = "on";
-   $tab_def_campos['persons'] = "persons";
-   $tab_labels["persons"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["persons"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["persons"] : "# of Tickets";
-   $tab_ger_campos['tot'] = "on";
-   $tab_def_campos['tot'] = "tot";
-   $tab_labels["tot"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["tot"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["tot"] : "Total Sales";
-   $tab_ger_campos['discount'] = "on";
-   $tab_def_campos['discount'] = "discount";
-   $tab_labels["discount"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["discount"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["discount"] : "Discount";
-   $tab_ger_campos['status'] = "on";
-   $tab_def_campos['status'] = "status";
-   $tab_labels["status"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["status"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["status"] : "Status";
-   $tab_ger_campos['strmultiprices'] = "on";
-   $tab_def_campos['strmultiprices'] = "strmultiprices";
-   $tab_labels["strmultiprices"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["strmultiprices"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["strmultiprices"] : "Strmultiprices";
-   $tab_ger_campos['ticket_detail'] = "on";
+   $tab_ger_campos['j3x_vikevents_items_price'] = "on";
    if ($use_alias == "S")
    {
-       $tab_def_campos['ticket_detail'] = "ticket_detail";
+       $tab_def_campos['j3x_vikevents_items_price'] = "j3x_vikevents_items_price";
    }
    else
    {
-       $tab_def_campos['ticket_detail'] = "";
+       $tab_def_campos['j3x_vikevents_items_price'] = "j3x_vikevents_items.price";
    }
-   $tab_labels["ticket_detail"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["ticket_detail"])) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['labels']["ticket_detail"] : "Tickets";
-   $tab_ger_campos['ticket_detail'] = "none";
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['field_display']))
+   $tab_labels["j3x_vikevents_items_price"]   = (isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_items_price"])) ? $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_items_price"] : "Price";
+   $tab_ger_campos['j3x_vikevents_orders_persons'] = "on";
+   if ($use_alias == "S")
    {
-       foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_orders']['field_display'] as $NM_cada_field => $NM_cada_opc)
+       $tab_def_campos['j3x_vikevents_orders_persons'] = "j3x_vikevents_orders_persons";
+   }
+   else
+   {
+       $tab_def_campos['j3x_vikevents_orders_persons'] = "j3x_vikevents_orders.persons";
+   }
+   $tab_labels["j3x_vikevents_orders_persons"]   = (isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_orders_persons"])) ? $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_orders_persons"] : "Persons";
+   $tab_ger_campos['j3x_vikevents_orders_custdata'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['j3x_vikevents_orders_custdata'] = "j3x_vikevents_orders_custdata";
+   }
+   else
+   {
+       $tab_def_campos['j3x_vikevents_orders_custdata'] = "j3x_vikevents_orders.custdata";
+   }
+   $tab_labels["j3x_vikevents_orders_custdata"]   = (isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_orders_custdata"])) ? $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_orders_custdata"] : "Custdata";
+   $tab_ger_campos['j3x_vikevents_orders_purchemail'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['j3x_vikevents_orders_purchemail'] = "cmp_maior_30_1";
+   }
+   else
+   {
+       $tab_def_campos['j3x_vikevents_orders_purchemail'] = "j3x_vikevents_orders.purchemail";
+   }
+   $tab_labels["j3x_vikevents_orders_purchemail"]   = (isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_orders_purchemail"])) ? $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_orders_purchemail"] : "Purchemail";
+   $tab_ger_campos['j3x_vikevents_orders_tot'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['j3x_vikevents_orders_tot'] = "j3x_vikevents_orders_tot";
+   }
+   else
+   {
+       $tab_def_campos['j3x_vikevents_orders_tot'] = "j3x_vikevents_orders.tot";
+   }
+   $tab_labels["j3x_vikevents_orders_tot"]   = (isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_orders_tot"])) ? $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['labels']["j3x_vikevents_orders_tot"] : "Tot";
+   if (isset($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['field_display']))
+   {
+       foreach ($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['field_display'] as $NM_cada_field => $NM_cada_opc)
        {
            if ($NM_cada_opc == "off")
            {
@@ -142,9 +154,9 @@ function Ord_cmp_init()
            }
        }
    }
-   if (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['php_cmp_sel']) && !empty($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['php_cmp_sel']))
+   if (isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['php_cmp_sel']) && !empty($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['php_cmp_sel']))
    {
-       foreach ($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['php_cmp_sel'] as $NM_cada_field => $NM_cada_opc)
+       foreach ($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['php_cmp_sel'] as $NM_cada_field => $NM_cada_opc)
        {
            if ($NM_cada_opc == "off")
            {
@@ -152,9 +164,9 @@ function Ord_cmp_init()
            }
        }
    }
-   if (!isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select']))
+   if (!isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select']))
    {
-       $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select'] = array();
+       $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select'] = array();
    }
    
    if ($fsel_ok == "cmp" && !$this->restore)
@@ -187,16 +199,16 @@ function Sel_processa_out_sel($campos_sel)
    global $tab_ger_campos, $sc_init, $tab_def_campos, $embbed;
    $arr_temp = array();
    $campos_sel = explode("@?@", $campos_sel);
-   $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select'] = array();
-   $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_grid']   = "";
-   $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_cmp']    = "";
+   $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select'] = array();
+   $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_grid']   = "";
+   $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_cmp']    = "";
    foreach ($campos_sel as $campo_sort)
    {
        $ordem = (substr($campo_sort, 0, 1) == "+") ? "asc" : "desc";
        $campo = substr($campo_sort, 1);
        if (isset($tab_def_campos[$campo]))
        {
-           $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select'][$tab_def_campos[$campo]] = $ordem;
+           $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select'][$tab_def_campos[$campo]] = $ordem;
        }
    }
 ?>
@@ -252,7 +264,7 @@ function Sel_processa_form()
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo $this->Nm_lang['lang_othr_grid_title'] ?> j3x_vikevents_orders</TITLE>
+ <TITLE>Snapshot of the Sales</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
  <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
@@ -304,7 +316,7 @@ if ($embbed)
     }
    return new Promise(function(resolve, reject) {$.ajax({
     type: "POST",
-    url: "grid_j3x_vikevents_orders_order_campos.php",
+    url: "Sales-Snapshots_order_campos.php",
     data: {
      script_case_init: $("#id_script_case_init_sel_ord").val(),
      script_case_session: $("#id_script_case_session_sel_ord").val(),
@@ -451,7 +463,7 @@ if (!$embbed)
         ob_end_clean();
         ob_start();
    }
-   $arr_order = ($this->restore) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select_orig'] : $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select'];
+   $arr_order = ($this->restore) ? $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select_orig'] : $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select'];
    foreach ($tab_ger_campos as $NM_cada_field => $NM_cada_opc)
    {
        if ($NM_cada_opc != "none")
@@ -483,7 +495,7 @@ if (!$embbed)
        ob_end_clean();
        ob_start();
    }
-   $arr_order = ($this->restore) ? $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select_orig'] : $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select'];
+   $arr_order = ($this->restore) ? $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select_orig'] : $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select'];
    foreach ($tab_ger_campos as $NM_cada_field => $NM_cada_opc)
    {
        if ($NM_cada_opc != "none")
@@ -529,7 +541,7 @@ if (!$embbed)
    <tr><td class="<?php echo ($embbed)? 'scAppDivToolbar':'scGridToolbar'; ?>">
 <?php
   $disp_rest = "none";
-  if (isset($_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select']) && $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select'] != $_SESSION['sc_session'][$sc_init]['grid_j3x_vikevents_orders']['ordem_select_orig']) {
+  if (isset($_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select']) && $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select'] != $_SESSION['sc_session'][$sc_init]['Sales-Snapshots']['ordem_select_orig']) {
       $disp_rest = "";
   }
    if (!$embbed)
@@ -614,7 +626,7 @@ function buttonEnable_ord(buttonId) {
 function restore_ord() {
     $.ajax({
         type: 'POST',
-        url: "grid_j3x_vikevents_orders_order_campos.php",
+        url: "Sales-Snapshots_order_campos.php",
         data: {
            script_case_init: $("#id_script_case_init_sel_ord").val(),
            script_case_session: $("#id_script_case_session_sel_ord").val(),

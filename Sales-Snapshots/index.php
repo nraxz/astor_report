@@ -1,12 +1,12 @@
 <?php
-   include_once('grid_j3x_vikevents_items_session.php');
+   include_once('Sales-Snapshots_session.php');
    @session_start() ;
-   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_perfil']          = "conn_mysql";
-   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_prod']       = "";
-   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_conf']       = "";
-   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imagens']    = "";
-   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imag_temp']  = "";
-   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_doc']        = "";
+   $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_perfil']          = "conn_mysql";
+   $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_prod']       = "";
+   $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_conf']       = "";
+   $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imagens']    = "";
+   $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp']  = "";
+   $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_doc']        = "";
     //check publication with the prod
     $NM_dir_atual = getcwd();
     if (empty($NM_dir_atual))
@@ -26,28 +26,28 @@
     $str_path_apl_dir = substr($str_path_sys, 0, strrpos($str_path_sys, "/"));
     $str_path_apl_dir = substr($str_path_apl_dir, 0, strrpos($str_path_apl_dir, "/")+1);
     //check prod
-    if(empty($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_prod']))
+    if(empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_prod']))
     {
-            /*check prod*/$_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_prod'] = $str_path_apl_url . "_lib/prod";
+            /*check prod*/$_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_prod'] = $str_path_apl_url . "_lib/prod";
     }
     //check img
-    if(empty($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imagens']))
+    if(empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imagens']))
     {
-            /*check img*/$_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imagens'] = $str_path_apl_url . "_lib/file/img";
+            /*check img*/$_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imagens'] = $str_path_apl_url . "_lib/file/img";
     }
     //check tmp
-    if(empty($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imag_temp']))
+    if(empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp']))
     {
-            /*check tmp*/$_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
+            /*check tmp*/$_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
     }
     //check doc
-    if(empty($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_doc']))
+    if(empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_doc']))
     {
-            /*check doc*/$_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_doc'] = $str_path_apl_dir . "_lib/file/doc";
+            /*check doc*/$_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_doc'] = $str_path_apl_dir . "_lib/file/doc";
     }
     //end check publication with the prod
 //
-class grid_j3x_vikevents_items_ini
+class Sales_Snapshots_ini
 {
    var $nm_cod_apl;
    var $nm_nome_apl;
@@ -99,7 +99,7 @@ class grid_j3x_vikevents_items_ini
    var $path_atual;
    var $Gd_missing;
    var $sc_site_ssl;
-   var $link_grid_j3x_vikevents_orders_cons_emb;
+   var $link_grid_j3x_vikevents_orderseats_cons;
    var $nm_cont_lin;
    var $nm_limite_lin;
    var $nm_limite_lin_prt;
@@ -199,8 +199,8 @@ class grid_j3x_vikevents_items_ini
       $_SESSION['scriptcase']['charset_entities']['EUC-JP'] = 'EUC-JP';
       $_SESSION['scriptcase']['charset_entities']['KOI8-R'] = 'KOI8-R';
       $_SESSION['scriptcase']['trial_version'] = 'N';
-      $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['decimal_db'] = "."; 
-      $this->nm_cod_apl      = "grid_j3x_vikevents_items"; 
+      $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['decimal_db'] = "."; 
+      $this->nm_cod_apl      = "Sales-Snapshots"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
       $this->nm_grupo        = "AstorReport"; 
@@ -211,7 +211,7 @@ class grid_j3x_vikevents_items_ini
       $this->nm_versao_sc    = "v9"; 
       $this->nm_tp_lic_sc    = "pe_bronze"; 
       $this->nm_dt_criacao   = "20191118"; 
-      $this->nm_hr_criacao   = "091431"; 
+      $this->nm_hr_criacao   = "092851"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20191218"; 
       $this->nm_hr_ult_alt   = "145852"; 
@@ -220,6 +220,7 @@ class grid_j3x_vikevents_items_ini
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0";
+      $this->nm_tp_variance  = "P";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -236,11 +237,11 @@ class grid_j3x_vikevents_items_ini
       $this->sc_site_ssl     = $this->appIsSsl();
       $this->sc_protocolo    = $this->sc_site_ssl ? 'https://' : 'http://';
       $this->sc_protocolo    = "";
-      $this->path_prod       = $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_prod'];
-      $this->path_conf       = $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_conf'];
-      $this->path_imagens    = $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imagens'];
-      $this->path_imag_temp  = $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imag_temp'];
-      $this->path_doc        = $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_doc'];
+      $this->path_prod       = $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_prod'];
+      $this->path_conf       = $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_conf'];
+      $this->path_imagens    = $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imagens'];
+      $this->path_imag_temp  = $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'];
+      $this->path_doc        = $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_doc'];
       if (!isset($_SESSION['scriptcase']['str_lang']) || empty($_SESSION['scriptcase']['str_lang']))
       {
           $_SESSION['scriptcase']['str_lang'] = "en_us";
@@ -268,7 +269,7 @@ class grid_j3x_vikevents_items_ini
       $str_path_web          = str_replace('//', '/', $str_path_web);
       $this->root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
       $this->path_aplicacao  = substr($str_path_sys, 0, strrpos($str_path_sys, '/'));
-      $this->path_aplicacao  = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/')) . '/grid_j3x_vikevents_items';
+      $this->path_aplicacao  = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/')) . '/Sales-Snapshots';
       $this->path_embutida   = substr($this->path_aplicacao, 0, strrpos($this->path_aplicacao, '/') + 1);
       $this->path_aplicacao .= '/';
       $this->path_link       = substr($str_path_web, 0, strrpos($str_path_web, '/'));
@@ -285,7 +286,7 @@ class grid_j3x_vikevents_items_ini
       $this->path_lib_php    = $this->root . $this->path_link . "_lib/lib/php";
       $this->path_lib_js     = $this->root . $this->path_link . "_lib/lib/js";
       $pos_path = strrpos($this->path_prod, "/");
-      $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['path_grid_sv'] = $this->root . substr($this->path_prod, 0, $pos_path) . "/conf/grid_sv/";
+      $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['path_grid_sv'] = $this->root . substr($this->path_prod, 0, $pos_path) . "/conf/grid_sv/";
       $this->path_lang       = "../_lib/lang/";
       $this->path_lang_js    = "../_lib/js/";
       $this->path_chart_theme = $this->root . $this->path_link . "_lib/chart/";
@@ -298,11 +299,11 @@ class grid_j3x_vikevents_items_ini
       $this->path_adodb      = $this->root . $this->path_prod . "/third/adodb";
       $_SESSION['scriptcase']['dir_temp'] = $this->root . $this->path_imag_temp;
       $this->Cmp_Sql_Time     = array();
-      if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['lang'])) {
-          $this->str_lang = $_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['lang'];
+      if (isset($_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['lang'])) {
+          $this->str_lang = $_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['lang'];
       }
-      elseif (!isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['actual_lang']) || $_SESSION['scriptcase']['grid_j3x_vikevents_items']['actual_lang'] != $this->str_lang) {
-          $_SESSION['scriptcase']['grid_j3x_vikevents_items']['actual_lang'] = $this->str_lang;
+      elseif (!isset($_SESSION['scriptcase']['Sales-Snapshots']['actual_lang']) || $_SESSION['scriptcase']['Sales-Snapshots']['actual_lang'] != $this->str_lang) {
+          $_SESSION['scriptcase']['Sales-Snapshots']['actual_lang'] = $this->str_lang;
           setcookie('sc_actual_lang_AstorReport',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
@@ -320,36 +321,36 @@ class grid_j3x_vikevents_items_ini
       }
       if (!class_exists('Services_JSON'))
       {
-          include_once("grid_j3x_vikevents_items_json.php");
+          include_once("Sales-Snapshots_json.php");
       }
-      $this->SC_Link_View = (isset($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_Link_View'])) ? $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_Link_View'] : false;
+      $this->SC_Link_View = (isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_Link_View'])) ? $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_Link_View'] : false;
       if (isset($_GET['SC_Link_View']) && !empty($_GET['SC_Link_View']) && is_numeric($_GET['SC_Link_View']))
       {
-          if ($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['embutida'])
+          if ($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['embutida'])
           {
               $this->SC_Link_View = true;
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_Link_View'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_Link_View'] = true;
           }
       }
-    if (!$_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['embutida'])
+    if (!$_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['embutida'])
     {
       if (isset($_POST['nmgp_opcao']) && $_POST['nmgp_opcao'] == "ajax_add_grid_search")
       {
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['grid_search_add']['cmp'] = $_POST['parm'];
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['grid_search_add']['seq'] = $_POST['seq'];
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['opcao'] = $_POST['origem'];
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['grid_search_add']['cmp'] = $_POST['parm'];
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['grid_search_add']['seq'] = $_POST['seq'];
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['opcao'] = $_POST['origem'];
           $nmgp_opcao = $_POST['origem'];
       }
       if (isset($_GET['nmgp_opcao']) && $_GET['nmgp_opcao'] == "ajax_aut_comp_dyn_search")
       {
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dyn_search_aut_comp']['cmp'] = $_GET['field'];
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['opcao'] = $_GET['origem'];
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dyn_search_aut_comp']['cmp'] = $_GET['field'];
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['opcao'] = $_GET['origem'];
           $nmgp_opcao = $_GET['origem'];
       }
     }
       if (isset($_POST['nmgp_opcao']) && $_POST['nmgp_opcao'] == "ajax_save_ancor")
       {
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['ancor_save'] = $_POST['ancor_save'];
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['ancor_save'] = $_POST['ancor_save'];
           $oJson = new Services_JSON();
           if ($_SESSION['scriptcase']['sem_session']) {
               unset($_SESSION['sc_session']);
@@ -398,86 +399,86 @@ class grid_j3x_vikevents_items_ini
           }
       }
       global $under_dashboard, $dashboard_app, $own_widget, $parent_widget, $compact_mode, $remove_margin;
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['under_dashboard']))
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['under_dashboard']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['under_dashboard'] = false;
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['dashboard_app']   = '';
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['own_widget']      = '';
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['parent_widget']   = '';
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['compact_mode']    = false;
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['remove_margin']   = false;
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['under_dashboard'] = false;
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['dashboard_app']   = '';
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['own_widget']      = '';
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['parent_widget']   = '';
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['compact_mode']    = false;
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['remove_margin']   = false;
       }
       if (isset($_GET['under_dashboard']) && 1 == $_GET['under_dashboard'])
       {
           if (isset($_GET['own_widget']) && 'dbifrm_widget' == substr($_GET['own_widget'], 0, 13)) {
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['own_widget'] = $_GET['own_widget'];
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['under_dashboard'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['own_widget'] = $_GET['own_widget'];
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['under_dashboard'] = true;
               if (isset($_GET['dashboard_app'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['dashboard_app'] = $_GET['dashboard_app'];
+                  $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['dashboard_app'] = $_GET['dashboard_app'];
               }
               if (isset($_GET['parent_widget'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['parent_widget'] = $_GET['parent_widget'];
+                  $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['parent_widget'] = $_GET['parent_widget'];
               }
               if (isset($_GET['compact_mode'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['compact_mode'] = 1 == $_GET['compact_mode'];
+                  $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['compact_mode'] = 1 == $_GET['compact_mode'];
               }
               if (isset($_GET['remove_margin'])) {
-                  $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['remove_margin'] = 1 == $_GET['remove_margin'];
+                  $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['remove_margin'] = 1 == $_GET['remove_margin'];
               }
           }
       }
       elseif (isset($under_dashboard) && 1 == $under_dashboard)
       {
           if (isset($own_widget) && 'dbifrm_widget' == substr($own_widget, 0, 13)) {
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['own_widget'] = $own_widget;
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['under_dashboard'] = true;
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['own_widget'] = $own_widget;
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['under_dashboard'] = true;
               if (isset($dashboard_app)) {
-                  $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['dashboard_app'] = $dashboard_app;
+                  $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['dashboard_app'] = $dashboard_app;
               }
               if (isset($parent_widget)) {
-                  $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['parent_widget'] = $parent_widget;
+                  $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['parent_widget'] = $parent_widget;
               }
               if (isset($compact_mode)) {
-                  $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['compact_mode'] = 1 == $compact_mode;
+                  $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['compact_mode'] = 1 == $compact_mode;
               }
               if (isset($remove_margin)) {
-                  $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['remove_margin'] = 1 == $remove_margin;
+                  $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['remove_margin'] = 1 == $remove_margin;
               }
           }
       }
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['maximized']))
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['maximized']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['maximized'] = false;
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['maximized'] = false;
       }
       if (isset($_GET['maximized']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
       }
-      $Tmp_apl_lig = "grid_j3x_vikevents_orders";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_j3x_vikevents_orders_ini.txt"))
+      $Tmp_apl_lig = "grid_j3x_vikevents_orderseats";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_j3x_vikevents_orderseats_ini.txt"))
       {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_j3x_vikevents_orders_ini.txt");
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_j3x_vikevents_orderseats_ini.txt");
           if (isset($Friendly[0]) && !empty($Friendly[0]))
           {
               $Tmp_apl_lig = trim($Friendly[0]);
           }
       }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_j3x_vikevents_orders_ini.txt"))
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_j3x_vikevents_orderseats_ini.txt"))
       {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_j3x_vikevents_orders_ini.txt");
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_j3x_vikevents_orderseats_ini.txt");
           if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
           {
-              $this->sc_lig_md5["grid_j3x_vikevents_orders"] = 'S';
+              $this->sc_lig_md5["grid_j3x_vikevents_orderseats"] = 'S';
           }
       }
-      $this->sc_lig_target["C_@scinf_order"] = '';
-      $this->sc_lig_target["C_@scinf_order_@scinf_grid_j3x_vikevents_orders"] = '';
-      if ($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['under_dashboard'])
+      $this->sc_lig_target["C_@scinf_j3x_vikevents_orders_persons"] = 'modal';
+      $this->sc_lig_target["C_@scinf_j3x_vikevents_orders_persons_@scinf_grid_j3x_vikevents_orderseats"] = 'modal';
+      if ($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['under_dashboard'])
       {
-          $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['dashboard_info']['dashboard_app'];
-          if ('' != $sTmpDashboardApp && isset($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["grid_j3x_vikevents_items"]))
+          $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['dashboard_info']['dashboard_app'];
+          if ('' != $sTmpDashboardApp && isset($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["Sales-Snapshots"]))
           {
-              foreach ($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["grid_j3x_vikevents_items"] as $sTmpTargetLink => $sTmpTargetWidget)
+              foreach ($_SESSION['scriptcase']['dashboard_targets'][$sTmpDashboardApp]["Sales-Snapshots"] as $sTmpTargetLink => $sTmpTargetWidget)
               {
                   if (isset($this->sc_lig_target[$sTmpTargetLink]))
                   {
@@ -486,7 +487,7 @@ class grid_j3x_vikevents_items_ini
               }
           }
       }
-      $this->link_grid_j3x_vikevents_orders_cons_emb =  $this->root . $this->path_link  . "" . SC_dir_app_name('grid_j3x_vikevents_orders') . "/index.php" ; 
+      $this->link_grid_j3x_vikevents_orderseats_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_j3x_vikevents_orderseats') . "/" ; 
       if ($Tp_init == "Path_sub")
       {
           return;
@@ -495,13 +496,13 @@ class grid_j3x_vikevents_items_ini
       if (!is_file($this->root . $str_path . 'devel/class/xmlparser/nmXmlparserIniSys.class.php'))
       {
           unset($_SESSION['scriptcase']['nm_sc_retorno']);
-          unset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao']);
+          unset($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao']);
       }
       include($this->path_lang . $this->str_lang . ".lang.php");
       include($this->path_lang . "config_region.php");
       include($this->path_lang . "lang_config_region.php");
       asort($this->Nm_lang_conf_region);
-      $_SESSION['scriptcase']['charset']  = "ISO-8859-1";
+      $_SESSION['scriptcase']['charset']  = (isset($this->Nm_lang['Nm_charset']) && !empty($this->Nm_lang['Nm_charset'])) ? $this->Nm_lang['Nm_charset'] : "UTF-8";
       ini_set('default_charset', $_SESSION['scriptcase']['charset']);
       $_SESSION['scriptcase']['charset_html']  = (isset($this->sc_charset[$_SESSION['scriptcase']['charset']])) ? $this->sc_charset[$_SESSION['scriptcase']['charset']] : $_SESSION['scriptcase']['charset'];
       if (!function_exists("mb_convert_encoding"))
@@ -539,7 +540,7 @@ class grid_j3x_vikevents_items_ini
          }
       }
       $_SESSION['sc_session']['SC_download_violation'] = $this->Nm_lang['lang_errm_fnfd'];
-      if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir']))
+      if (isset($_SESSION['sc_session']['SC_parm_violation']) && !isset($_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir']))
       {
           unset($_SESSION['sc_session']['SC_parm_violation']);
           echo "<html>";
@@ -573,7 +574,7 @@ class grid_j3x_vikevents_items_ini
               echo "<div><font size=6>" . $this->Nm_lang['lang_othr_prod_incp'] . "</font></div>";exit;
           } 
       } 
-      $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['path_doc'] = $this->path_doc; 
+      $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['path_doc'] = $this->path_doc; 
       $_SESSION['scriptcase']['nm_path_prod'] = $this->root . $this->path_prod . "/"; 
       if (empty($this->path_imag_cab))
       {
@@ -707,7 +708,7 @@ class grid_j3x_vikevents_items_ini
           echo "   </b></td>";
           echo " </tr>";
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -758,13 +759,13 @@ class grid_j3x_vikevents_items_ini
       $this->nm_limite_lin_res     = 0;
       $this->nm_limite_lin_res_prt = 0;
 // 
-      include_once($this->path_aplicacao . "grid_j3x_vikevents_items_erro.class.php"); 
-      $this->Erro = new grid_j3x_vikevents_items_erro();
+      include_once($this->path_aplicacao . "Sales-Snapshots_erro.class.php"); 
+      $this->Erro = new Sales_Snapshots_erro();
       include_once($this->path_adodb . "/adodb.inc.php"); 
       $this->sc_Include($this->path_libs . "/nm_sec_prod.php", "F", "nm_reg_prod") ; 
       $this->sc_Include($this->path_libs . "/nm_ini_perfil.php", "F", "perfil_lib") ; 
 // 
- if(function_exists('set_php_timezone')) set_php_timezone('grid_j3x_vikevents_items'); 
+ if(function_exists('set_php_timezone')) set_php_timezone('Sales-Snapshots'); 
 // 
       $this->sc_Include($this->path_lib_php . "/nm_functions.php", "", "") ; 
       $this->sc_Include($this->path_lib_php . "/nm_api.php", "", "") ; 
@@ -795,7 +796,7 @@ class grid_j3x_vikevents_items_ini
       include($this->path_btn . $this->Str_btn_grid);
       $_SESSION['scriptcase']['erro']['str_schema_dir'] = $this->str_schema_all . "_error" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->sc_tem_trans_banco = false;
-      if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir'])) {
+      if (isset($_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir'])) {
           $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
           $SS_cod_html .= "<HTML>\r\n";
@@ -807,7 +808,7 @@ class grid_j3x_vikevents_items_ini
           }
           $SS_cod_html .= "   <META http-equiv=\"Expires\" content=\"Fri, Jan 01 1900 00:00:00 GMT\"/>\r\n";
           $SS_cod_html .= "    <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n";
-          if ($_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir_tp'] == "R") {
+          if ($_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir_tp'] == "R") {
               $SS_cod_html .= "  </HEAD>\r\n";
               $SS_cod_html .= "   <body>\r\n";
           }
@@ -822,14 +823,14 @@ class grid_j3x_vikevents_items_ini
               $SS_cod_html .= $this->Nm_lang['lang_errm_expired_session'] . "\r\n";
               $SS_cod_html .= "     <form name=\"Fsession_redir\" method=\"post\"\r\n";
               $SS_cod_html .= "           target=\"_self\">\r\n";
-              $SS_cod_html .= "           <input type=\"button\" name=\"sc_sai_seg\" value=\"OK\" onclick=\"sc_session_redir('" . $_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir'] . "');\">\r\n";
+              $SS_cod_html .= "           <input type=\"button\" name=\"sc_sai_seg\" value=\"OK\" onclick=\"sc_session_redir('" . $_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir'] . "');\">\r\n";
               $SS_cod_html .= "     </form>\r\n";
               $SS_cod_html .= "    </td></tr></table>\r\n";
               $SS_cod_html .= "    </div></td></tr></table>\r\n";
           }
           $SS_cod_html .= "    <script type=\"text/javascript\">\r\n";
-          if ($_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir_tp'] == "R") {
-              $SS_cod_html .= "      sc_session_redir('" . $_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir'] . "');\r\n";
+          if ($_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir_tp'] == "R") {
+              $SS_cod_html .= "      sc_session_redir('" . $_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir'] . "');\r\n";
           }
           $SS_cod_html .= "      function sc_session_redir(url_redir)\r\n";
           $SS_cod_html .= "      {\r\n";
@@ -853,7 +854,7 @@ class grid_j3x_vikevents_items_ini
           $SS_cod_html .= "    </script>\r\n";
           $SS_cod_html .= " </body>\r\n";
           $SS_cod_html .= "</HTML>\r\n";
-          unset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']);
+          unset($_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']);
           unset($_SESSION['sc_session']);
       }
       if (isset($SS_cod_html) && isset($_GET['nmgp_opcao']) && (substr($_GET['nmgp_opcao'], 0, 14) == "ajax_aut_comp_" || substr($_GET['nmgp_opcao'], 0, 13) == "ajax_autocomp"))
@@ -894,9 +895,9 @@ class grid_j3x_vikevents_items_ini
       $this->nm_ttf_rus  = array("pl", "ru", "sk", "cz", "el", "mk");
       $this->nm_ttf_thai = array("thai");
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
-      $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['seq_dir'] = 0; 
-      $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKH9BiHIrwV5JeDMvOV9FeH5FqHIF7D9JmZkFGDSrYHQF7DMBYHEJqDWFqHMFaHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMFaHgrKHErsH5FYHMJsHQNmDQBOZ1BYHQNUHgrwVcXKH5XKVENUHQBiZ1FUZ1rYHuJwHgNKHArsDWFqHIJeHQXODQBOZ1BYHQJsDMzGDkB/H5FqHIJsHQJmVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDQBqDSvCV5BODMvOVIBsV5BmVoX7HQXGVIJwZ1rYHuFGHgNOZSJqDWX7HMB/HQXOZ9JeZ1zGVWJsDMrYZSNiDWFYHIF7DcFYZkFUZ1vOZMJeDMvCHENiHEFqHIFGHQJeDQBOD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMB/DMvCVkJqH5BmZuJeHQNwDQBOZ1BYHQB/DMNOZSNiH5XCHMF7HQBsZkFUZ1rYHuFGHgNOZSJ3H5F/HINUHQBiZ9JeZ1zGV5BqDMzGZSJqH5B3VEF7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BeHQX7HgBYDkFeV5FaHMJsD9NwH9X7Z1rwD5XGHuzGVIBODWFaDoXGDcBwZ1FGHANOV5JeDEBOHEFiDWFqDoXGDcJUDQBOHIrKVWBODMvsVcBUDWBmDoFGHQFYH9BqZ1NOV5FaDEvsHErCV5FqDoraD9JKZSX7D1vOV5JwHuBYZSNiHEX/VoraD9BiH9FaHIBeZMBODErKVkXeV5FaDoB/D9NmDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwHQBODMvmVcB/DWJeHMJwHQXGH9BqHINKV5X7HgveHErsDWBmDoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIraDcFYZ1BODSNOD5JeDEBOHEJGH5F/HIJwHQNwZ9F7HANOHQJsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwD5FaDMvODkFCDur/VoJwD9BiZSB/DSrYV5JsDMzGHEJGDWXCVoB/D9XsH9FGD1veV5BqHgrYDkBOHEFYVENUDcJUZ1B/Z1rYD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoJeHQXsDuBqHANOVWXGHuzGDkBODuX7HMBOHQXOZSB/HIveHQX7HgNKHArCDWF/VoBiDcJUZSX7Z1BYHuFaHuzGVcFKDWFYVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAzGZMJeHgveHArsDWrGDoBqHQJeDQFaHAveD5NUHgNKDkBOV5FYHMBiD9XGZ1BOHAzGZMFaDEBeHArCDuJeHMBiHQJKZ9XGHAN7HuXGHuzGVcB/HEF/HIBiDcJUZ1BODSrYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1N7V5FUHuzGVIBODWFYVoFGD9JmZ1FUHArKHuX7DEBeHEFiDWX7VoJeD9JKDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['seq_dir'] = 0; 
+      $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['sub_dir'] = array(); 
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZSX7HArYVWJsHgrwZSJqDur/DoX7DcNmZ1F7HIBOD5BOHgvCHEXeHEFqZuXGDcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKHArCDurmDoXGHQFYDQFaHIBOD5F7HgrwVcXKH5XCHMraHQNwZ1FGHINaV5X7HgNOHErsH5FGZuB/DcBiDQBqD1NKD5F7DMzGVIBsHEX7HIXGDcFYZ1FGD1NaD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIvsVWFaDMvOZSNiDWJeHIX7HQNmZSBOD1NaV5X7HgNOVkJqH5FYHMJwHQNwZ9F7HAvCD5F7DMrYVcBUDWBmVEraHQBiZ1BOD1zGV5X7HgBYHEJqH5F/HIXGHQJKZ9F7HIvsV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgNKHENiDWXCHMBiHQJeDQFaHIvsD5F7DMBOV9FeDWBmVENUDcFYH9BqD1zGV5X7HgNOVkJqH5FYHIBiHQXsZ9XGHAvmD5F7DMvODkBsHEFGVENUHQNwH9BODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgBeDkB/HEB3DoB/HQFYDQJwHANOV5JwHgrKDkFCDWJeVoB/D9BsZkFUHArKHQraDEBeHEXeDuFYVoB/D9NwZ9rqHANKD5BOHuBOVcBUDurGVErqHQNGZkFUZ1BeHuXGDMzGHEJGH5F/HMBqDcJeDQX7DSrwD5JwDMrwDkFCDWBmVEFGHQFYH9FaHIBeZMBODEvsZSJGDWr/DoB/D9XsZSFGD1NKV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raDMBYVIBsDWFaHIJeHQBsZ1BOD1rwHQF7HgvCHArsDWBmDoBOHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiDcBqVINUHAvCD5BOHgveVkXeHEFaHIBiHQXODQFaDSBYHuBOHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSJqH5FYDoraD9XsDQJsHABYV5BqDMrwVcB/H5FqDoJsDcBqZ1FaHArKD5JeDEBeHEFiV5FaZuFaD9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuNODkBODWXKDoXGDcJUZ1FGDSBeZMFaDEBeHEXeDuFaHIXGHQNwDuFaDSN7HuraDMvmVcFKV5BmVoBqD9BsZkFGHArKD5BqDMzGHEJqV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiDuBqDSzGV5XGDMvOZSNiDWXKVEX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMFGHQFYZ9F7D1BeHQJeDMBOVcXKDuX7VoX7DcNmZ1BOHArKV5JwDEvsHEJqV5XKZuXGDcBiDQFaZ1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1NOD5NUDErKVkXeDWFqDoXGD9JKDQBOHAveHQF7HuvmVcFKDWFaDoX7D9JmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -908,7 +909,7 @@ class grid_j3x_vikevents_items_ini
           echo "   </b></td>";
           echo " </tr>";
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -923,12 +924,7 @@ class grid_j3x_vikevents_items_ini
       } 
       if (empty($this->nm_tabela))
       {
-          $this->nm_tabela = "j3x_vikevents_items"; 
-      }
-      $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_orders']['ind_tree'] = 0;
-      if (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['emb_linha']))
-      {
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['emb_linha'] = 0;
+          $this->nm_tabela = "j3x_vikevents_items INNER JOIN j3x_vikevents_orders ON j3x_vikevents_items.id = j3x_vikevents_orders.iditem"; 
       }
    }
 
@@ -962,26 +958,26 @@ class grid_j3x_vikevents_items_ini
       {
           foreach ($_SESSION['scriptcase']['sc_connection'] as $NM_con_orig => $NM_con_dest)
           {
-              if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao']) && $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao'] == $NM_con_orig)
+              if (isset($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao']) && $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao'] == $NM_con_orig)
               {
-/*NM*/            $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao'] = $NM_con_dest;
+/*NM*/            $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao'] = $NM_con_dest;
               }
-              if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_perfil']) && $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_perfil'] == $NM_con_orig)
+              if (isset($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_perfil']) && $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_perfil'] == $NM_con_orig)
               {
-/*NM*/            $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_perfil'] = $NM_con_dest;
+/*NM*/            $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_perfil'] = $NM_con_dest;
               }
-              if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_con_' . $NM_con_orig]))
+              if (isset($_SESSION['scriptcase']['Sales-Snapshots']['glo_con_' . $NM_con_orig]))
               {
-                  $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_con_' . $NM_con_orig] = $NM_con_dest;
+                  $_SESSION['scriptcase']['Sales-Snapshots']['glo_con_' . $NM_con_orig] = $NM_con_dest;
               }
           }
       }
-      $con_devel             = (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao'])) ? $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao'] : ""; 
+      $con_devel             = (isset($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao'])) ? $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao'] : ""; 
       $perfil_trab           = ""; 
       $this->nm_falta_var    = ""; 
       $this->nm_falta_var_db = ""; 
       $nm_crit_perfil        = false;
-      if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao']))
+      if (isset($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao']))
       {
           ob_start();
           db_conect_devel($con_devel, $this->root . $this->path_prod, 'AstorReport', 2); 
@@ -992,9 +988,9 @@ class grid_j3x_vikevents_items_ini
               $nm_crit_perfil = true;
           }
       }
-      if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_perfil']))
+      if (isset($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_perfil']))
       {
-          $perfil_trab = $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_perfil'];
+          $perfil_trab = $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_perfil'];
       }
       elseif (isset($_SESSION['scriptcase']['glo_perfil']) && !empty($_SESSION['scriptcase']['glo_perfil']))
       {
@@ -1013,7 +1009,7 @@ class grid_j3x_vikevents_items_ini
       {
           $perfil_trab = $con_devel;
       }
-      if (!isset($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['embutida_init']) 
+      if (!isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['embutida_init']) 
       {
       }
 // 
@@ -1123,23 +1119,23 @@ class grid_j3x_vikevents_items_ini
       }
       if (isset($_SESSION['scriptcase']['glo_decimal_db']) && !empty($_SESSION['scriptcase']['glo_decimal_db']))
       {
-          $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['decimal_db'] = $_SESSION['scriptcase']['glo_decimal_db']; 
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['decimal_db'] = $_SESSION['scriptcase']['glo_decimal_db']; 
       }
       if (isset($_SESSION['scriptcase']['glo_date_separator']) && !empty($_SESSION['scriptcase']['glo_date_separator']))
       {
           $SC_temp = trim($_SESSION['scriptcase']['glo_date_separator']);
           if (strlen($SC_temp) == 2)
           {
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date']  = substr($SC_temp, 0, 1); 
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date1'] = substr($SC_temp, 1, 1); 
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date']  = substr($SC_temp, 0, 1); 
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date1'] = substr($SC_temp, 1, 1); 
           }
           else
            {
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date']  = $SC_temp; 
-              $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date1'] = $SC_temp; 
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date']  = $SC_temp; 
+              $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date1'] = $SC_temp; 
           }
-          $this->date_delim  = $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date'];
-          $this->date_delim1 = $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date1'];
+          $this->date_delim  = $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date'];
+          $this->date_delim1 = $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date1'];
       }
 // 
       if (!empty($this->nm_falta_var) || !empty($this->nm_falta_var_db) || $nm_crit_perfil)
@@ -1293,7 +1289,7 @@ class grid_j3x_vikevents_items_ini
               echo " </tr>";
           }
           echo "</table>";
-          if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan'])) 
+          if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_menu'] && (!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan']) || !$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan'])) 
           { 
               if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno'])) 
               { 
@@ -1349,9 +1345,9 @@ class grid_j3x_vikevents_items_ini
    {
       global $glo_senha_protect;
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
-      if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao']))
+      if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_conexao'], $this->root . $this->path_prod, 'AstorReport'); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_conexao'], $this->root . $this->path_prod, 'AstorReport'); 
       } 
       else 
       { 
@@ -1360,7 +1356,7 @@ class grid_j3x_vikevents_items_ini
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
       } 
-      if (!$_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['embutida'])
       {
           if (substr($_POST['nmgp_opcao'], 0, 5) == "ajax_")
           {
@@ -1443,10 +1439,10 @@ class grid_j3x_vikevents_items_ini
                $delim  = "#";
                $delim1 = "#";
            }
-           if (isset($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date']))
+           if (isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date']))
            {
-               $delim  = $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date'];
-               $delim1 = $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_sep_date1'];
+               $delim  = $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date'];
+               $delim1 = $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_sep_date1'];
            }
            return $delim . $var . $delim1;
        }
@@ -1534,21 +1530,1002 @@ class grid_j3x_vikevents_items_ini
 	}
    function Get_Gb_date_format($GB, $cmp)
    {
-       return (isset($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_Gb_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_Gb_date_format'][$GB][$cmp] : "";
+       return (isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_Gb_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_Gb_date_format'][$GB][$cmp] : "";
    }
 
    function Get_Gb_prefix_date_format($GB, $cmp)
    {
-       return (isset($_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_Gb_prefix_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['grid_j3x_vikevents_items']['SC_Gb_prefix_date_format'][$GB][$cmp] : "";
+       return (isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_Gb_prefix_date_format'][$GB][$cmp])) ? $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['SC_Gb_prefix_date_format'][$GB][$cmp] : "";
    }
 
    function GB_date_format($val, $format, $prefix, $conf_region="S", $mask="")
    {
+       if (empty($val) || empty($format)) {
            return $val;
+       }
+       if ($format == 'HH') {
+           return $prefix . substr($val, 11, 2);
+       }
+       if ($format == 'DD') {
+           return $prefix . substr($val, 8, 2);
+       }
+       if ($format == 'MM' && $conf_region == "S") {
+           return $prefix . substr($val, 5, 2);
+       }
+       if ($format == 'WEEK' || $format == 'YYYYWEEK') {
+           $part = $this->Get_Sql_Week($val);
+           $part = (substr($part, 0, 1)== 0) ? substr($part, 1) : $part;
+       }
+       if ($format == 'DAYNAME' || $format == 'YYYYDAYNAME') {
+           $daynum = $this->nm_data->GetWeekDay($val);
+           if ($daynum == 0) {
+               $part = $this->Nm_lang['lang_days_sund'];
+           }
+           if ($daynum == 1) {
+               $part = $this->Nm_lang['lang_days_mond'];
+           }
+           if ($daynum == 2) {
+               $part = $this->Nm_lang['lang_days_tued'];
+           }
+           if ($daynum == 3) {
+               $part = $this->Nm_lang['lang_days_wend'];
+           }
+           if ($daynum == 4) {
+               $part = $this->Nm_lang['lang_days_thud'];
+           }
+           if ($daynum == 5) {
+               $part = $this->Nm_lang['lang_days_frid'];
+           }
+           if ($daynum == 6) {
+               $part = $this->Nm_lang['lang_days_satd'];
+           }
+       }
+       if ($format == 'YYYYSEMIANNUAL' || $format == 'SEMIANNUAL') {
+           $part = $this->nm_data->GetSem(substr($val, 5, 2));
+       }
+       if ($format == 'YYYYFOURMONTHS' || $format == 'FOURMONTHS') {
+           $part = $this->nm_data->GetQuadr(substr($val, 5, 2));
+       }
+       if ($format == 'YYYYQUARTER' || $format == 'QUARTER') {
+           $part = $this->nm_data->GetTrim(substr($val, 5, 2));
+       }
+       if ($format == 'YYYYBIMONTHLY' || $format == 'BIMONTHLY') {
+           $part = $this->nm_data->GetBim(substr($val, 5, 2));
+       }
+       if ($format == 'SEMIANNUAL' || $format == 'FOURMONTHS'  || $format == 'QUARTER' || $format == 'BIMONTHLY' || $format == 'WEEK' || $format == 'DAYNAME') {
+           return $prefix . $part;
+       }
+       if ($format == 'YYYYSEMIANNUAL' || $format == 'YYYYFOURMONTHS'  || $format == 'YYYYQUARTER' || $format == 'YYYYBIMONTHLY' || $format == 'YYYYWEEK' || $format == 'YYYYDAYNAME') {
+           return $prefix . $part . " " . substr($val, 0, 4);
+       }
+       if ($format == 'HHIISS') {
+           $tp     = 'HH';
+           $mk     = 'hhiiss';
+           $format = 'HH:II:SS';
+           $val    = substr($val, 11, 8);
+       }
+       if ($format == 'HHII') {
+           $tp     = 'HH';
+           $mk     = 'hhii';
+           $format = 'HH:II';
+           $val    = substr($val, 11, 5);
+       }
+       if ($format == 'YYYYMMDDHHIISS') {
+           $tp     = 'DH';
+           $mk     = 'ddmmaaaa;hhiiss';
+           $format = 'YYYY-MM-DD HH:II:SS';
+       }
+       if ($format == 'YYYYMMDDHHII') {
+           $tp     = 'DH';
+           $mk     = 'ddmmaaaa;hhii';
+           $format = 'YYYY-MM-DD HH:II';
+           $val    = substr($val, 0, 16);
+       }
+       if ($format == 'YYYYMMDDHH') {
+           $tp     = 'DH';
+           $mk     = 'ddmmaaaa;hh';
+           $format = 'YYYY-MM-DD HH';
+           $val    = substr($val, 0, 13);
+       }
+       if ($format == 'YYYYMMDD2') {
+           $tp     = 'DT';
+           $mk     = 'ddmmaaaa';
+           $format = 'YYYY-MM-DD';
+           $val    = substr($val, 0, 10);
+       }
+       if ($format == 'YYYYHH') {
+           return $prefix . substr($val, 0, 4) . $_SESSION['scriptcase']['reg_conf']['date_sep'] . substr($val, 11, 2);
+       }
+       if ($format == 'YYYYDD') {
+           return $prefix . substr($val, 0, 4) . $_SESSION['scriptcase']['reg_conf']['date_sep'] . substr($val, 8, 2);
+       }
+       if ($format == 'YYYYMM') {
+           $tp     = 'DT';
+           $mk     = 'mmaaaa';
+           $format = 'YYYY-MM';
+           $val = substr($val, 0, 7);
+       }
+       if ($format == 'MM') {
+           $tp     = 'DT';
+           $mk     = 'mm';
+           $format = 'MM';
+           $val = substr($val, 5, 2);
+       }
+       if ($format == 'YYYY') {
+           $tp     = 'DT';
+           $mk     = 'aaaa';
+           $format = 'YYYY';
+           $val = substr($val, 0, 4);
+       }
+       $conteudo_x = $val;
+       nm_conv_limpa_dado($conteudo_x, $format);
+       if (is_numeric($conteudo_x) && $conteudo_x > 0) 
+       { 
+           $this->nm_data->SetaData($val, $format);
+           if ($conf_region != "S")
+           { 
+               $val = $this->nm_data->FormataSaida($mask);
+           }
+           else
+           { 
+               $val = $this->nm_data->FormataSaida($this->nm_data->FormatRegion($tp, $mk));
+           }
+       }
+       return $prefix . $val;
+   }
+
+   function Get_date_arg_sum($val, $format, $cmp_sql, $arq_link_res=false, $res_metric=false)
+   {
+       $delimit  = $this->date_delim;
+       $delimit1 = $this->date_delim1;
+       if ($val == "")
+       {
+           return " is null";;
+       }
+       $arg_sum = "";
+       if ($format == 'YYYYMMDDHHIISS' && (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)))
+       {
+           $arg_sum = " like '" . substr($val, 0, 19) . "%'";
+           if ($res_metric)
+           {
+               return "";;
+           }
+       }
+       elseif ($format == 'YYYYMMDDHHIISS')
+       {
+           $arg_sum = " = " . $delimit . $val . $delimit1;
+           if ($res_metric)
+           {
+               return "";;
+           }
+       }
+       elseif ($format == 'YYYY' || $format == 'YYYYMMDDHHII' || $format == 'YYYYMMDDHH' || $format == 'YYYYMMDD2' || $format == 'YYYYMM')
+       {
+           $valx     = substr($val, 0, 4);
+           $arg_sum  = $this->Get_date_arg_sum_compl($valx, 'YYYY', $cmp_sql, $res_metric);
+          if ($format == 'YYYYMMDDHHII')
+           {
+               $valx     = substr($val, 5, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'MM', $cmp_sql, $res_metric);
+               $valx     = substr($val, 8, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DD', $cmp_sql, $res_metric);
+               $valx     = substr($val, 11, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+               $valx     = substr($val, 14, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'II', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYMMDDHH')
+           {
+               $valx     = substr($val, 5, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'MM', $cmp_sql, $res_metric);
+               $valx     = substr($val, 8, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DD', $cmp_sql, $res_metric);
+               $valx     = substr($val, 11, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYMMDD2')
+           {
+               $valx     = substr($val, 5, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'MM', $cmp_sql, $res_metric);
+               $valx     = substr($val, 8, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DD', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYMM')
+           {
+               $valx     = substr($val, 5, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'MM', $cmp_sql, $res_metric);
+           }
+       }
+       elseif ($format == 'MM')
+       {
+           $valx     = ($arq_link_res) ? $val : substr($val, 5, 2);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'DD')
+       {
+            $valx    = ($arq_link_res) ? $val : substr($val, 8, 2);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'HH')
+       {
+           $valx     = ($arq_link_res) ? substr($val, 0, 2) : substr($val, 11, 2);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'DAYNAME')
+       {
+            $valx    = ($arq_link_res || $res_metric) ? $val : $this->Compat_WeekDay($val);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'WEEK')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->Get_Sql_Week($val);
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'BIMONTHLY')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->nm_data->GetBim(substr($val, 5, 2));
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'QUARTER')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->nm_data->GetTrim(substr($val, 5, 2));
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'FOURMONTHS')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->nm_data->GetQuadr(substr($val, 5, 2));
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'SEMIANNUAL')
+       {
+           $valx     = ($arq_link_res || $res_metric) ? $val : $this->nm_data->GetSem(substr($val, 5, 2));
+           $arg_sum = $this->Get_date_arg_sum_compl($valx, $format, $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'YYYYHH' || $format == 'YYYYDD' || $format == 'YYYYDAYNAME' || $format == 'YYYYWEEK' || $format == 'YYYYBIMONTHLY' || $format == 'YYYYQUARTER' || $format == 'YYYYFOURMONTHS' || $format == 'YYYYSEMIANNUAL')
+       {
+           $valx     = substr($val, 0, 4);
+           $arg_sum  = $this->Get_date_arg_sum_compl($valx, 'YYYY', $cmp_sql, $res_metric);
+           if ($format == 'YYYYHH')
+           {
+               $valx      = ($arq_link_res) ?  substr($val, 4, 2) : substr($val, 11, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYDD')
+           {
+                $valx     = ($arq_link_res) ?  substr($val, 4, 2) : substr($val, 8, 2);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DD', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYDAYNAME')
+           {
+               $valx      = ($arq_link_res || $res_metric) ?  substr($val, 4, 1) : $this->Compat_WeekDay($val);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'DAYNAME', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYWEEK')
+           {
+               $valx      = ($arq_link_res || $res_metric) ?  substr($val, 4, 2) : $this->Get_Sql_Week($val);
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'WEEK', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYBIMONTHLY')
+           {
+               $valx      = ($arq_link_res || $res_metric) ? substr($val, 4, 1) : $this->nm_data->GetBim(substr($val, 5, 2));
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'BIMONTHLY', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYQUARTER')
+           {
+               $valx      = ($arq_link_res || $res_metric) ? substr($val, 4, 1) : $this->nm_data->GetTrim(substr($val, 5, 2));
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'QUARTER', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYFOURMONTHS')
+           {
+               $valx      = ($arq_link_res || $res_metric) ? substr($val, 4, 1) : $this->nm_data->GetQuadr(substr($val, 5, 2));
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'FOURMONTHS', $cmp_sql, $res_metric);
+           }
+           elseif ($format == 'YYYYSEMIANNUAL')
+           {
+               $valx      = ($arq_link_res || $res_metric) ? substr($val, 4, 1) : $this->nm_data->GetSem(substr($val, 5, 2));
+               $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'SEMIANNUAL', $cmp_sql, $res_metric);
+           }
+       }
+       elseif ($format == 'HHIISS')
+       {
+           $valx     = ($arq_link_res) ? substr($val, 0, 2) : substr($val, 11, 2);
+           $arg_sum  = $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+           $valx     = ($arq_link_res) ? substr($val, 3, 2) : substr($val, 14, 2);
+           $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'II', $cmp_sql, $res_metric);
+           $valx     = ($arq_link_res) ? substr($val, 6, 2) : substr($val, 17, 2);
+           $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'SS', $cmp_sql, $res_metric);
+       }
+       elseif ($format == 'HHII')
+       {
+           $valx     = ($arq_link_res) ? substr($val, 0, 2) : substr($val, 11, 2);
+           $arg_sum  = $this->Get_date_arg_sum_compl($valx, 'HH', $cmp_sql, $res_metric);
+           $valx     = ($arq_link_res) ? substr($val, 3, 2) : substr($val, 14, 2);
+           $arg_sum .= " and " . $this->Get_date_arg_sum_compl($valx, 'II', $cmp_sql, $res_metric);
+       }
+       else
+       {
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+           {
+               $arg_sum = " = #" . $val . "#";
+           }
+           else
+           {
+               $arg_sum = " = " . $this->Db->qstr($val);
+           }
+       }
+       return $arg_sum;
+   }
+   function Get_date_arg_sum_compl($val, $format, $cmp_sql, $res_metric=false)
+   {
+       if ($res_metric) {
+           return $this->Get_date_arq_res_metric($format, $cmp_sql);
+       }
+       $delimit  = $this->date_delim;
+       $delimit1 = $this->date_delim1;
+       if ($format == 'HH') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%H'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "hour(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('hour' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(hour from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "hour(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "hour(" . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'II') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%M'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "minute(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('minute' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(minute from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "minute(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "minute(" . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'SS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%S'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "second(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('second' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(second from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "second(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "second(" . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'DD') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%d'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "day(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('day' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(day from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFMONTH(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "day(" . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'MM') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%m'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "month(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('month' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(month from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "month(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "month( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'YYYY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%Y'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "year(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('year' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(year from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "year(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "year( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'WEEK') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "DatePart('ww'," . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%W'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "WEEK(" . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('week' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(week from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase)) {
+               return "CONVERT(VARCHAR(2), DATEPART(wk, " . $cmp_sql . ")) = '" . $val . "'";
+           }
+           else {
+               return "week( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'DAYNAME') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "Weekday(" . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%w'," . $cmp_sql . ")  = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "WEEKDAY(" . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('dow' from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(weekday from " . $cmp_sql . ") = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase)) {
+               return "CONVERT(CHAR(1), DATEPART(dw, " . $cmp_sql . ")) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFWEEK( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+           else {
+               return "WEEKDAY( " . $cmp_sql . ") = " . $delimit . $val . $delimit1;
+           }
+       }
+       if ($format == 'SEMIANNUAL') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 6 + 1)) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 6 + 1) AS INTEGER) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 6 + 1) AS VARCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 6 + 1) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS INT (1)) = '" . $val . "'";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+       }
+       if ($format == 'FOURMONTHS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 4 + 1)) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 4 + 1) AS INTEGER) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 4 + 1) AS VARCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 4 + 1) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS INT (1)) = '" . $val . "'";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+       }
+       if ($format == 'QUARTER') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 3 + 1)) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 3 + 1) AS INTEGER) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "QUARTER(" . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "EXTRACT ('QUARTER' FROM " . $cmp_sql . ") = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 3 + 1) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "QUARTER(" . $cmp_sql . ") = " . $val;
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 3 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+       }
+       if ($format == 'BIMONTHLY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 2 + 1)) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 2 + 1) AS INTEGER) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 2 + 1) AS VARCHAR (1)) = '" . $val . "'";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 2 + 1) = " . $val;
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS INT (1)) = '" . $val . "'";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) = '" . $val . "'";
+           }
+       }
+   }
+   function Get_date_arq_res_metric($format, $cmp_sql)
+   {
+       if ($format == 'HH') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%H'," . $cmp_sql . ") *sc# strftime('%H',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "hour(" . $cmp_sql . ") *sc# hour(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('hour' from " . $cmp_sql . ") *sc# extract('hour' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(hour from " . $cmp_sql . ") *sc# extract(hour from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "hour(" . $cmp_sql . ") *sc# hour(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "hour(" . $cmp_sql . ") *sc# hour(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'II') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%M'," . $cmp_sql . ") *sc# strftime('%M',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "minute(" . $cmp_sql . ") *sc# minute(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('minute' from " . $cmp_sql . ") *sc# extract('minute' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(minute from " . $cmp_sql . ") *sc# extract(minute from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "minute(" . $cmp_sql . ") *sc# minute(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "minute(" . $cmp_sql . ") *sc# minute(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'SS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%S'," . $cmp_sql . ") *sc# strftime('%S',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "second(" . $cmp_sql . ") *sc# second(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('second' from " . $cmp_sql . ") *sc# extract('second' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(second from " . $cmp_sql . ") *sc# extract(second from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "second(" . $cmp_sql . ") *sc# second(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "second(" . $cmp_sql . ") *sc# second(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'DD') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%d'," . $cmp_sql . ") *sc# strftime('%d',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "day(" . $cmp_sql . ") *sc# day(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('day' from " . $cmp_sql . ") *sc# extract('day' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(day from " . $cmp_sql . ") *sc# extract(day from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "day(" . $cmp_sql . ") *sc# day(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFMONTH(" . $cmp_sql . ") *sc# DAYOFMONTH(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "day(" . $cmp_sql . ") *sc# day(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'MM') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%m'," . $cmp_sql . ") *sc# strftime('%m',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "month(" . $cmp_sql . ") *sc# month(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('month' from " . $cmp_sql . ") *sc# extract('month' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(month from " . $cmp_sql . ") *sc# extract(month from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "month(" . $cmp_sql . ") *sc# month(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "month(" . $cmp_sql . ") *sc# month(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'YYYY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%Y'," . $cmp_sql . ") *sc# strftime('%Y',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "year( " . $cmp_sql . ") *sc# year(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('year' from " . $cmp_sql . ") *sc# extract('year' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(year from " . $cmp_sql . ") *sc# extract(year from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access)) {
+               return "year(" . $cmp_sql . ") *sc# year(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "year( " . $cmp_sql . ") *sc# year(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'WEEK') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "DatePart('ww'," . $cmp_sql . ") *sc# DatePart('ww',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%W'," . $cmp_sql . ")  *sc# strftime('%W',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "WEEK(" . $cmp_sql . ") *sc# WEEK(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('week' from " . $cmp_sql . ") *sc# extract('week' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(week from " . $cmp_sql . ") *sc# extract(week from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase)) {
+               return "CONVERT(VARCHAR(2), DATEPART(wk, " . $cmp_sql . ")) *sc# CONVERT(VARCHAR(2), DATEPART(wk, SC." . $cmp_sql . "))";
+           }
+           else {
+               return "week(" . $cmp_sql . ") *sc# week(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'DAYNAME') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "Weekday(" . $cmp_sql . ") *sc# Weekday(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "strftime('%w'," . $cmp_sql . ") *sc# strftime('%w',SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "WEEKDAY(" . $cmp_sql . ") *sc# WEEKDAY(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "extract('dow' from " . $cmp_sql . ") *sc# extract('dow' from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "extract(weekday from " . $cmp_sql . ") *sc# extract(weekday from SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase)) {
+               return "CONVERT(CHAR(1), DATEPART(dw, " . $cmp_sql . ")) *sc# CONVERT(CHAR(1), DATEPART(dw, SC." . $cmp_sql . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFWEEK(" . $cmp_sql . ") *sc# DAYOFWEEK(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "WEEKDAY(" . $cmp_sql . ") *sc# WEEKDAY(SC." . $cmp_sql . ")";
+           }
+       }
+       if ($format == 'SEMIANNUAL') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 6 + 1)) *sc# CInt(Val((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1)))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 6 + 1) AS INTEGER) *sc# CAST(((strftime('%m', SC." . $cmp_sql . ") -1 ) / 6 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 6 + 1) AS VARCHAR (1)) *sc# CAST(((EXTRACT ('MONTH' FROM SC." . $cmp_sql . ") - 1) / 6 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 6 + 1) *sc# ((EXTRACT(MONTH FROM SC." . $cmp_sql . ") - 1) / 6 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS INT (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'FOURMONTHS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 4 + 1)) *sc# CInt(Val((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1)))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 4 + 1) AS INTEGER) *sc# CAST(((strftime('%m', SC." . $cmp_sql . ") -1 ) / 4 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 4 + 1) AS VARCHAR (1)) *sc# CAST(((EXTRACT ('MONTH' FROM SC." . $cmp_sql . ") - 1) / 4 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 4 + 1) *sc# ((EXTRACT(MONTH FROM SC." . $cmp_sql . ") - 1) / 4 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS INT (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'QUARTER') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 3 + 1)) *sc# CInt(Val((MONTH(SC." . $cmp_sql . ") - 1) / 3 + 1)))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 3 + 1) AS INTEGER) *sc# CAST(((strftime('%m', SC." . $cmp_sql . ") -1 ) / 3 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "QUARTER(" . $cmp_sql . ") *sc# QUARTER(SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "EXTRACT ('QUARTER' FROM " . $cmp_sql . ") *sc# EXTRACT ('QUARTER' FROM SC." . $cmp_sql . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 3 + 1) *sc# ((EXTRACT(MONTH FROM SC." . $cmp_sql . ") - 1) / 3 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "QUARTER(" . $cmp_sql . ") *sc# QUARTER(SC." . $cmp_sql . ")";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 3 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 3 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'BIMONTHLY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $cmp_sql . ") - 1) / 2 + 1)) *sc# CInt(Val((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1)))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $cmp_sql . ") -1 ) / 2 + 1) AS INTEGER) *sc# CAST(((strftime('%m', SC." . $cmp_sql . ") -1 ) / 2 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $cmp_sql . ") - 1) / 2 + 1) AS VARCHAR (1)) *sc# CAST(((EXTRACT ('MONTH' FROM SC." . $cmp_sql . ") - 1) / 2 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $cmp_sql . ") - 1) / 2 + 1) *sc# ((EXTRACT(MONTH FROM SC." . $cmp_sql . ") - 1) / 2 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS INT (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1)) *sc# CAST(((MONTH(SC." . $cmp_sql . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+       }
+   }
+   function Get_sql_date_groupby($sql_def, $format)
+   {
+       if (empty($format))
+       {
+           return $sql_def;
+       }
+       if ($format != 'YYYYMMDDHHIISS')
+       {
+           return "";
+       }
+       $sql = $sql_def;
+       if ($format != 'YYYYMMDDHHIISS' && in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+       {
+           $sql = "to_char(" . $sql_def . ", 'YYYY-MM-DD HH24:MI:SS')";
+       }
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+       {
+           $sql = $sql_def;
+       }
+       return $sql;
    }
    function Get_arg_groupby($val, $format)
    {
-       return $val; 
+       if ($format == 'YYYYMMDDHHIISS' && (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle)))
+       {
+           return substr($val, 0, 19) ; 
+       }
+       elseif ($format == 'YYYYMMDDHHII')
+       {
+           return substr($val, 0, 16) ; 
+       }
+       elseif ($format == 'YYYYMMDDHH')
+       {
+           return substr($val, 0, 13) ; 
+       }
+       elseif ($format == 'YYYYMMDD2')
+       {
+           return substr($val, 0, 10) ; 
+       }
+       elseif ($format == 'YYYYMM')
+       {
+           return substr($val, 0, 7) ; 
+       }
+       elseif ($format == 'YYYYHH')
+       {
+           returnsubstr($val, 0, 4) . substr($val, 11, 2); 
+       }
+       elseif ($format == 'YYYYSEMIANNUAL')
+       {
+           return substr($val, 0, 4) . $this->nm_data->GetSem(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'YYYYFOURMONTHS')
+       {
+           return substr($val, 0, 4) . $this->nm_data->GetQuadr(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'YYYYQUARTER')
+       {
+           return substr($val, 0, 4) . $this->nm_data->GetTrim(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'YYYYBIMONTHLY')
+       {
+           return substr($val, 0, 4) . $this->nm_data->GetBim(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'YYYYWEEK')
+       {
+           return substr($val, 0, 4) . $this->Get_Sql_Week($val); 
+       }
+       elseif ($format == 'YYYYDAYNAME')
+       {
+           return substr($val, 0, 4) . $this->Compat_WeekDay($val); 
+       }
+       elseif ($format == 'YYYY')
+       {
+           return substr($val, 0, 4) ; 
+       }
+       elseif ($format == 'SEMIANNUAL')
+       {
+           return $this->nm_data->GetSem(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'FOURMONTHS')
+       {
+           return $this->nm_data->GetQuadr(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'QUARTER')
+       {
+           return $this->nm_data->GetTrim(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'BIMONTHLY')
+       {
+           return $this->nm_data->GetBim(substr($val, 5, 2)); 
+       }
+       elseif ($format == 'WEEK')
+       {
+           return $this->Get_Sql_Week($val); 
+       }
+       elseif ($format == 'DAYNAME')
+       {
+           return $this->Compat_WeekDay($val); 
+       }
+       elseif ($format == 'MM')
+       {
+           return substr($val, 5, 2); 
+       }
+       elseif ($format == 'DD')
+       {
+           return substr($val, 8, 2); 
+       }
+       elseif ($format == 'HH')
+       {
+           return substr($val, 11, 2); 
+       }
+       elseif ($format == 'HHIISS')
+       {
+           return substr($val, 11, 8); 
+       }
+       elseif ($format == 'HHII')
+       {
+           return substr($val, 11, 5); 
+       }
+       else
+       {
+           return $val; 
+       }
    }
    function Get_format_dimension($ind_ini, $ind_qb, $campo, $rs, $conf_region="S", $mask="")
    {
@@ -1755,37 +2732,470 @@ class grid_j3x_vikevents_items_ini
    function Get_date_order_groupby($sql_def, $order, $format="", $order_old="")
    {
        $order      = " " . trim($order);
-       $order_old .= (!empty($order_old)) ? ", " : "";
-       return $order_old . $sql_def . $order;
+       $orderby_ok = "";
+       if ($format == 'YYYYMMDDHHIISS' || $format == 'YYYYMMDDHHII' || $format == 'YYYYMMDDHH' || $format == 'YYYYMMDD2')
+       {
+           $orderby_ok .= $sql_def . $order;
+       }
+       elseif ($format == 'YYYY' || $format == 'MM' || $format == 'DD' || $format == 'HH')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby($format, $sql_def) . $order;
+       }
+       elseif (substr($format, 0, 4) == 'YYYY')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby('YYYY', $sql_def) . $order . "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby(substr($format, 4), $sql_def) . $order;
+       }
+       elseif ($format == 'SEMIANNUAL' || $format == 'FOURMONTHS' || $format == 'QUARTER' || $format == 'BIMONTHLY' || $format == 'WEEK' || $format == 'DAYNAME')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby($format, $sql_def) . $order;
+       }
+       elseif ($format == 'HHIISS')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby('HH', $sql_def) . $order. "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby('II', $sql_def) . $order. "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby('SS', $sql_def) . $order;
+       }
+       elseif ($format == 'HHII')
+       {
+           $orderby_ok .= $this->Return_date_order_groupby('HH', $sql_def) . $order. "#@#";
+           $orderby_ok .= $this->Return_date_order_groupby('II', $sql_def) . $order;
+       }
+       else
+       {
+           $orderby_ok .= $sql_def . $order;
+       }
+       $tst_order = explode("#@#", $orderby_ok);
+       foreach ($tst_order as $cada_tst)
+       {
+           $pos = strpos(" " . $order_old, $cada_tst);
+           if ($pos === false)
+           {
+               $order_old .= (!empty($order_old)) ? ", " : "";
+               $order_old .= $cada_tst;
+           }
+       }
+       return $order_old;
+   }
+   function Return_date_order_groupby($format, $sql_def)
+   {
+       if ($format == 'YYYY')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "YEAR(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "YEAR(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%Y'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(YEAR FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(year from " . $sql_def . "))";
+           }
+           else
+           {
+               return "YEAR(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'MM')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "MONTH(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "MONTH(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%m'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(MONTH FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(month from  " . $sql_def . "))";
+           }
+           else
+           {
+               return "MONTH(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'DD')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "DAY(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "DAY(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%d'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(DAY FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(day from " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress))
+           {
+               return "DAYOFMONTH(" . $sql_def . ")";
+           }
+           else
+           {
+               return "DAY(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'HH')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "hour(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "hour(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%H'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(hour FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(hour FROM " . $sql_def . "))";
+           }
+           else
+           {
+               return "hour(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'II')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "minute(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "minute(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%M'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(minute FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(minute FROM " . $sql_def . "))";
+           }
+           else
+           {
+               return "minute(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'SS')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "second(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "second(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%S'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(second FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(second FROM " . $sql_def . "))";
+           }
+           else
+           {
+               return "second(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'WEEK')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "DatePart('ww'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "WEEK(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase))
+           {
+               return "CONVERT(VARCHAR(2), DATEPART(wk, " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%W'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(week FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(week FROM " . $sql_def . "))";
+           }
+           else
+           {
+               return "week(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'DAYNAME')
+       {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "Weekday(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+           {
+               return "WEEKDAY(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase))
+           {
+               return "CONVERT(CHAR(1), DATEPART(dw, " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+           {
+               return "strftime('%w'," . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+           {
+               return "(EXTRACT(dow FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+           {
+               return "(extract(weekday FROM " . $sql_def . "))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "DAYOFWEEK(" . $sql_def . ")";
+           }
+           else
+           {
+               return "weekday(" . $sql_def . ")";
+           }
+       }
+       if ($format == 'SEMIANNUAL') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $sql_def . ") - 1) / 6 + 1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $sql_def . ") -1 ) / 6 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $sql_def . ") - 1) / 6 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $sql_def . ") - 1) / 6 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 6 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 6 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'FOURMONTHS') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $sql_def . ") - 1) / 4 + 1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $sql_def . ") -1 ) / 4 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $sql_def . ") - 1) / 4 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $sql_def . ") - 1) / 4 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 4 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 4 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'QUARTER') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $sql_def . ") - 1) / 3 + 1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $sql_def . ") -1 ) / 3 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "QUARTER(" . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "EXTRACT ('QUARTER' FROM " . $sql_def . ")";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $sql_def . ") - 1) / 3 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "QUARTER(" . $sql_def . ")";
+           }
+           else {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 3 + 1) AS NCHAR (1))";
+           }
+       }
+       if ($format == 'BIMONTHLY') {
+           if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+           {
+               return "CInt(Val((MONTH(" . $sql_def . ") - 1) / 2 + 1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite)) {
+               return "CAST(((strftime('%m', " . $sql_def . ") -1 ) / 2 + 1) AS INTEGER)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres)) {
+               return "CAST(((EXTRACT ('MONTH' FROM " . $sql_def . ") - 1) / 2 + 1) AS VARCHAR (1))";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase)) {
+               return "((EXTRACT(MONTH FROM " . $sql_def . ") - 1) / 2 + 1)";
+           }
+           elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress)) {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 2 + 1) AS INT (1))";
+           }
+           else {
+               return "CAST(((MONTH(" . $sql_def . ") - 1) / 2 + 1) AS NCHAR (1))";
+           }
+       }
+       return $order;
+   }
+   function Get_Sql_Week($val)
+   {
+       static $DT_in  = "";
+       static $DT_out = "";
+       if (empty($val))
+       {
+           return 0;
+       }
+       $sql_def = substr($val, 0, 10);
+       if ($sql_def == $DT_in)
+       {
+           return $DT_out;
+       }
+       $DT_in  = $sql_def;
+       $DT_out = 0;
+       $sql_def = "'" . $sql_def . "'";
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access))
+       {
+           $cmd = "select DatePart('ww'," . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+       {
+           $cmd = "select WEEK(" . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sybase))
+       {
+           $cmd = "select CONVERT(VARCHAR(2), DATEPART(wk, " . $sql_def . "))";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_sqlite))
+       {
+           $cmd = "select strftime('%W'," . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+       {
+           $cmd = "select EXTRACT(week FROM date " . $sql_def . ")";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_ibase))
+       {
+           $cmd = "select extract(week FROM cast(" . $sql_def . " as date)) from RDB\$DATABASE";
+       }
+       elseif (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress))
+       {
+           $cmd = "select week(" . $sql_def . ") FROM SYSPROGRESS.SYSCALCTABLE";
+       }
+       else
+       {
+           $cmd = "select week(" . $sql_def . ")";
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $cmd;
+       $rweek = $this->Db->Execute($cmd);
+       if (isset($rweek->fields[0]))
+       { 
+           $DT_out = $rweek->fields[0];
+       } 
+       $rweek->Close(); 
+       return $DT_out;
+   }
+   function Compat_WeekDay($val)
+   {
+       $num = $this->nm_data->GetWeekDay($val);
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_access) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_oracle) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mssql) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_db2) || in_array(strtolower($this->nm_tpbanco), $this->nm_bases_progress))
+       {
+           $num++;
+       }
+       if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_mysql))
+       {
+           $num = ($num == 0) ? 6 : $num - 1;
+       }
+       return $num;
    }
 }
 //===============================================================================
 //
-class grid_j3x_vikevents_items_sub_css
+class Sales_Snapshots_sub_css
 {
    function __construct()
    {
       global $script_case_init;
-      if (!$this->Ini) 
-      { 
-          $this->Ini = new grid_j3x_vikevents_items_ini(); 
-          $this->Ini->init("Path_sub");
-      } 
-      $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_orders']['SC_herda_css'] = "S"; 
-      $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_orders']['embutida'] = true;
-      include_once ($this->Ini->link_grid_j3x_vikevents_orders_cons_emb);
-      $this->grid_j3x_vikevents_orders = new grid_j3x_vikevents_orders_sub_css ;
-      $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_orders']['embutida'] = false;
       $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_SweetHollyhock/Sc9_SweetHollyhock";
-      if ($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['SC_herda_css'] == "N")
+      if ($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['SC_herda_css'] == "N")
       {
-          $_SESSION['sc_session'][$script_case_init]['SC_sub_css']['grid_j3x_vikevents_items']    = $str_schema_all . "_grid.css";
-          $_SESSION['sc_session'][$script_case_init]['SC_sub_css_bw']['grid_j3x_vikevents_items'] = $str_schema_all . "_grid_bw.css";
+          $_SESSION['sc_session'][$script_case_init]['SC_sub_css']['Sales-Snapshots']    = $str_schema_all . "_grid.css";
+          $_SESSION['sc_session'][$script_case_init]['SC_sub_css_bw']['Sales-Snapshots'] = $str_schema_all . "_grid_bw.css";
       }
    }
 }
 //
-class grid_j3x_vikevents_items_apl
+class Sales_Snapshots_apl
 {
    var $Ini;
    var $Erro;
@@ -1821,12 +3231,12 @@ class grid_j3x_vikevents_items_apl
              $glo_senha_protect, $nmgp_opcao, $nm_call_php, $rec, $nmgp_quant_linhas, $nmgp_fast_search, $nmgp_cond_fast_search, $nmgp_arg_fast_search, $nmgp_ordem, $nmgp_parms_where;
 
       $Parms_form_pdf = false;
-      if (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_j3x_vikevents_items']))
+      if (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['Sales-Snapshots']))
       { 
-          $GLOBALS['nmgp_parms'] = $_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_j3x_vikevents_items'];
+          $GLOBALS['nmgp_parms'] = $_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['Sales-Snapshots'];
           $Parms_form_pdf = true;
       } 
-      if ($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'] || $Parms_form_pdf)
+      if ($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'] || $Parms_form_pdf)
       { 
           if (!empty($GLOBALS['nmgp_parms'])) 
           { 
@@ -1851,14 +3261,14 @@ class grid_j3x_vikevents_items_apl
                        {
                            $cadapar[0] = $GLOBALS['sc_conv_var'][strtolower($cadapar[0])];
                        }
-                       nm_limpa_str_grid_j3x_vikevents_items($cadapar[1]);
-                       nm_protect_num_grid_j3x_vikevents_items($cadapar[0], $cadapar[1]);
+                       nm_limpa_str_Sales_Snapshots($cadapar[1]);
+                       nm_protect_num_Sales_Snapshots($cadapar[0], $cadapar[1]);
                        if ($cadapar[1] == "@ ") {$cadapar[1] = trim($cadapar[1]); }
                        $Tmp_par   = $cadapar[0];
                        $$Tmp_par = $cadapar[1];
                        if ($Tmp_par == "nmgp_opcao")
                        {
-                           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] = $cadapar[1];
+                           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] = $cadapar[1];
                        }
                    }
               }
@@ -1866,33 +3276,32 @@ class grid_j3x_vikevents_items_apl
       } 
       if ($Parms_form_pdf)
       { 
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_pdf'] = true;
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form'] = true;
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_full'] = false;
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_pai'] = "";
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_pdf'] = true;
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form'] = true;
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_full'] = false;
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_pai'] = "";
       } 
       $_SESSION['scriptcase']['sc_ctl_ajax'] = 'part';
-      if (!$this->Ini || isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_ibase'])) 
+      if (!$this->Ini || isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_ibase'])) 
       { 
-          $this->Ini = new grid_j3x_vikevents_items_ini(); 
+          $this->Ini = new Sales_Snapshots_ini(); 
           $this->Ini->init();
       } 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase) && $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_ibase'] = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_ibase'] = true;
       }
       $this->Ini->Proc_print      = false;
       $this->Ini->Export_det_zip  = false;
       $this->Ini->Export_html_zip = false;
       $this->Ini->Export_img_zip  = false;
       $this->Ini->Img_export_zip  = array();
-      $this->Ini->Init_apl_lig = array();
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['emb_lig_aba'] = array();
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['emb_lig_aba'] = array();
       $this->Change_Menu = false;
        if ($nmgp_opcao == "link_res")  
        { 
            $nmgp_opcao = "inicio";  
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "inicio";  
+           $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "inicio";  
            $Temp_parms = "";  
            $todox = str_replace("?#?@?@?", "?#?@ ?@?", $nmgp_parms_where);
            $todox = stripslashes($todox);
@@ -1900,37 +3309,97 @@ class grid_j3x_vikevents_items_apl
            foreach ($todo as $param)
            {
                 $cadapar  = explode("?#?", $param);
+                if ($cadapar[0] == "j3x_vikevents_items_price")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_items_price", "j3x_vikevents_items.price", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_orders_persons")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_persons", "j3x_vikevents_orders.persons", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_orders_custdata")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_custdata", "j3x_vikevents_orders.custdata", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_orders_purchemail")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_purchemail", "j3x_vikevents_orders.purchemail", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_orders_tot")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_tot", "j3x_vikevents_orders.tot", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_items_id")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_items_id", "j3x_vikevents_items.id", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_items_title")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_items_title", "j3x_vikevents_items.title", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_orders_iditem")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_iditem", "j3x_vikevents_orders.iditem", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_orders_persons_1")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_persons_1", "j3x_vikevents_orders.persons", $cadapar[0]);
+                } 
                 if ($cadapar[0] == "start_at")  
                 { 
-                    $cadapar[0] = str_replace("start_at", "FROM_UNIXTIME(tsinit)", $cadapar[0]);
+                    $cadapar[0] = str_replace("start_at", "FROM_UNIXTIME(j3x_vikevents_items.tsinit)", $cadapar[0]);
                 } 
-                if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Ind_Groupby'] == "location")
+                if ($cadapar[0] == "j3x_vikevents_orders_membdata")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_membdata", "j3x_vikevents_orders.membdata", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_orders_totpaid")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_totpaid", "j3x_vikevents_orders.totpaid", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "j3x_vikevents_orders_id")  
+                { 
+                    $cadapar[0] = str_replace("j3x_vikevents_orders_id", "j3x_vikevents_orders.id", $cadapar[0]);
+                } 
+                if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Ind_Groupby'] == "SalesByVenue")
                 { 
                     $Temp_parms .= (empty($Temp_parms)) ? "" : " and ";
-                    $Tmp_pos = strpos($cadapar[1], "@aspass@");
-                    $cadapar[1] = str_replace("@aspass@", "", $cadapar[1]);
-                    if ($Tmp_pos !== false)
+                    if ($cadapar[0] == "FROM_UNIXTIME(j3x_vikevents_items.tsinit)")
                     {
-                        $cadapar[1] = $this->Ini->Db->qstr($cadapar[1]);
-                    }
-                    if ($cadapar[1] == "__SCNULL__" || $cadapar[1] == "'__SCNULL__'")
-                    {
-                        $Temp_parms .= $cadapar[0] . " is null" ;
+                        $cadapar[1]  = str_replace("@aspass@", "", $cadapar[1]);
+                        $Format_tst  = $this->Ini->Get_Gb_date_format('SalesByVenue', 'start_at');
+                        $Temp_arg    = $this->Ini->Get_date_arg_sum($cadapar[1], $Format_tst, $cadapar[0], true);
+                        $Temp_sql    = ($Temp_arg == " is null") ? $cadapar[0] : $this->Ini->Get_sql_date_groupby($cadapar[0], $Format_tst);
+                        $Temp_parms .= $Temp_sql;
+                        $Temp_parms .= $Temp_arg;
                     }
                     else
                     {
-                        $Temp_parms .= $cadapar[0] . " = " . $cadapar[1];
+                        $Tmp_pos = strpos($cadapar[1], "@aspass@");
+                        $cadapar[1] = str_replace("@aspass@", "", $cadapar[1]);
+                        if ($Tmp_pos !== false)
+                        {
+                            $cadapar[1] = $this->Ini->Db->qstr($cadapar[1]);
+                        }
+                        if ($cadapar[1] == "__SCNULL__" || $cadapar[1] == "'__SCNULL__'")
+                        {
+                            $Temp_parms .= $cadapar[0] . " is null" ;
+                        }
+                        else
+                        {
+                            $Temp_parms .= $cadapar[0] . " = " . $cadapar[1];
+                        }
                     }
                 } 
            }
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_resumo'] = $Temp_parms;
+           $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_resumo'] = $Temp_parms;
        } 
-      if ($nmgp_opcao != "ajax_navigate" && $nmgp_opcao != "ajax_detalhe" && isset($_SESSION['scriptcase']['menu_atual']) && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['sc_outra_jan'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['sc_modal']))
+      if ($nmgp_opcao != "ajax_navigate" && $nmgp_opcao != "ajax_detalhe" && isset($_SESSION['scriptcase']['menu_atual']) && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['sc_outra_jan'] || $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['sc_modal']))
       {
           $this->sc_init_menu = "x";
-          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['grid_j3x_vikevents_items']))
+          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['Sales-Snapshots']))
           {
-              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['grid_j3x_vikevents_items'];
+              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['Sales-Snapshots'];
           }
           elseif (isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']]))
           {
@@ -1943,10 +3412,10 @@ class grid_j3x_vikevents_items_apl
                   }
               }
           }
-          if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'] && $this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['grid_j3x_vikevents_items']))
+          if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'] && $this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['Sales-Snapshots']))
           {
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['grid_j3x_vikevents_items']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('grid_j3x_vikevents_items') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['grid_j3x_vikevents_items']['label'] = "Astor Theatre Event Summary";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['Sales-Snapshots']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('Sales-Snapshots') . "/";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['Sales-Snapshots']['label'] = "Snapshot of the Sales";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -1954,7 +3423,7 @@ class grid_j3x_vikevents_items_apl
               $achou = false;
               foreach ($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu] as $apl => $parms)
               {
-                  if ($apl == "grid_j3x_vikevents_items")
+                  if ($apl == "Sales-Snapshots")
                   {
                       $achou = true;
                   }
@@ -1966,39 +3435,39 @@ class grid_j3x_vikevents_items_apl
               }
           }
       }
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       {
           $this->Change_Menu = false;
       }
       $this->Db = $this->Ini->Db; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['nm_tpbanco'] = $this->Ini->nm_tpbanco;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['nm_tpbanco'] = $this->Ini->nm_tpbanco;
       $this->nm_data = new nm_data("en_us");
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       { 
-          include_once($this->Ini->path_embutida . "grid_j3x_vikevents_items/grid_j3x_vikevents_items_erro.class.php"); 
+          include_once($this->Ini->path_embutida . "Sales-Snapshots/Sales-Snapshots_erro.class.php"); 
       } 
       else 
       { 
-          include_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_erro.class.php"); 
+          include_once($this->Ini->path_aplicacao . "Sales-Snapshots_erro.class.php"); 
       } 
-      $this->Erro      = new grid_j3x_vikevents_items_erro();
+      $this->Erro      = new Sales_Snapshots_erro();
       $this->Erro->Ini = $this->Ini;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       { 
-          require_once($this->Ini->path_embutida . "grid_j3x_vikevents_items/grid_j3x_vikevents_items_lookup.class.php"); 
+          require_once($this->Ini->path_embutida . "Sales-Snapshots/Sales-Snapshots_lookup.class.php"); 
       } 
       else 
       { 
-          require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_lookup.class.php"); 
+          require_once($this->Ini->path_aplicacao . "Sales-Snapshots_lookup.class.php"); 
       } 
-      $this->Lookup       = new grid_j3x_vikevents_items_lookup();
+      $this->Lookup       = new Sales_Snapshots_lookup();
       $this->Lookup->Db   = $this->Db;
       $this->Lookup->Ini  = $this->Ini;
       $this->Lookup->Erro = $this->Erro;
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
-      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       {
           $this->Ini->sc_Include($this->Ini->path_libs . "/nm_trata_saida.php", "C", "nm_trata_saida") ; 
           $nm_saida = new nm_trata_saida();
@@ -2008,39 +3477,39 @@ class grid_j3x_vikevents_items_apl
               $this->Ini->sc_export_ajax = true;
               $this->Ini->Arr_result     = array();
               $nmgp_opcao                = $_POST['export_opc'];
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = $nmgp_opcao;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = $nmgp_opcao;
               if ($nmgp_opcao == "print" || $nmgp_opcao == "res_print" || $nmgp_opcao == "det_print")
               {
                   $ajax_opc_print   = true;
-                  $nm_arquivo_print = "/sc_grid_j3x_vikevents_items_" . session_id();
+                  $nm_arquivo_print = "/sc_Sales-Snapshots_" . session_id();
                   $nm_saida->seta_arquivo($this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_print . ".html");
                   $this->Ini->sc_export_ajax_img = true;
               }
               ob_start();
           }
       }
-      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       {
           $_SESSION['scriptcase']['saida_var'] = false;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['ajax_nav'] = false;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['scroll_navigate'] = false;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['scroll_navigate_reload'] = false;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['scroll_navigate_app'] = false;
-          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['scroll_navigate_header_row']))
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['ajax_nav'] = false;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['scroll_navigate'] = false;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['scroll_navigate_reload'] = false;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['scroll_navigate_app'] = false;
+          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['scroll_navigate_header_row']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['scroll_navigate_header_row'] = 1;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['scroll_navigate_header_row'] = 1;
           }
           if (isset($_POST['nmgp_opcao']) && ($_POST['nmgp_opcao'] == "ajax_navigate" || $_POST['nmgp_opcao'] == "ajax_detalhe"))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['ajax_nav'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['ajax_nav'] = true;
               $_SESSION['scriptcase']['saida_var']  = true;
               $_SESSION['scriptcase']['saida_html'] = "";
               $this->Ini->Arr_result = array();
               $nmgp_opcao = $_POST['opc'];
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = $nmgp_opcao;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = $nmgp_opcao;
               if (isset($_POST['parm']) && $_POST['parm'] == "save_grid")
               {
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['save_grid'] = true;
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['save_grid'] = true;
               }
               if ($nmgp_opcao == "edit" && isset($_POST['parm']) && $_POST['parm'] == "fim")
               {
@@ -2070,67 +3539,93 @@ class grid_j3x_vikevents_items_apl
               }
           }
       }
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Gb_date_format'])) 
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Gb_date_format'])) 
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Gb_date_format'] = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Gb_date_format'] = array();
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_All_Groupby'] = array('location' => 'all');
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Groupby_hide'])) 
-      { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Groupby_hide'] = array();
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Gb_prefix_date_format']['SalesByVenue']['start_at'] = "" . $this->Ini->Nm_lang['lang_othr_valueYYYYMM'] . "";
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Gb_date_format']['SalesByVenue']['start_at'])) 
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Gb_date_format']['SalesByVenue']['start_at'] = 'YYYYMM';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Gb_def_sql']['SalesByVenue']['start_at'] = 'FROM_UNIXTIME(j3x_vikevents_items.tsinit)';
       }
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Ind_Groupby'])) 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_All_Groupby'] = array('SalesByVenue' => 'all');
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Groupby_hide'])) 
       { 
-          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_All_Groupby'] as $Ind => $Tp)
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Groupby_hide'] = array();
+      }
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Ind_Groupby'])) 
+      { 
+          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_All_Groupby'] as $Ind => $Tp)
           {
-              if (!in_array($Ind, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Groupby_hide'])) 
+              if (!in_array($Ind, $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Groupby_hide'])) 
               { 
                   break;
               }
           }
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Ind_Groupby'] = $Ind;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Ind_Groupby'] = $Ind;
       } 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['Labels_GB'] = array();
-      if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Ind_Groupby'] == "location")
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Labels_GB'] = array();
+      if  ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Ind_Groupby'] == "SalesByVenue")
       {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['Labels_GB'][] = "Location";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Labels_GB'][] = sprintf("" . $this->Ini->Nm_lang['lang_othr_cons_title_YYYYMM'] . "", "Start At");
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Labels_GB'][] = "Title";
       }
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_display']['SalesByVenue']))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb'] = array();
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['all']['SC_Ind_Groupby'] = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['all']['SC_Gb_Free_cmp'] = array();
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Ind_Groupby']))
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_display']['SalesByVenue'][2] = array('label' => "Iditem (" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_order']['SalesByVenue'][] = 2;
+      }
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_control']['SalesByVenue']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_control']['SalesByVenue'] = array(
+               array(
+                   'cmp_res' => "j3x_vikevents_orders_iditem",
+                   'label' => "Iditem (" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . ")",
+                   'label_field' => "Iditem",
+                   'options' => array(
+                       array('op' => 'C', 'index' => '2', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_count'] . "", 'abbrev' => "Count"),
+                   ),
+                   'select' => "<select class=\"sc-ui-select-j3x_vikevents_orders_iditem\" onChange=\"scSummChange($(this))\"><option value=\"2\" class=\"sc-ui-select-option-C\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_count'] . "</option></select>",
+               ),
+           );
+      }
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb'] = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['all']['SC_Ind_Groupby'] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['all']['SC_Gb_Free_cmp'] = array();
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Ind_Groupby']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['all']['SC_Ind_Groupby'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Ind_Groupby'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['all']['SC_Ind_Groupby'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Ind_Groupby'];
           }
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Gb_Free_cmp']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Gb_Free_cmp']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['all']['SC_Gb_Free_cmp'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Gb_Free_cmp'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['all']['SC_Gb_Free_cmp'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Gb_Free_cmp'];
           }
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['res']['summarizing_fields_display'] = array();
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['res']['summarizing_fields_order']   = array();
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['res']['summarizing_fields_control'] = array();
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['res']['pivot_x_axys']               = array();
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['summarizing_fields_display']))
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['res']['summarizing_fields_display'] = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['res']['summarizing_fields_order']   = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['res']['summarizing_fields_control'] = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['res']['pivot_x_axys']               = array();
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_display']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['res']['summarizing_fields_display'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['summarizing_fields_display'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['res']['summarizing_fields_display'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_display'];
           }
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['summarizing_fields_order']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_order']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['res']['summarizing_fields_order'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['summarizing_fields_order'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['res']['summarizing_fields_order'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_order'];
           }
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['summarizing_fields_control']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_control']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['res']['summarizing_fields_control'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['summarizing_fields_control'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['res']['summarizing_fields_control'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['summarizing_fields_control'];
           }
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pivot_x_axys']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pivot_x_axys']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dados_orig_gb']['res']['pivot_x_axys'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pivot_x_axys'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dados_orig_gb']['res']['pivot_x_axys'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pivot_x_axys'];
           }
       }
-      $this->Ini->Apl_resumo  = "grid_j3x_vikevents_items_resumo_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Ind_Groupby'] . ".class.php"; 
-      $this->Ini->Apl_grafico = "grid_j3x_vikevents_items_grafico_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_Ind_Groupby'] . ".class.php"; 
+      $this->Ini->Apl_resumo  = "Sales-Snapshots_resumo_" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Ind_Groupby'] . ".class.php"; 
+      $this->Ini->Apl_grafico = "Sales-Snapshots_grafico_" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_Ind_Groupby'] . ".class.php"; 
       $_SESSION['sc_session']['path_third'] = $this->Ini->path_prod . "/third";
       $_SESSION['sc_session']['real_path_third'] = $this->Ini->path_third;
       $_SESSION['sc_session']['path_prod']  = $this->Ini->path_prod . "/third";
@@ -2152,9 +3647,9 @@ class grid_j3x_vikevents_items_apl
           @closedir($Res_dir_img);
           rmdir($this->Ini->path_aplicacao . 'img');
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['xls_return'] = ($nmgp_opcao == "xls") ? "volta_grid" : "resumo"; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['csv_return'] = ($nmgp_opcao == "csv") ? "volta_grid" : "resumo"; 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['xml_return'] = ($nmgp_opcao == "xml") ? "volta_grid" : "resumo"; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['xls_return'] = ($nmgp_opcao == "xls") ? "volta_grid" : "resumo"; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['csv_return'] = ($nmgp_opcao == "csv") ? "volta_grid" : "resumo"; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['xml_return'] = ($nmgp_opcao == "xml") ? "volta_grid" : "resumo"; 
       $this->Ini->SC_module_export = (isset($SC_module_export) && !empty($SC_module_export)) ? $SC_module_export : "grid"; 
       if (empty($this->Ini->SC_module_export) && $nmgp_opcao == 'pdf')
       { 
@@ -2192,112 +3687,112 @@ class grid_j3x_vikevents_items_apl
           else {
               $this->ret_print = "resumo";
           }
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_return'] = $this->ret_print;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_return'] = $this->ret_print;
       }
-      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       {
           if ($this->Ini->Export_html_zip)
           {
               $this->Ini->Export_img_zip = true;
-              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['html_name']))
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['html_name']))
               {
-                  $nm_arquivo_html = "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['html_name'];
+                  $nm_arquivo_html = "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['html_name'];
               }
               elseif ($nmgp_opcao == 'print' && strpos(" " . $this->Ini->SC_module_export, "grid") !== false)
               {
-                  $nm_arquivo_html = "/sc_grid_j3x_vikevents_items_" . session_id() . ".html";
+                  $nm_arquivo_html = "/sc_Sales-Snapshots_" . session_id() . ".html";
               }
               else
               {
-                  $nm_arquivo_html = "/sc_grid_j3x_vikevents_items_res_" . session_id() . ".html";
+                  $nm_arquivo_html = "/sc_Sales-Snapshots_res_" . session_id() . ".html";
               }
               $nm_saida->seta_arquivo($this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_html);
           }
       }
       if ($nmgp_opcao == "doc_word") {  
           $this->ret_word = "volta_grid";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_return'] = $this->ret_word;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_return'] = $this->ret_word;
           $_SESSION['scriptcase']['proc_mobile'] = false;
       }
       if ($nmgp_opcao == "doc_word_res") {  
           $this->ret_word = "resumo";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_return'] = $this->ret_word;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_return'] = $this->ret_word;
           $_SESSION['scriptcase']['proc_mobile'] = false;
       }
       if ($nmgp_opcao == "doc_word_res" && strpos(" " . $this->Ini->SC_module_export, "grid") !== false)  
       { 
           $nmgp_opcao = "doc_word"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "doc_word"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "doc_word"; 
       }
       elseif ($nmgp_opcao == "doc_word" && strpos(" " . $this->Ini->SC_module_export, "grid") === false)  
       { 
           $nmgp_opcao = "doc_word_res"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "doc_word_res"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "doc_word_res"; 
       }
       if ($nmgp_opcao == "xls_res" && strpos(" " . $this->Ini->SC_module_export, "grid") !== false)  
       { 
           $nmgp_opcao = "xls"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "xls"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "xls"; 
       }
       elseif ($nmgp_opcao == "xls" && strpos(" " . $this->Ini->SC_module_export, "grid") === false)  
       { 
           $nmgp_opcao = "xls_res"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "xls_res"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "xls_res"; 
       }
       if ($nmgp_opcao == "csv_res" && strpos(" " . $this->Ini->SC_module_export, "grid") !== false)  
       { 
           $nmgp_opcao = "csv"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "csv"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "csv"; 
       }
       elseif ($nmgp_opcao == "csv" && strpos(" " . $this->Ini->SC_module_export, "grid") === false)  
       { 
           $nmgp_opcao = "csv_res"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "csv_res"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "csv_res"; 
       }
       if ($nmgp_opcao == "xml_res" && strpos(" " . $this->Ini->SC_module_export, "grid") !== false)  
       { 
           $nmgp_opcao = "xml"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "xml"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "xml"; 
       }
       elseif ($nmgp_opcao == "xml" && strpos(" " . $this->Ini->SC_module_export, "grid") === false)  
       { 
           $nmgp_opcao = "xml_res"; 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "xml_res"; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "xml_res"; 
       }
-      $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['skip_charts'] = (strpos(" " . $this->Ini->SC_module_export, "chart") !== false) ? false : true;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_det'] = false;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['conf_chart_level'] = "S";
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida']))
+      $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['skip_charts'] = (strpos(" " . $this->Ini->SC_module_export, "chart") !== false) ? false : true;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_det'] = false;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['conf_chart_level'] = "S";
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida']      = false;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida']      = false;
       } 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_grid']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_grid']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_grid'] = false;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_grid'] = false;
       } 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_init']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_init']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_init'] = false;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_init'] = false;
       } 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_label']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_label']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_label'] = false;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_label'] = false;
       } 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['cab_embutida']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cab_embutida']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['cab_embutida'] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cab_embutida'] = "";
       } 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_pdf']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_pdf']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_pdf'] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_pdf'] = "";
       } 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_treeview']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_treeview']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida_treeview'] = false;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida_treeview'] = false;
       } 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['proc_pdf']      = (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'] && ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "pdf" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "pdf_res")) ? true : false;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['proc_pdf_vert'] = false;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['proc_pdf']) {
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf']      = (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'] && ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "pdf" || $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "pdf_res")) ? true : false;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf_vert'] = false;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf']) {
           $_SESSION['scriptcase']['proc_mobile'] = false;
       } 
       include("../_lib/css/" . $this->Ini->str_schema_all . "_grid.php");
@@ -2372,7 +3867,7 @@ class grid_j3x_vikevents_items_apl
           'style'            => "default",
       );
 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       { 
       $this->Ini->Color_bg_ajax            = (!isset($str_ajax_bg)       || "" == trim($str_ajax_bg))         ? "#000" : $str_ajax_bg;
       $this->Ini->Border_c_ajax            = (!isset($str_ajax_border_c) || "" == trim($str_ajax_border_c))   ? ""     : $str_ajax_border_c;
@@ -2415,33 +3910,36 @@ class grid_j3x_vikevents_items_apl
           $_SESSION['scriptcase']['bg_btn_popup']['bsair']     = nmButtonOutput($this->arr_buttons, "bsair_appdiv", "window.close()", "window.close()", "bsair", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $_SESSION['scriptcase']['bg_btn_popup']['btbremove'] = nmButtonOutput($this->arr_buttons, "bsair_appdiv", "self.parent.tb_remove()", "self.parent.tb_remove()", "bsair", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
       } 
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order']))
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'][] = "id";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'][] = "title";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'][] = "descr";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'][] = "price";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'][] = "start_at";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'][] = "availnum";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'][] = "img";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'][] = "tsend";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'];
-          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['usr_cmp_sel']))
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_items_price";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_orders_persons";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_orders_custdata";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_orders_purchemail";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_orders_tot";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_items_id";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_items_title";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_orders_iditem";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'][] = "j3x_vikevents_orders_persons_1";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'];
+          if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel']))
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['usr_cmp_sel'] = array();
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel'] = array();
           } 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['usr_cmp_sel']['img'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['usr_cmp_sel']['tsend'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['usr_cmp_sel'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel']['j3x_vikevents_items_id'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel']['j3x_vikevents_items_title'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel']['j3x_vikevents_orders_iditem'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel']['j3x_vikevents_orders_persons_1'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel'];
       } 
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_items']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_items']['exit'] != '')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['exit'] != '')
       {
-          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page] = $_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_items']['exit'];
+          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page] = $_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['exit'];
       }
 
       $this->Ini->sc_Include($this->Ini->path_libs . "/nm_gc.php", "F", "nm_gc") ; 
       nm_gc($this->Ini->path_libs);
-      if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
       { 
           $_SESSION['scriptcase']['sc_page_process'] = $this->Ini->sc_page;
       } 
@@ -2498,10 +3996,10 @@ class grid_j3x_vikevents_items_apl
                                   $this->Ini->Nm_lang['lang_shrt_days_thud'],
                                   $this->Ini->Nm_lang['lang_shrt_days_frid'],
                                   $this->Ini->Nm_lang['lang_shrt_days_satd']);
-      if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
       { 
-          $this->pdf_zip = (isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opc_pdf']['pdf_zip'])) ? $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opc_pdf']['pdf_zip'] : "N";
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['use_pass_pdf'] = "";
+          $this->pdf_zip = (isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opc_pdf']['pdf_zip'])) ? $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opc_pdf']['pdf_zip'] : "N";
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['use_pass_pdf'] = "";
           $_SESSION['scriptcase']['sc_tp_pdf'] = "wkhtmltopdf";
           $_SESSION['scriptcase']['sc_idioma_pdf'] = array();
           $_SESSION['scriptcase']['sc_idioma_pdf']['en_us'] = array('titulo' => $this->Ini->Nm_lang['lang_pdff_titl'], 'titulo_colunas' => $this->Ini->Nm_lang['lang_btns_clmn_hint'], 'modules' => $this->Ini->Nm_lang['lang_export_modules'], 'mod_grid' => $this->Ini->Nm_lang['lang_export_mod_grid'], 'mod_resume' => $this->Ini->Nm_lang['lang_export_mod_summary'], 'mod_chart' => $this->Ini->Nm_lang['lang_export_mod_chart'], 'tp_imp' => $this->Ini->Nm_lang['lang_pdff_type'], 'color' => $this->Ini->Nm_lang['lang_pdff_colr'], 'econm' => $this->Ini->Nm_lang['lang_pdff_bndw'], 'tp_pap' => $this->Ini->Nm_lang['lang_pdff_pper'], 'carta' => $this->Ini->Nm_lang['lang_pdff_letr'], 'oficio' => $this->Ini->Nm_lang['lang_pdff_legl'], 'customiz' => $this->Ini->Nm_lang['lang_pdff_cstm'], 'alt_papel' => $this->Ini->Nm_lang['lang_pdff_pper_hgth'], 'larg_papel' => $this->Ini->Nm_lang['lang_pdff_pper_wdth'], 'orient' => $this->Ini->Nm_lang['lang_pdff_pper_orie'], 'retrato' => $this->Ini->Nm_lang['lang_pdff_prtr'], 'paisag' => $this->Ini->Nm_lang['lang_pdff_lnds'], 'book' => $this->Ini->Nm_lang['lang_pdff_bkmk'], 'grafico' => $this->Ini->Nm_lang['lang_pdff_chrt'], 'largura' => $this->Ini->Nm_lang['lang_pdff_wdth'], 'fonte' => $this->Ini->Nm_lang['lang_pdff_font'], 'create' => $this->Ini->Nm_lang['lang_pdff_create'], 'sim' => $this->Ini->Nm_lang['lang_pdff_chrt_yess'], 'nao' => $this->Ini->Nm_lang['lang_pdff_chrt_nooo'], 'chart_level' => $this->Ini->Nm_lang['lang_chart_level_groupby'], 'chart_level' => $this->Ini->Nm_lang['lang_chart_level_groupby'], 'group_general' => $this->Ini->Nm_lang['lang_pdff_group_general'], 'group_chart' => $this->Ini->Nm_lang['lang_pdff_group_chart'], 'pdf_res' => $this->Ini->Nm_lang['lang_app_xls_summry'], 'pdf_cons' => $this->Ini->Nm_lang['lang_app_xls_grid'], 'password' => $this->Ini->Nm_lang['lang_app_xls_pswd'], 'page_break' => $this->Ini->Nm_lang['lang_groupby_break_page_pdf'], 'other_options' => $this->Ini->Nm_lang['lang_app_other_options'], 'label_group' => $this->Ini->Nm_lang['lang_pdf_below_groupby'], 'page_label' => $this->Ini->Nm_lang['lang_pdf_all_pages_title'], 'page_header' => $this->Ini->Nm_lang['lang_pdf_all_pages_header'], 'format_zip' => $this->Ini->Nm_lang['lang_export_pdf_zip'], 'cancela' => $this->Ini->Nm_lang['lang_pdff_cncl']);
@@ -2610,27 +4108,27 @@ class grid_j3x_vikevents_items_apl
           'pyram_slice_s' => $this->Ini->Nm_lang['lang_flsh_chrt_pyrm_opcs'],
           'pyram_slice_n' => $this->Ini->Nm_lang['lang_flsh_chrt_pyrm_opcn'],
       );
-      if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
       { 
           $_SESSION['scriptcase']['sc_idioma_prt'] = array();
           $_SESSION['scriptcase']['sc_idioma_prt']['en_us'] = array('titulo' => $this->Ini->Nm_lang['lang_btns_prtn_titl_hint'], 'modules' => $this->Ini->Nm_lang['lang_export_modules'], 'mod_grid' => $this->Ini->Nm_lang['lang_export_mod_grid'], 'mod_resume' => $this->Ini->Nm_lang['lang_export_mod_summary'], 'mod_chart' => $this->Ini->Nm_lang['lang_export_mod_chart'], 'group_general' => $this->Ini->Nm_lang['lang_pdff_group_general'], 'titulo_colunas' => $this->Ini->Nm_lang['lang_btns_clmn_hint'], 'modoimp' => $this->Ini->Nm_lang['lang_btns_mode_prnt_hint'], 'curr' => $this->Ini->Nm_lang['lang_othr_curr_page'], 'total' => $this->Ini->Nm_lang['lang_othr_full'], 'cor' => $this->Ini->Nm_lang['lang_othr_prtc'], 'pb' => $this->Ini->Nm_lang['lang_othr_bndw'], 'color' => $this->Ini->Nm_lang['lang_othr_colr'], 'pdf_res' => $this->Ini->Nm_lang['lang_app_xls_summry'], 'pdf_cons' => $this->Ini->Nm_lang['lang_app_xls_grid'], 'cancela' => $this->Ini->Nm_lang['lang_btns_cncl_prnt_hint'], 'password' => $this->Ini->Nm_lang['lang_app_xls_pswd']);
       } 
-      if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
       { 
           $_SESSION['scriptcase']['sc_idioma_word'] = array();
           $_SESSION['scriptcase']['sc_idioma_word']['en_us'] = array('titulo' => $this->Ini->Nm_lang['lang_export_title'], 'modules' => $this->Ini->Nm_lang['lang_export_modules'], 'mod_grid' => $this->Ini->Nm_lang['lang_export_mod_grid'], 'mod_resume' => $this->Ini->Nm_lang['lang_export_mod_summary'], 'mod_chart' => $this->Ini->Nm_lang['lang_export_mod_chart'], 'group_general' => $this->Ini->Nm_lang['lang_pdff_group_general'], 'titulo_colunas' => $this->Ini->Nm_lang['lang_btns_clmn_hint'], 'cor' => $this->Ini->Nm_lang['lang_othr_prtc'], 'pb' => $this->Ini->Nm_lang['lang_othr_bndw'], 'color' => $this->Ini->Nm_lang['lang_othr_colr'], 'cancela' => $this->Ini->Nm_lang['lang_btns_cncl_prnt_hint'], 'password' => $this->Ini->Nm_lang['lang_app_xls_pswd']);
       } 
-      if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
       { 
           $_SESSION['scriptcase']['sc_idioma_csv'] = array();
           $_SESSION['scriptcase']['sc_idioma_csv']['en_us'] = array('titulo' => $this->Ini->Nm_lang['lang_app_csv_title'], 'group_general' => $this->Ini->Nm_lang['lang_pdff_group_general'], 'titulo_colunas' => $this->Ini->Nm_lang['lang_btns_clmn_hint'], 'modules' => $this->Ini->Nm_lang['lang_export_modules'], 'mod_grid' => $this->Ini->Nm_lang['lang_export_mod_grid'], 'mod_resume' => $this->Ini->Nm_lang['lang_export_mod_summary'], 'mod_chart' => $this->Ini->Nm_lang['lang_export_mod_chart'], 'delim_line' => $this->Ini->Nm_lang['lang_app_csv_lin_separator'], 'delim_col' => $this->Ini->Nm_lang['lang_app_csv_col_separator'], 'delim_dados' => $this->Ini->Nm_lang['lang_app_csv_txt_separator'], 'label_csv' => $this->Ini->Nm_lang['lang_app_csv_grid_label'], 'password' => $this->Ini->Nm_lang['lang_app_xls_pswd']);
       } 
-      if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
       { 
           $_SESSION['scriptcase']['sc_idioma_xml'] = array();
           $_SESSION['scriptcase']['sc_idioma_xml']['en_us'] = array('titulo' => $this->Ini->Nm_lang['lang_export_title'], 'group_general' => $this->Ini->Nm_lang['lang_pdff_group_general'], 'titulo_colunas' => $this->Ini->Nm_lang['lang_btns_clmn_hint'], 'modules' => $this->Ini->Nm_lang['lang_export_modules'], 'mod_grid' => $this->Ini->Nm_lang['lang_export_mod_grid'], 'mod_resume' => $this->Ini->Nm_lang['lang_export_mod_summary'], 'mod_chart' => $this->Ini->Nm_lang['lang_export_mod_chart'], 'xml_label' => $this->Ini->Nm_lang['lang_inherit_label'], 'xml_yes' => $this->Ini->Nm_lang['lang_pdff_chrt_yess'], 'xml_no' => $this->Ini->Nm_lang['lang_pdff_chrt_nooo'], 'xml_format' => $this->Ini->Nm_lang['lang_xml_tag_attr'], 'xml_attr' => $this->Ini->Nm_lang['lang_xml_formt_attr'], 'xml_tag' => $this->Ini->Nm_lang['lang_xml_formt_tag'], 'password' => $this->Ini->Nm_lang['lang_app_xls_pswd']);
       } 
-      if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
       { 
           $_SESSION['scriptcase']['sc_idioma_xls'] = array();
           $_SESSION['scriptcase']['sc_idioma_xls']['en_us'] = array('titulo' => $this->Ini->Nm_lang['lang_app_xls_title'], 'modules' => $this->Ini->Nm_lang['lang_export_modules'], 'mod_grid' => $this->Ini->Nm_lang['lang_export_mod_grid'], 'mod_resume' => $this->Ini->Nm_lang['lang_export_mod_summary'], 'mod_chart' => $this->Ini->Nm_lang['lang_export_mod_chart'], 'group_general' => $this->Ini->Nm_lang['lang_pdff_group_general'], 'titulo_colunas' => $this->Ini->Nm_lang['lang_btns_clmn_hint'], 'tp_xls' => $this->Ini->Nm_lang['lang_app_xls_ext'], 'tot_xls' => $this->Ini->Nm_lang['lang_othr_export_excel_total'], 'xls_res' => $this->Ini->Nm_lang['lang_app_xls_summry'], 'xls_cons' => $this->Ini->Nm_lang['lang_app_xls_grid'], 'password' => $this->Ini->Nm_lang['lang_app_xls_pswd']);
@@ -2645,173 +4143,188 @@ class grid_j3x_vikevents_items_apl
           $this->Ini->Gd_missing = false;
       }
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_trata_img.php", "C", "nm_trata_img") ; 
-      if ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao']) || empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig'])))
+      if ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao']) || empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'])))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "inicio";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "inicio";
       }
-      if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_items']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_j3x_vikevents_items']['start'] == 'filter')
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['Sales-Snapshots']['start'] == 'filter')
       {
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "inicio" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid")  
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "inicio" || $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid")  
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "busca";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "busca";
           }   
       }
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] != "detalhe" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig']) || !empty($nmgp_parms) || !empty($GLOBALS["nmgp_parms"])))
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] != "detalhe" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig']) || !empty($nmgp_parms) || !empty($GLOBALS["nmgp_parms"])))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opc_liga'] = array();  
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opc_liga'] = array();  
           if (isset($NMSC_conf_apl) && !empty($NMSC_conf_apl))
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opc_liga'] = $NMSC_conf_apl;  
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opc_liga'] = $NMSC_conf_apl;  
           }   
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opc_liga']['inicial']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opc_liga']['inicial']))
           {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opc_liga']['inicial'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opc_liga']['inicial'];
           }
       }
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opc_liga']['paginacao']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opc_liga']['paginacao']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opc_liga']['paginacao']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opc_liga']['paginacao']))
           { 
-              $this->Ini->Apl_paginacao = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opc_liga']['paginacao'];
+              $this->Ini->Apl_paginacao = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opc_liga']['paginacao'];
           } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "busca")
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "busca")
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "grid" ;  
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "grid" ;  
       }   
-      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao_print']) || empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao_print']))  
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao_print']) || empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao_print']))  
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao_print'] = "inicio" ;  
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao_print'] = "inicio" ;  
       }   
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_all'] = false;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "print")  
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_all'] = false;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "print")  
       { 
           if (strpos(" " . $this->Ini->SC_module_export, "grid") === false)
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "res_print";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "res_print";
           }
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "res_print")  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "res_print")  
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao']     = "resumo";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_all'] = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao']     = "resumo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_all'] = true;
           if (strpos(" " . $this->Ini->SC_module_export, "grid") !== false)
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "print";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "print";
               $nmgp_tipo_print = "RC";
           }
       } 
-      if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'], 0, 7) == "grafico")  
+      if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'], 0, 7) == "grafico")  
       { 
           $_SESSION['scriptcase']['sc_ctl_ajax'] = 'part';
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "pdf")
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "pdf")
       { 
           $this->Ini->path_img_modelo = $this->Ini->path_img_modelo;
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "fast_search")  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "fast_search")  
       { 
           $this->SC_fast_search($GLOBALS["nmgp_fast_search"], $GLOBALS["nmgp_cond_fast_search"], $GLOBALS["nmgp_arg_fast_search"]);
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_ant'] == $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq'])
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant'] == $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'])
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = 'igual';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = 'igual';
           } 
           else 
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq'];
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_array_resumo'] = "NAO";
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_total_geral']  = "NAO";
-              unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tot_geral']);
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = 'pesq';
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq'] = 'grid';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_array_resumo'] = "NAO";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_total_geral']  = "NAO";
+              unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tot_geral']);
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = 'pesq';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq'] = 'grid';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_refresh'] = true;
           } 
       } 
       $this->Ini->grid_search_change_fil = false;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid_search" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid_search_res")
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid_search" || $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid_search_res")
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid_search")
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_refresh'] = true;
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid_search")
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq'] = 'grid';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq'] = 'grid';
           } 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid_search_res")
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid_search_res")
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq'] = 'res';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq'] = 'res';
           } 
           $this->SC_proc_grid_search($_POST['parm']);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq'];
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_array_resumo'] = "NAO";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_total_geral']  = "NAO";
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tot_geral']);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = 'pesq';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_array_resumo'] = "NAO";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_total_geral']  = "NAO";
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tot_geral']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = 'pesq';
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid_search_change_fil" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid_search_change_fil_res")
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid_search_change_fil" || $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid_search_change_fil_res")
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid_search_change_fil")
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid_search_change_fil")
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq'] = 'grid';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq'] = 'grid';
           } 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "grid_search_change_fil_res")
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "grid_search_change_fil_res")
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq'] = 'res';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq'] = 'res';
           } 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_refresh'] = true;
           if (!$_SESSION['scriptcase']['proc_mobile']) 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_pesq.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_pesq.class.php"); 
           } 
           else 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_mobile_pesq.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_mobile_pesq.class.php"); 
           } 
-          $this->pesq  = new grid_j3x_vikevents_items_pesq();
+          $this->pesq  = new Sales_Snapshots_pesq();
           $this->prep_modulos("pesq");
           $this->pesq->NM_ajax_grid_fil = $_POST['parm'];
           $this->pesq->NM_ajax_flag     = true;
           $this->pesq->NM_ajax_opcao    = "ajax_grid_search_change_fil";
           $staus_fil = $this->pesq->monta_busca();
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq'];
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_array_resumo'] = "NAO";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_total_geral']  = "NAO";
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tot_geral']);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = 'pesq';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_array_resumo'] = "NAO";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_total_geral']  = "NAO";
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tot_geral']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = 'pesq';
           $this->Ini->grid_search_change_fil = true;
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == 'pesq' && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq']))  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "interativ_search")
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq'] == "res")  
+          $this->SC_proc_interativ_search($_POST['parm']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_array_resumo'] = "NAO";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_total_geral']  = "NAO";
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tot_geral']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = 'inicio';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opc_int_search'] = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_refresh'] = true;
+      } 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == 'pesq' && isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq']))  
+      { 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq'] == "res")  
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = 'resumo';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = 'resumo';
           } 
-          elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['orig_pesq'] == "grid") 
+          elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['orig_pesq'] == "grid") 
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = 'inicio';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = 'inicio';
           } 
       } 
 //
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['prim_cons'] = false;  
-      if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'], 0, 7) != "grafico" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] != "detalhe" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig']) || !empty($nmgp_parms) || !empty($GLOBALS["nmgp_parms"])))  
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['prim_cons'] = false;  
+      if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'], 0, 7) != "grafico" && $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] != "detalhe" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig']) || !empty($nmgp_parms) || !empty($GLOBALS["nmgp_parms"])))  
       { 
-         unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['use_pass_pdf']);
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['prim_cons'] = true;  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig'];  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['cond_pesq'] = ""; 
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_filtro'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_fast'] = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_total_geral'] = "NAO";
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['sc_total']);
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tot_geral']);
+         unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['use_pass_pdf']);
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['prim_cons'] = true;  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq']       = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant']   = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'];  
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['cond_pesq'] = ""; 
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_total_geral'] = "NAO";
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['sc_total']);
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tot_geral']);
       } 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_ant'];  
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_ant'];  
       $nm_flag_pdf   = true;
-      $nm_vendo_pdf  = ("pdf" == $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao']);
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['graf_pdf'] = "S";
+      $nm_vendo_pdf  = ("pdf" == $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao']);
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['graf_pdf'] = "S";
       if (isset($nmgp_graf_pdf) && !empty($nmgp_graf_pdf))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['graf_pdf'] = $nmgp_graf_pdf;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['graf_pdf'] = $nmgp_graf_pdf;
       }
-      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       {
          if ($nm_flag_pdf && $nm_vendo_pdf)
          {
-            $nm_arquivo_htm_temp = $this->Ini->root . $this->Ini->path_imag_temp . "/sc_grid_j3x_vikevents_items_html_" . session_id() . "_2.html";
+            $nm_arquivo_htm_temp = $this->Ini->root . $this->Ini->path_imag_temp . "/sc_Sales-Snapshots_html_" . session_id() . "_2.html";
             if (isset($_GET['pdf_base']) && isset($_GET['pdf_url']))
             {
                 $nm_arquivo_pdf_base = "/" . str_replace("_NMPLUS_", "+", $_GET['pdf_base']);
@@ -2819,12 +4332,12 @@ class grid_j3x_vikevents_items_apl
             }
             else
             {
-                $nm_arquivo_pdf_base = "/sc_pdf_" . date("YmdHis") . "_" . rand(0, 1000) . "_grid_j3x_vikevents_items.pdf";
+                $nm_arquivo_pdf_base = "/sc_pdf_" . date("YmdHis") . "_" . rand(0, 1000) . "_Sales-Snapshots.pdf";
                 $nm_arquivo_pdf_url  = $this->Ini->path_imag_temp . $nm_arquivo_pdf_base;
             }
             $nm_arquivo_pdf_serv = $this->Ini->root . $nm_arquivo_pdf_url;
-            $nm_arquivo_de_saida = $this->Ini->root . $this->Ini->path_imag_temp . "/sc_grid_j3x_vikevents_items_html_" . session_id() . ".html";
-            $nm_url_de_saida = $this->Ini->server_pdf . $this->Ini->path_imag_temp . "/sc_grid_j3x_vikevents_items_html_" . session_id() . ".html";
+            $nm_arquivo_de_saida = $this->Ini->root . $this->Ini->path_imag_temp . "/sc_Sales-Snapshots_html_" . session_id() . ".html";
+            $nm_url_de_saida = $this->Ini->server_pdf . $this->Ini->path_imag_temp . "/sc_Sales-Snapshots_html_" . session_id() . ".html";
             if (in_array(trim($this->Ini->str_lang), $this->Ini->nm_font_ttf) && strtolower($_SESSION['scriptcase']['charset']) != "utf-8")
             { 
                 $nm_saida->seta_arquivo($nm_arquivo_de_saida, $_SESSION['scriptcase']['charset']);
@@ -2836,188 +4349,188 @@ class grid_j3x_vikevents_items_apl
          }
       }
 //----------------------------------->
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "doc_word_res")
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "doc_word_res")
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_navigator'] = "Microsoft Internet Explorer";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_all'] = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['doc_word']  = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao']     = "resumo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_navigator'] = "Microsoft Internet Explorer";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_all'] = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['doc_word']  = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao']     = "resumo";
           $_SESSION['scriptcase']['saida_word'] = true;
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_name']))
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_name']))
           {
-              $nm_arquivo_doc_word = "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_name'];
+              $nm_arquivo_doc_word = "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_name'];
           }
           else
           {
-              $nm_arquivo_doc_word = "/sc_grid_j3x_vikevents_items_res_" . session_id() . ".doc";
+              $nm_arquivo_doc_word = "/sc_Sales-Snapshots_res_" . session_id() . ".doc";
           }
           $nm_saida->seta_arquivo($this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_doc_word);
           $this->Ini->nm_limite_lin_res_prt = 0;
           $GLOBALS['nmgp_cor_print']        = "CO";
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "xls")  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "xls")  
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
           { 
-              require_once($this->Ini->path_embutida . "grid_j3x_vikevents_items/grid_j3x_vikevents_items_xls.class.php"); 
+              require_once($this->Ini->path_embutida . "Sales-Snapshots/Sales-Snapshots_xls.class.php"); 
           } 
           else 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_xls.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_xls.class.php"); 
           } 
-          $this->xls  = new grid_j3x_vikevents_items_xls();
+          $this->xls  = new Sales_Snapshots_xls();
           $this->prep_modulos("xls");
           $this->xls->monta_xls();
       }
       else
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "xml")  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "xml")  
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
           { 
-              require_once($this->Ini->path_embutida . "grid_j3x_vikevents_items/grid_j3x_vikevents_items_xml.class.php"); 
+              require_once($this->Ini->path_embutida . "Sales-Snapshots/Sales-Snapshots_xml.class.php"); 
           } 
           else 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_xml.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_xml.class.php"); 
           } 
-          $this->xml  = new grid_j3x_vikevents_items_xml();
+          $this->xml  = new Sales_Snapshots_xml();
           $this->prep_modulos("xml");
           $this->xml->monta_xml();
       }
       else
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "csv")  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "csv")  
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
           { 
-              require_once($this->Ini->path_embutida . "grid_j3x_vikevents_items/grid_j3x_vikevents_items_csv.class.php"); 
+              require_once($this->Ini->path_embutida . "Sales-Snapshots/Sales-Snapshots_csv.class.php"); 
           } 
           else 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_csv.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_csv.class.php"); 
           } 
-          $this->csv  = new grid_j3x_vikevents_items_csv();
+          $this->csv  = new Sales_Snapshots_csv();
           $this->prep_modulos("csv");
           $this->csv->monta_csv();
       }
       else   
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "rtf")  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "rtf")  
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
           { 
-              require_once($this->Ini->path_embutida . "grid_j3x_vikevents_items/grid_j3x_vikevents_items_rtf.class.php"); 
+              require_once($this->Ini->path_embutida . "Sales-Snapshots/Sales-Snapshots_rtf.class.php"); 
           } 
           else 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_rtf.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_rtf.class.php"); 
           } 
-          $this->rtf  = new grid_j3x_vikevents_items_rtf();
+          $this->rtf  = new Sales_Snapshots_rtf();
           $this->prep_modulos("rtf");
           $this->rtf->monta_rtf();
       }
       else
-      if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'], 0, 7) == "grafico")  
+      if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'], 0, 7) == "grafico")  
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
           { 
-              require_once($this->Ini->path_embutida . " . grid_j3x_vikevents_items . /" . $this->Ini->Apl_grafico); 
+              require_once($this->Ini->path_embutida . " . Sales-Snapshots . /" . $this->Ini->Apl_grafico); 
           } 
           else 
           { 
               require_once($this->Ini->path_aplicacao . $this->Ini->Apl_grafico); 
           } 
-          $this->Graf  = new grid_j3x_vikevents_items_grafico();
+          $this->Graf  = new Sales_Snapshots_grafico();
           $this->prep_modulos("Graf");
-          if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'], 7, 1) == "_")  
+          if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'], 7, 1) == "_")  
           { 
-              $this->Graf->grafico_col(substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'], 8));
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "grid";
+              $this->Graf->grafico_col(substr($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'], 8));
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "grid";
           }
           else
           { 
-              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dashboard_refresh_after_chart'])) {
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dashboard_refresh_after_chart'];
-                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['dashboard_refresh_after_chart']);
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dashboard_refresh_after_chart'])) {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dashboard_refresh_after_chart'];
+                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dashboard_refresh_after_chart']);
               }
               else {
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] = "grid";
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] = "grid";
               }
               $this->Graf->monta_grafico();
           }
       }
       else 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "busca")  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "busca")  
       { 
           if (!$_SESSION['scriptcase']['proc_mobile']) 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_pesq.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_pesq.class.php"); 
           } 
           else 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_mobile_pesq.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_mobile_pesq.class.php"); 
           } 
-          $this->pesq  = new grid_j3x_vikevents_items_pesq();
+          $this->pesq  = new Sales_Snapshots_pesq();
           $this->prep_modulos("pesq");
           $this->pesq->NM_ajax_flag    = $this->NM_ajax_flag;
           $this->pesq->NM_ajax_opcao   = $this->NM_ajax_opcao;
           $this->pesq->monta_busca();
       }
       else 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "resumo")  
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "resumo")  
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
           { 
-              require_once($this->Ini->path_embutida . "grid_j3x_vikevents_items/" . $this->Ini->Apl_resumo); 
+              require_once($this->Ini->path_embutida . "Sales-Snapshots/" . $this->Ini->Apl_resumo); 
           } 
           else 
           { 
               require_once($this->Ini->path_aplicacao . $this->Ini->Apl_resumo); 
           } 
-          $this->Res = new grid_j3x_vikevents_items_resumo("out");
+          $this->Res = new Sales_Snapshots_resumo("out");
           $this->prep_modulos("Res");
           $this->Res->monta_resumo();
       }
       else 
       { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "print" && $nmgp_tipo_print == "RC")
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "print" && $nmgp_tipo_print == "RC")
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_navigator'] = $nmgp_navegator_print;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_all'] = true;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao']     = "pdf";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_navigator'] = $nmgp_navegator_print;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_all'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao']     = "pdf";
               $GLOBALS['nmgp_tipo_pdf'] = strtolower($nmgp_cor_print);
           } 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] == "doc_word")
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] == "doc_word")
           { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_navigator'] = "Microsoft Internet Explorer";
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['print_all'] = true;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['doc_word']  = true;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao']     = "pdf";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_navigator'] = "Microsoft Internet Explorer";
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['print_all'] = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['doc_word']  = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao']     = "pdf";
               $_SESSION['scriptcase']['saida_word'] = true;
-              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_name']))
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_name']))
               {
-                  $nm_arquivo_doc_word =  "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_name'];
+                  $nm_arquivo_doc_word =  "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_name'];
               }
               else
               {
-                  $nm_arquivo_doc_word = "/sc_grid_j3x_vikevents_items_" . session_id() . ".doc";
+                  $nm_arquivo_doc_word = "/sc_Sales-Snapshots_" . session_id() . ".doc";
               }
               $nm_saida->seta_arquivo($this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_doc_word);
               $this->Ini->nm_limite_lin_prt = 0;
               $GLOBALS['nmgp_tipo_pdf'] = "CO";
           } 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
           { 
-              require_once($this->Ini->path_embutida . "grid_j3x_vikevents_items/grid_j3x_vikevents_items_grid.class.php"); 
+              require_once($this->Ini->path_embutida . "Sales-Snapshots/Sales-Snapshots_grid.class.php"); 
           } 
           else 
           { 
-              require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_grid.class.php"); 
+              require_once($this->Ini->path_aplicacao . "Sales-Snapshots_grid.class.php"); 
           } 
-          $this->grid  = new grid_j3x_vikevents_items_grid();
+          $this->grid  = new Sales_Snapshots_grid();
           $this->prep_modulos("grid");
           $this->grid->monta_grid($linhas);
       }   
 //--- 
-      if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
       {
            $this->Db->Close(); 
       }
@@ -3050,38 +4563,38 @@ class grid_j3x_vikevents_items_apl
 <?php
           }
       }
-      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['embutida'])
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['embutida'])
       {
          $nm_saida->finaliza();
-         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['ajax_nav'])
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['ajax_nav'])
          {
              $Temp = ob_get_clean();
              if ($Temp !== false && trim($Temp) != "")
              {
                  $this->Ini->Arr_result['htmOutput'] = $Temp;
              }
-             if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['opcao'] != "ajax_detalhe")  
+             if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] != "ajax_detalhe")  
              {
-                 $this->Ini->Arr_result['setVar'][] = array('var' => 'scQtReg', 'value' => $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['qt_reg_grid']);
+                 $this->Ini->Arr_result['setVar'][] = array('var' => 'scQtReg', 'value' => $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['qt_reg_grid']);
              }
              $_SESSION['scriptcase']['saida_var'] = false;
              $oJson = new Services_JSON();
              echo $oJson->encode($this->Ini->Arr_result);
              exit;
          }
-            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['export_sel_columns']['field_order']))
+            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['export_sel_columns']['field_order']))
             {
-                $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['field_order'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['export_sel_columns']['field_order'];
-                unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['export_sel_columns']['field_order']);
+                $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['field_order'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['export_sel_columns']['field_order'];
+                unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['export_sel_columns']['field_order']);
             }
-            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['export_sel_columns']['usr_cmp_sel']))
+            if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['export_sel_columns']['usr_cmp_sel']))
             {
-                $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['usr_cmp_sel'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['export_sel_columns']['usr_cmp_sel'];
-                unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['export_sel_columns']['usr_cmp_sel']);
+                $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['usr_cmp_sel'] = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['export_sel_columns']['usr_cmp_sel'];
+                unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['export_sel_columns']['usr_cmp_sel']);
             }
-         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['doc_word'])
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['doc_word'])
          {
-             $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file'] = $this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
+             $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file'] = $this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
              $this->html_doc_word($nm_arquivo_doc_word, $nmgp_password);
          }
          if ($this->Ini->Export_html_zip)
@@ -3111,11 +4624,11 @@ class grid_j3x_vikevents_items_apl
             {
                 $str_pd4ml    = " --page-size A4 --orientation Portrait";
             }
-            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_res'])
+            if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_res'])
             { 
                 $str_pd4ml .= " --outline-depth 0";
             }
-            if (!$this->Ini->sc_export_ajax && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_det'])
+            if (!$this->Ini->sc_export_ajax && !$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_det'])
             {
                 if (-1 < $this->grid->progress_grid && $this->grid->progress_fp)
                 {
@@ -3128,12 +4641,12 @@ class grid_j3x_vikevents_items_apl
                     fclose($this->grid->progress_fp);
                 }
             }
-            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_name']))
+            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_name']))
             {
-                $nm_arquivo_pdf_serv = $this->Ini->root .  $this->Ini->path_imag_temp . "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_name'];
-                $nm_arquivo_pdf_url  = $this->Ini->path_imag_temp . "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_name'];
-                $nm_arquivo_pdf_base = "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_name'];
-                unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_name']);
+                $nm_arquivo_pdf_serv = $this->Ini->root .  $this->Ini->path_imag_temp . "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_name'];
+                $nm_arquivo_pdf_url  = $this->Ini->path_imag_temp . "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_name'];
+                $nm_arquivo_pdf_base = "/" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_name'];
+                unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_name']);
             }
             $arq_pdf_out  = (FALSE !== strpos($nm_arquivo_pdf_serv, ' ')) ? " \"" . $nm_arquivo_pdf_serv . "\"" :  $nm_arquivo_pdf_serv;
             $arq_pdf_in   = (FALSE !== strpos($nm_url_de_saida, ' '))     ? " \"" . $nm_url_de_saida . "\""     :  $nm_url_de_saida;
@@ -3160,7 +4673,7 @@ class grid_j3x_vikevents_items_apl
             {
                 $arq_pdf_final = str_replace(".pdf", ".zip", $arq_pdf_out);
             }
-            elseif (is_dir($this->Ini->path_third . $dir_qpdf) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['use_pass_pdf']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['use_pass_pdf']))
+            elseif (is_dir($this->Ini->path_third . $dir_qpdf) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['use_pass_pdf']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['use_pass_pdf']))
             {
                 $arq_pdf_final = $arq_pdf_out;
                 $arq_pdf_out   = str_replace(".pdf", "_wk.pdf", $arq_pdf_out);
@@ -3234,7 +4747,7 @@ class grid_j3x_vikevents_items_apl
             $str_zip      = "";
             if ($this->pdf_zip == "S")
             {
-                $pdf_pass = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['use_pass_pdf'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['use_pass_pdf'] : "";
+                $pdf_pass = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['use_pass_pdf'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['use_pass_pdf'] : "";
                 $opt_pass = (!empty($pdf_pass)) ? " -p" : "";
                 if (is_file($arq_pdf_final)) {
                     unlink($arq_pdf_final);
@@ -3269,7 +4782,7 @@ class grid_j3x_vikevents_items_apl
                     unlink($arq_pdf_out);
                 }
             }
-            elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['use_pass_pdf']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['use_pass_pdf']))
+            elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['use_pass_pdf']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['use_pass_pdf']))
             {
                 if (FALSE !== strpos(strtolower(php_uname()), 'windows')) 
                 {
@@ -3297,7 +4810,7 @@ class grid_j3x_vikevents_items_apl
                 if (is_dir($this->Ini->path_third . $dir_qpdf)) 
                 {
                     chdir($this->Ini->path_third . $dir_qpdf);
-                    $pdf_pass  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['use_pass_pdf'];
+                    $pdf_pass  = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['use_pass_pdf'];
                     $str_cmd_qpdf .= "--encrypt " . $pdf_pass . " " . $pdf_pass . " 256 -- " . $arq_pdf_out . " " . $arq_pdf_final;
                     exec($str_cmd_qpdf);
                     if (is_file($arq_pdf_final)) 
@@ -3306,8 +4819,8 @@ class grid_j3x_vikevents_items_apl
                     }
                 }
             }
-            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_array_resumo'] = '';
-            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['contr_total_geral']  = '';
+            $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_array_resumo'] = '';
+            $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['contr_total_geral']  = '';
             // ----- PDF log
             $fp = @fopen($this->Ini->root . $this->Ini->path_imag_temp . str_replace(array(".pdf",".zip"), array("",""), $nm_arquivo_pdf_base) . '.log', 'w');
             if ($fp)
@@ -3335,7 +4848,7 @@ class grid_j3x_vikevents_items_apl
             { 
                $_SESSION['scriptcase']['charset_html'] = (isset($this->Ini->sc_charset[$_SESSION['scriptcase']['charset']])) ? $this->Ini->sc_charset[$_SESSION['scriptcase']['charset']] : $_SESSION['scriptcase']['charset'];
             }
-            if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_det'])
+            if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_det'])
             {
                 if (-1 < $this->grid->progress_grid && $this->grid->progress_fp)
                 {
@@ -3353,10 +4866,10 @@ class grid_j3x_vikevents_items_apl
                     }
                 }
             }
-unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_file']);
+unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_file']);
 if (is_file($nm_arquivo_pdf_serv))
 {
-    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['pdf_file'] = $nm_arquivo_pdf_serv;
+    $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['pdf_file'] = $nm_arquivo_pdf_serv;
 }
 $NM_volta  = "volta_grid";
 $NM_target = "_parent";
@@ -3427,24 +4940,35 @@ else
       if (empty($data_search)) 
       {
           $tmp_cmd = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_fast'] = "";
-          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig'])) 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'] = "";
+          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'])) 
           {
-              $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig']; 
+              $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig']; 
           }
-          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_filtro'])) 
+          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'])) 
           {
               if (!empty($tmp_cmd)) 
               {
-                  $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_filtro'] . ")"; 
+                  $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] . ")"; 
               }
               else
               {
-                  $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_filtro'] . ")"; 
+                  $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] . ")"; 
               }
           }
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq'] = $tmp_cmd;
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['fast_search']);
+          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'])) 
+          {
+              if (!empty($tmp_cmd)) 
+              {
+                  $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] . ")"; 
+              }
+              else
+              {
+                  $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] . ")"; 
+              }
+          }
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] = $tmp_cmd;
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['fast_search']);
           return;
       }
       $comando = "";
@@ -3455,151 +4979,67 @@ else
       $sv_data = $data_search;
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "id", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_items.id", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "title", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_items.title", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "descr", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_items.price", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "img", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_orders.iditem", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "tsend", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_orders.persons", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "tsendiscr", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_orders.persons", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "imgtwo", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_orders.membdata", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "availnum", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_orders.custdata", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "location", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_orders.totpaid", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "price", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_orders.tot", $arg_search, $data_search);
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "idcats", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "ts", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "smalldescr", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "maps", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "params", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "published", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "archived", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "origid", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "origavailnum", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "multiprices", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "dayselection", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "excludedays", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "loclat", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "loclng", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "fgroupname", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "imggview", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "cpayments", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "sessions", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "alias", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "forfaitprice", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "ownjuid", $arg_search, $data_search);
-      }
-      if ($field == "SC_all_Cmp") 
-      {
-          $this->SC_monta_condicao($comando, "tsinitsale", $arg_search, $data_search);
+          $this->SC_monta_condicao($comando, "j3x_vikevents_orders.purchemail", $arg_search, $data_search);
       }
       if (empty($comando)) 
       {
           $comando = " 1 <> 1 "; 
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_fast'] = $comando;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'] = $comando;
       $tmp_cmd = "";
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig'])) 
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'])) 
       {
-          $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_orig']; 
+          $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig']; 
       }
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_filtro'])) 
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'])) 
       {
           if (!empty($tmp_cmd)) 
           {
-              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_filtro'] . ")"; 
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] . ")"; 
           }
           else
           {
-              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq_filtro'] . ")"; 
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] . ")"; 
           }
       }
       if (!empty($tmp_cmd)) 
@@ -3610,10 +5050,14 @@ else
       {
           $comando = " where (" . $comando . ")"; 
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['where_pesq'] = $comando;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['fast_search'][0] = $field;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['fast_search'][1] = $arg_search;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['fast_search'][2] = $sv_data;
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'])) 
+      {
+          $comando .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] . ")";
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] = $comando;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['fast_search'][0] = $field;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['fast_search'][1] = $arg_search;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['fast_search'][2] = $sv_data;
    }
    function SC_monta_condicao(&$comando, $nome, $condicao, $campo, $tp_campo="")
    {
@@ -3625,10 +5069,10 @@ else
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "id";$nm_numeric[] = "tsend";$nm_numeric[] = "tsendiscr";$nm_numeric[] = "availnum";$nm_numeric[] = "price";$nm_numeric[] = "ts";$nm_numeric[] = "published";$nm_numeric[] = "archived";$nm_numeric[] = "origid";$nm_numeric[] = "origavailnum";$nm_numeric[] = "multiprices";$nm_numeric[] = "dayselection";$nm_numeric[] = "forfaitprice";$nm_numeric[] = "ownjuid";$nm_numeric[] = "tsinitsale";
+      $nm_numeric[] = "j3x_vikevents_items_id";$nm_numeric[] = "j3x_vikevents_items_price";$nm_numeric[] = "j3x_vikevents_orders_iditem";$nm_numeric[] = "j3x_vikevents_orders_persons";$nm_numeric[] = "j3x_vikevents_orders_totpaid";$nm_numeric[] = "j3x_vikevents_orders_tot";$nm_numeric[] = "j3x_vikevents_orders_id";
       if (in_array($campo_join, $nm_numeric))
       {
-         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['decimal_db'] == ".")
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['decimal_db'] == ".")
          {
              $nm_aspas  = "";
              $nm_aspas1 = "";
@@ -3683,7 +5127,7 @@ else
           $nm_aspas  = "'";
           $nm_aspas1 = "'";
       }
-      $Nm_datas['FROM_UNIXTIME(tsinit)'] = "datetime";
+      $Nm_datas['FROM_UNIXTIME(j3x_vikevents_items.tsinit)'] = "datetime";
       if (isset($Nm_datas[$nome]))
       {
           for ($x = 0; $x < strlen($campo); $x++)
@@ -3700,10 +5144,10 @@ else
          $nm_aspas  = "#";
          $nm_aspas1 = "#";
       }
-      if (isset($Nm_datas[$campo_join]) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_sep_date']))
+      if (isset($Nm_datas[$campo_join]) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date']))
       {
-          $nm_aspas  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_sep_date'];
-          $nm_aspas1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['SC_sep_date1'];
+          $nm_aspas  = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date'];
+          $nm_aspas1 = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date1'];
       }
       if (isset($Nm_datas[$campo_join]) && (strtoupper($condicao) == "II" || strtoupper($condicao) == "QP" || strtoupper($condicao) == "NP" || strtoupper($condicao) == "DF"))
       {
@@ -3789,17 +5233,17 @@ else
            $Parms = NM_conv_charset($Parms, $_SESSION['scriptcase']['charset'], "UTF-8");
        }
        $tmp    = explode("_FDYN_", $Parms);
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'] = array();
+       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'] = array();
        foreach ($tmp as $cada_f)
        {
            $dats = explode("_DYN_", $cada_f);
            if ($dats[1] == "del_grid_search_all")
            {
-               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['grid_pesq'] as $ind => $dados)
+               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'] as $ind => $dados)
                {
                    $this->proc_del_grid_search($ind, true);
                }
-               unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['grid_pesq']);
+               unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq']);
                continue;
            }
            if ($dats[1] == "del_grid_search")
@@ -3848,7 +5292,17 @@ else
            if (!isset($busca[$dats[0]]))
            {
                $busca[$dats[0]] = $dats[1];
-               if ($dats[0] == "start_at")
+               if ($dats[0] == "j3x_vikevents_items_price")
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0]] = (isset($fields[$ix]['vls'][0])) ? $fields[$ix]['vls'][0][0] : "";
+                   nm_limpa_valor($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0]], $_SESSION['scriptcase']['reg_conf']['dec_num'], $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
+                   if (isset($fields[$ix]['vls'][1]))
+                   {
+                       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0] . '_input_2'] = $fields[$ix]['vls'][1][0];
+                       nm_limpa_valor($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0] . '_input_2'], $_SESSION['scriptcase']['reg_conf']['dec_num'], $_SESSION['scriptcase']['reg_conf']['grup_num']) ; 
+                   }
+               }
+               elseif ($dats[0] == "start_at")
                {
                    $cond = $dats[1];
                    if (substr($cond, 0, 3) == "bi_")
@@ -3884,45 +5338,45 @@ else
                    }
                    foreach ($val as $tp => $vl)
                    {
-                       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'][$dats[0] . '_' . $tp] = $vl;
+                       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0] . '_' . $tp] = $vl;
                    }
                    if (!empty($val1))
                    {
                        foreach ($val1 as $tp => $vl)
                        {
-                          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'][$dats[0] . '_input_2_' . $tp] = $vl;
+                          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0] . '_input_2_' . $tp] = $vl;
                        }
                    }
                }
                else
                {
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'][$dats[0]] = (isset($fields[$ix]['vls'][0])) ? $fields[$ix]['vls'][0][0] : "";
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0]] = (isset($fields[$ix]['vls'][0])) ? $fields[$ix]['vls'][0][0] : "";
                    if (isset($fields[$ix]['vls'][1]))
                    {
-                       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'][$dats[0] . '_input_2'] = $fields[$ix]['vls'][1][0];
+                       $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0] . '_input_2'] = $fields[$ix]['vls'][1][0];
                    }
                }
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'][$dats[0] . '_cond'] = $dats[1];
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'][$dats[0] . '_cond'] = $dats[1];
            }
            $ix++;
       }
       if ($_SESSION['scriptcase']['charset'] != "UTF-8")
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'], "UTF-8", $_SESSION['scriptcase']['charset']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'] = NM_conv_charset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'], "UTF-8", $_SESSION['scriptcase']['charset']);
       }
-      foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['tmp_busca'] as $ind => $dados)
+      foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['tmp_busca'] as $ind => $dados)
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$ind] = $dados;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$ind] = $dados;
       }
       if (!$_SESSION['scriptcase']['proc_mobile']) 
       { 
-          require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_pesq.class.php"); 
+          require_once($this->Ini->path_aplicacao . "Sales-Snapshots_pesq.class.php"); 
       } 
       else 
       { 
-          require_once($this->Ini->path_aplicacao . "grid_j3x_vikevents_items_mobile_pesq.class.php"); 
+          require_once($this->Ini->path_aplicacao . "Sales-Snapshots_mobile_pesq.class.php"); 
       } 
-      $this->pesq  = new grid_j3x_vikevents_items_pesq();
+      $this->pesq  = new Sales_Snapshots_pesq();
       $this->prep_modulos("pesq");
       $this->pesq->NM_ajax_flag  = true;
       $this->pesq->NM_ajax_opcao = "ajax_grid_search";
@@ -3932,25 +5386,423 @@ else
    {
       if (in_array($cmp_del, array('start_at')))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_dia"] = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_mes"] = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_ano"] = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_input_2_dia"] = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_input_2_mes"] = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_input_2_ano"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_dia"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_mes"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_ano"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_input_2_dia"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_input_2_mes"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_input_2_ano"] = "";
       }
-      elseif (is_array($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del]))
+      elseif (in_array($cmp_del, array('start_at')))
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del] = array();
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_input_2"] = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_hor"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_min"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_seg"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_input_2_hor"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_input_2_min"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_input_2_seg"] = "";
+      }
+      elseif (is_array($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del]))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del] = array();
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_input_2"] = array();
       }
       else
       {
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del] = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_input_2"] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_input_2"] = "";
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['campos_busca'][$cmp_del . "_cond"] = "";
-      unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['grid_pesq'][$cmp_del]);
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['campos_busca'][$cmp_del . "_cond"] = "";
+      unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['grid_pesq'][$cmp_del]);
+   }
+   function SC_proc_interativ_search($Parms)
+   {
+       $Parms = str_replace("__NM_PLUS__", "+", $Parms);
+       $Parms = str_replace("__NM_AMP__", "&", $Parms);
+       $Parms = str_replace("__NM_PRC__", "%", $Parms);
+       $cmps_dt_hh = array();
+       $cmps_dt_hh["start_at"] = 'YYYY-MM-DD';
+       $range_bw = array();
+       if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($Parms))
+       {
+           $Parms = NM_conv_charset($Parms, $_SESSION['scriptcase']['charset'], "UTF-8");
+       }
+       $tmp     = explode("__DL__", $Parms);
+       $cmd_sql = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['int_search_sql'][$tmp[0]];
+       $vls     = "";
+       $bol_numeric = false;
+       if ($tmp[3] != "clear_interativ")
+       {
+           $vls  = explode("_VLS_", $tmp[3]);
+           if($tmp[2] == "nn" || $tmp[2] == "bw")
+           {
+               $bol_numeric = true;
+               $delim  = "";
+               $delim1 = "";
+           }
+           else
+           {
+               $delim  = "'";
+               $delim1 = "'";
+           }
+           if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
+           {
+               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+               {
+                   $delim  = "#";
+                   $delim1 = "#";
+               }
+               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date']))
+               {
+                   $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date'];
+                   $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['SC_sep_date1'];
+               }
+           }
+       }
+       unset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'][$tmp[0]]);
+       if (!empty($vls))
+       {
+           $prep = "";
+           $this->Cmd_dth = "";
+           $bol_has_empty = false;
+           foreach ($vls as $cada_val)
+           {
+               $cada_val = NM_charset_decode($cada_val);
+               $descr = $cada_val;
+               $tmp_pos = strpos($cada_val, "##@@");
+               if ($tmp_pos !== false)
+               {
+                   $descr    = substr($cada_val, $tmp_pos + 4);
+                   $cada_val = substr($cada_val, 0, $tmp_pos);
+               }
+               $cada_val = substr($this->Db->qstr($cada_val), 1, -1);
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'][$tmp[0]]['lab'][$tmp[1]][] = $descr;
+               if ($cada_val == "")
+               {
+                   $bol_has_empty = true;
+               }
+               if (isset($cmps_dt_hh[$tmp[0]]))
+               {
+                   $this->SC_prep_cmd_dth($cada_val, $cmd_sql, $cmps_dt_hh[$tmp[0]]);
+               }
+               else
+               {
+                   $prep .= ($prep != "") ? "," : "";
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access) && $cada_val == "")
+                   {
+                       $prep .= 'null';
+                   }
+                   else
+                   $prep .= $delim . $cada_val . $delim1;
+               }
+               $range_bw[] = $cada_val;
+           }
+               $str_add_null    = '';
+               $str_add_null_or = '';
+               if($bol_has_empty)
+               {
+                   $str_add_null    = ' ' . $cmd_sql . ' is null ';
+                   $str_add_null_or = ' OR ' . $cmd_sql . ' is null ';
+               }
+           if ($prep == "" && $bol_numeric)
+           {
+               if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " is null";
+               }
+               else
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " = '' or " . $cmd_sql . " is null";
+               }
+           }
+           elseif ($prep == "" && $delim != "" && $this->Cmd_dth == "")
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " = '' or " . $cmd_sql . " is null";
+           }
+           elseif (isset($cmps_dt_hh[$tmp[0]]))
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'][$tmp[0]]['val'] = $this->Cmd_dth;
+           }
+           elseif ( $tmp[2] == "bw")
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " between " . $delim . $range_bw[0] .  $delim1 . " and " . $delim . $range_bw[1] .  $delim1 . $str_add_null_or;
+           }
+           else
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " IN (" . $prep . ")" . $str_add_null_or;
+           }
+       }
+      $tmp_cmd = "";
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig'])) 
+      {
+          $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_orig']; 
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] . ")"; 
+          }
+          else
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_filtro'] . ")"; 
+          }
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'] . ")";
+          }
+          else 
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_fast'] . ")";
+          }
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_resumo'])) 
+      { 
+          if (empty($tmp_where)) 
+          { 
+              $tmp_cmd = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_resumo']; 
+          } 
+          else
+          { 
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_resumo'] . ")"; 
+          } 
+      } 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] = "";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_sem_interativ']  = $tmp_cmd;
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'])) 
+      {
+          $prim = true;
+          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['interativ_search'] as $cmp => $val) 
+          {
+              if (!$prim)
+              {
+                 $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] .= " and ";
+              }
+              $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] .= "(" . $val['val'] . ")";
+              $prim = false;
+          }
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] . ")"; 
+          }
+          else
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq_interativ'] . ")"; 
+          }
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] = $tmp_cmd;
+      if(isset($tmp[4]) && $tmp[4] == 'N')
+      {
+          $this->Arr_result['interativ_search'] = array();
+          $oJson = new Services_JSON();
+          echo $oJson->encode( $this->Arr_result );
+          exit;
+      }
+   }
+   function SC_prep_cmd_dth($val, $def, $format)
+   {
+       $ano = "";
+       $mes = "";
+       $dia = "";
+       $hor = "";
+       $min = "";
+       $seg = "";
+       $tmp = "";
+       for ($i = 0; $i < strlen($format); $i++)
+       {
+           if (substr($format, $i, 1) == "Y") {
+               $ano .= substr($val, $i, 1);
+           }
+           if (substr($format, $i, 1) == "M") {
+               $mes .= substr($val, $i, 1);
+           }
+           if (substr($format, $i, 1) == "D") {
+               $dia .= substr($val, $i, 1);
+           }
+           if (substr($format, $i, 1) == "H") {
+               $hor .= substr($val, $i, 1);
+           }
+           if (substr($format, $i, 1) == "I") {
+               $min .= substr($val, $i, 1);
+           }
+           if (substr($format, $i, 1) == "S") {
+               $seg .= substr($val, $i, 1);
+           }
+       }
+       $delim  = "";
+       $delim1 = "";
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+       {
+           $delim  = "'";
+           $delim1 = "'";
+       }
+       if (!empty($ano))
+       {
+           $tmp .= (!empty($tmp)) ? " and " : "";
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+           {
+               $tmp .= "strftime('%Y', " . $def . ") = " . $delim . $ano . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+           {
+               $tmp .= "extract(year from " . $def . ") = " . $delim . $ano . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+           {
+               $tmp .= "extract(year from " . $def . ") = " . $delim . $ano . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+           {
+               $tmp .= "extract(year from " . $def . ") = " . $delim . $ano . $delim1;
+           }
+           else
+           {
+               $tmp .= "year(" . $def . ") = " . $delim . $ano . $delim1;
+           }
+       }
+       if (!empty($mes))
+       {
+           $tmp .= (!empty($tmp)) ? " and " : "";
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+           {
+               $tmp .= "strftime('%m', " . $def . ") = " . $delim . $mes . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+           {
+               $tmp .= "extract(month from " . $def . ") = " . $delim . $mes . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+           {
+               $tmp .= "extract(month from " . $def . ") = " . $delim . $mes . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+           {
+               $tmp .= "extract(month from " . $def . ") = " . $delim . $mes . $delim1;
+           }
+           else
+           {
+               $tmp .= "month(" . $def . ") = " . $delim . $mes . $delim1;
+           }
+       }
+       if (!empty($dia))
+       {
+           $tmp .= (!empty($tmp)) ? " and " : "";
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+           {
+               $tmp .= "strftime('%d', " . $def . ") = " . $delim . $dia . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+           {
+               $tmp .= "extract(day from " . $def . ") = " . $delim . $dia . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+           {
+               $tmp .= "extract(day from " . $def . ") = " . $delim . $dia . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+           {
+               $tmp .= "extract(day from " . $def . ") = " . $delim . $dia . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress))
+           {
+               $tmp .= "DAYOFMONTH(" . $def . ") = " . $delim . $dia . $delim1;
+           }
+           else
+           {
+               $tmp .= "day(" . $def . ") = " . $delim . $dia . $delim1;
+           }
+       }
+       if (!empty($hor))
+       {
+           $tmp .= (!empty($tmp)) ? " and " : "";
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+           {
+               $tmp .= "strftime('%H', " . $def . ") = " . $delim . $hor . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+           {
+               $tmp .= "extract(hour from " . $def . ") = " . $delim . $hor . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+           {
+               $tmp .= "extract(hour from " . $def . ") = " . $delim . $hor . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+           {
+               $tmp .= "extract(hour from " . $def . ") = " . $delim . $hor . $delim1;
+           }
+           else
+           {
+               $tmp .= "hour(" . $def . ") = " . $delim . $hor . $delim1;
+           }
+       }
+       if (!empty($min))
+       {
+           $tmp .= (!empty($tmp)) ? " and " : "";
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+           {
+               $tmp .= "strftime('%M', " . $def . ") = " . $delim . $min . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+           {
+               $tmp .= "extract(minute from " . $def . ") = " . $delim . $min . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+           {
+               $tmp .= "extract(minute from " . $def . ") = " . $delim . $min . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+           {
+               $tmp .= "extract(minute from " . $def . ") = " . $delim . $min . $delim1;
+           }
+           else
+           {
+               $tmp .= "minute(" . $def . ") = " . $delim . $min . $delim1;
+           }
+       }
+       if (!empty($seg))
+       {
+           $tmp .= (!empty($tmp)) ? " and " : "";
+           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+           {
+               $tmp .= "strftime('%S', " . $def . ") = " . $delim . $seg . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+           {
+               $tmp .= "extract(second from " . $def . ") = " . $delim . $seg . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+           {
+               $tmp .= "extract(second from " . $def . ") = " . $delim . $seg . $delim1;
+           }
+           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+           {
+               $tmp .= "extract(second from " . $def . ") = " . $delim . $seg . $delim1;
+           }
+           else
+           {
+               $tmp .= "second(" . $def . ") = " . $delim . $seg . $delim1;
+           }
+       }
+       if(empty($tmp))
+       {
+           if(empty($delim))
+           {
+               $tmp = $def . " is null";
+           }
+           else
+           {
+               $tmp = $def . " = " . $delim . $delim1 . " OR " . $def . " is null";
+           }
+       }
+       $this->Cmd_dth .= (!empty($this->Cmd_dth)) ? " or " : "";
+       $this->Cmd_dth .= "(" . $tmp . ")";
    }
   function html_doc_word($nm_arquivo_doc_word, $nmgp_password)
   {
@@ -3959,10 +5811,10 @@ else
       if ($this->Ini->Export_zip || $Word_password != "")
       { 
           $Parm_pass  = ($Word_password != "") ? " -p" : "";
-          $Arq_zip = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file'];
-          $Pos = strrpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file'], ".");
+          $Arq_zip = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file'];
+          $Pos = strrpos($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file'], ".");
           if ($Pos !== false) {
-              $Arq_zip = substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file'], 0, $Pos);
+              $Arq_zip = substr($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file'], 0, $Pos);
           }
           $Arq_zip .= ".zip";
           $Arq_doc = $nm_arquivo_doc_word;
@@ -3972,7 +5824,7 @@ else
           }
           $Arq_doc  .= ".zip";
           $Zip_f     = (FALSE !== strpos($Arq_zip, ' ')) ? " \"" . $Arq_zip . "\"" :  $Arq_zip;
-          $Arq_input = (FALSE !== strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file'], ' ')) ? " \"" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file'] . "\"" :  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file'];
+          $Arq_input = (FALSE !== strpos($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file'], ' ')) ? " \"" . $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file'] . "\"" :  $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file'];
            if (is_file($Arq_zip)) {
                unlink($Arq_zip);
            }
@@ -4037,14 +5889,14 @@ else
               }
            }
            if (is_file($Arq_zip)) {
-               unlink($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file']);
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file'] = $Arq_zip;
+               unlink($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file']);
+               $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file'] = $Arq_zip;
                $nm_arquivo_doc_word = $Arq_doc;
           } 
       } 
       if ($this->Ini->sc_export_ajax)
       {
-          $this->Arr_result['file_export']  = NM_charset_to_utf8($_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items']['word_file']);
+          $this->Arr_result['file_export']  = NM_charset_to_utf8($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['word_file']);
           $this->Arr_result['title_export'] = NM_charset_to_utf8($nm_arquivo_doc_word);
           $Temp = ob_get_clean();
           if ($Temp !== false && trim($Temp) != "")
@@ -4058,12 +5910,12 @@ else
       if (strpos(" " . $this->Ini->SC_module_export, "grid") !== false)
       {
           $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
           require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
           $this->pb = new scProgressBar();
           $this->pb->setRoot($this->Ini->root);
-          $this->pb->setDir($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imag_temp'] . "/");
+          $this->pb->setDir($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] . "/");
           $this->pb->setProgressbarMd5($_GET['pbmd5']);
           $this->pb->initialize();
           $Mens_bar = $this->Ini->Nm_lang['lang_othr_file_msge'];
@@ -4083,7 +5935,7 @@ else
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Astor Theatre Event Summary :: Doc</TITLE>
+ <TITLE>Snapshot of the Sales :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -4093,8 +5945,8 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 }
 $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
-$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
-$_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
+$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
+$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
  <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
@@ -4140,9 +5992,9 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
 </td></tr></table>
 <form name="Fview" method="get" action="<?php echo $this->Ini->path_imag_temp . $nm_arquivo_doc_word ?>" target="_blank" style="display: none"> 
 </form>
-<form name="Fdown" method="get" action="grid_j3x_vikevents_items_download.php" target="_blank" style="display: none"> 
+<form name="Fdown" method="get" action="Sales-Snapshots_download.php" target="_blank" style="display: none"> 
 <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page); ?>"> 
-<input type="hidden" name="nm_tit_doc" value="grid_j3x_vikevents_items"> 
+<input type="hidden" name="nm_tit_doc" value="Sales-Snapshots"> 
 <input type="hidden" name="nm_name_doc" value="<?php echo $path_doc_md5 ?>"> 
 </form>
 <FORM name="F0" method=post action="./"> 
@@ -4247,12 +6099,12 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
                $nm_arquivo_html = $Arq_htm;
            } 
           $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_html);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_html;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_doc_md5][1] = substr($nm_arquivo_html, 1);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_html;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][1] = substr($nm_arquivo_html, 1);
           require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
           $this->pb = new scProgressBar();
           $this->pb->setRoot($this->Ini->root);
-          $this->pb->setDir($_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imag_temp'] . "/");
+          $this->pb->setDir($_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] . "/");
           $this->pb->setProgressbarMd5($_GET['pbmd5']);
           $this->pb->initialize();
           $Mens_bar = $this->Ini->Nm_lang['lang_othr_file_msge'];
@@ -4270,7 +6122,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
 } 
 // 
 //======= =========================
-   if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['sc_process_barr'])) {
+   if (isset($_SESSION['scriptcase']['Sales-Snapshots']['sc_process_barr'])) {
        return;
    }
    if (!function_exists("NM_is_utf8"))
@@ -4282,7 +6134,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
    SC_dir_app_ini('AstorReport');
-   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['contr_erro'] = 'off';
+   $_SESSION['scriptcase']['Sales-Snapshots']['contr_erro'] = 'off';
    $sc_conv_var = array();
    $Sc_lig_md5 = false;
    $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
@@ -4338,9 +6190,9 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
             {
                 $nmgp_var = $sc_conv_var[strtolower($nmgp_var)];
             }
-            nm_limpa_str_grid_j3x_vikevents_items($nmgp_val);
+            nm_limpa_str_Sales_Snapshots($nmgp_val);
             $nmgp_val = NM_decode_input($nmgp_val);
-            nm_protect_num_grid_j3x_vikevents_items($nmgp_var, $nmgp_val);
+            nm_protect_num_Sales_Snapshots($nmgp_var, $nmgp_val);
             $$nmgp_var = $nmgp_val;
        }
    }
@@ -4395,9 +6247,9 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
             {
                 $nmgp_var = $sc_conv_var[strtolower($nmgp_var)];
             }
-            nm_limpa_str_grid_j3x_vikevents_items($nmgp_val);
+            nm_limpa_str_Sales_Snapshots($nmgp_val);
             $nmgp_val = NM_decode_input($nmgp_val);
-            nm_protect_num_grid_j3x_vikevents_items($nmgp_var, $nmgp_val);
+            nm_protect_num_Sales_Snapshots($nmgp_var, $nmgp_val);
             $$nmgp_var = $nmgp_val;
        }
    }
@@ -4424,23 +6276,23 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
        if (isset($_COOKIE['sc_apl_default_AstorReport'])) {
            $apl_def = explode(",", $_COOKIE['sc_apl_default_AstorReport']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imag_temp'] . "/sc_apl_default_AstorReport.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['grid_j3x_vikevents_items']['glo_nm_path_imag_temp'] . "/sc_apl_default_AstorReport.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] . "/sc_apl_default_AstorReport.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['Sales-Snapshots']['glo_nm_path_imag_temp'] . "/sc_apl_default_AstorReport.txt"));
        }
        if (isset($apl_def)) {
-           if ($apl_def[0] != "grid_j3x_vikevents_items") {
+           if ($apl_def[0] != "Sales-Snapshots") {
                $_SESSION['scriptcase']['sem_session'] = true;
                if (strtolower(substr($apl_def[0], 0 , 7)) == "http://" || strtolower(substr($apl_def[0], 0 , 8)) == "https://" || substr($apl_def[0], 0 , 2) == "..") {
-                   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir'] = $apl_def[0];
+                   $_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir'] = $apl_def[0];
                }
                else {
-                   $_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir'] = $path_aplicacao . "/" . SC_dir_app_name($apl_def[0]) . "/index.php";
+                   $_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir'] = $path_aplicacao . "/" . SC_dir_app_name($apl_def[0]) . "/index.php";
                }
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
-               $_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['redir_tp'] = $Redir_tp;
+               $_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['redir_tp'] = $Redir_tp;
            }
            if (isset($_COOKIE['sc_actual_lang_AstorReport'])) {
-               $_SESSION['scriptcase']['grid_j3x_vikevents_items']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_AstorReport'];
+               $_SESSION['scriptcase']['Sales-Snapshots']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_AstorReport'];
            }
        }
    }
@@ -4480,14 +6332,14 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
    {
        $_SESSION['scriptcase']['glo_senha_protect'] = $glo_senha_protect;
    }
-   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_pai']))
+   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_pai']))
    {
-       $apl_pai = $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_pai'];
+       $apl_pai = $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_pai'];
        if (isset($_SESSION['sc_session'][$script_case_init][$apl_pai]['embutida_filho']))
        {
            foreach ($_SESSION['sc_session'][$script_case_init][$apl_pai]['embutida_filho'] as $init_filho)
            {
-               if (isset($_SESSION['sc_session'][$init_filho]['grid_j3x_vikevents_items']['master_pai']) && $_SESSION['sc_session'][$init_filho]['grid_j3x_vikevents_items']['master_pai'] == $script_case_init)
+               if (isset($_SESSION['sc_session'][$init_filho]['Sales-Snapshots']['master_pai']) && $_SESSION['sc_session'][$init_filho]['Sales-Snapshots']['master_pai'] == $script_case_init)
                {
                    $script_case_init = $init_filho;
                    break;
@@ -4495,46 +6347,46 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
            }
        }
    }
-   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form'] && !isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['master_pai']))
+   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form'] && !isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['master_pai']))
    {
        $SC_init_ant = $script_case_init;
        $script_case_init = rand(2, 10000);
-       if (isset($_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_pai']))
+       if (isset($_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_pai']))
        {
-           $_SESSION['sc_session'][$SC_init_ant][$_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_pai']]['embutida_filho'][] = $script_case_init;
+           $_SESSION['sc_session'][$SC_init_ant][$_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_pai']]['embutida_filho'][] = $script_case_init;
        }
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['master_pai'] = $SC_init_ant;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['master_pai'] = $SC_init_ant;
    }
-   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['master_pai']))
+   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['master_pai']))
    {
-       $SC_init_ant = $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['master_pai'];
-       if (!isset($_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_form_parms']))
+       $SC_init_ant = $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['master_pai'];
+       if (!isset($_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_form_parms']))
        {
-           $_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_form_parms'] = "";
+           $_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_form_parms'] = "";
        }
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_parms'] = $_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_form_parms'];
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form'] = true;
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_full'] = (isset($_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_form_full'])) ? $_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_form_full'] : false;
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['reg_start'] = "";
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] = "inicio";
-       unset($_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_form']);
-       unset($_SESSION['sc_session'][$SC_init_ant]['grid_j3x_vikevents_items']['embutida_form_parms']);
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_parms'] = $_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_form_parms'];
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form'] = true;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_full'] = (isset($_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_form_full'])) ? $_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_form_full'] : false;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['reg_start'] = "";
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] = "inicio";
+       unset($_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_form']);
+       unset($_SESSION['sc_session'][$SC_init_ant]['Sales-Snapshots']['embutida_form_parms']);
    }
-   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_parms'])) 
+   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_parms'])) 
    {
-       if (!empty($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_parms'])) 
+       if (!empty($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_parms'])) 
        {
-           $nmgp_parms = $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_parms'];
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_parms'] = "";
+           $nmgp_parms = $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_parms'];
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_parms'] = "";
        }
    }
    elseif (isset($script_case_init))
    {
-       unset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form']);
-       unset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_full']);
-       unset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_parms']);
+       unset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form']);
+       unset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_full']);
+       unset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_parms']);
    }
-   if (!isset($nmgp_opcao) || !isset($script_case_init) || ((!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida']) || !$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida']) && $nmgp_opcao != "formphp"))
+   if (!isset($nmgp_opcao) || !isset($script_case_init) || ((!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida']) || !$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida']) && $nmgp_opcao != "formphp"))
    { 
        if (!empty($nmgp_parms)) 
        { 
@@ -4562,8 +6414,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
                     {
                         $cadapar[0] = $sc_conv_var[strtolower($cadapar[0])];
                     }
-                    nm_limpa_str_grid_j3x_vikevents_items($cadapar[1]);
-                    nm_protect_num_grid_j3x_vikevents_items($cadapar[0], $cadapar[1]);
+                    nm_limpa_str_Sales_Snapshots($cadapar[1]);
+                    nm_protect_num_Sales_Snapshots($cadapar[0], $cadapar[1]);
                     if ($cadapar[1] == "@ ") {$cadapar[1] = trim($cadapar[1]); }
                     $Tmp_par   = $cadapar[0];
                     $$Tmp_par = $cadapar[1];
@@ -4596,13 +6448,13 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
            }
            if (isset($NM_run_iframe) && $NM_run_iframe == 1) 
            { 
-               unset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']);
-               $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['b_sair'] = false;
+               unset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']);
+               $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['b_sair'] = false;
            }   
        } 
    } 
    $ini_embutida = "";
-   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida']) && $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'])
+   if (isset($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida']) && $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'])
    {
        $nmgp_outra_jan = "";
    }
@@ -4613,18 +6465,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
    if (isset($GLOBALS["script_case_init"]) && !empty($GLOBALS["script_case_init"]))
    {
        $ini_embutida = $GLOBALS["script_case_init"];
-        if (!isset($_SESSION['sc_session'][$ini_embutida]['grid_j3x_vikevents_items']['embutida']))
+        if (!isset($_SESSION['sc_session'][$ini_embutida]['Sales-Snapshots']['embutida']))
         { 
-           $_SESSION['sc_session'][$ini_embutida]['grid_j3x_vikevents_items']['embutida'] = false;
+           $_SESSION['sc_session'][$ini_embutida]['Sales-Snapshots']['embutida'] = false;
         }
-        if (!$_SESSION['sc_session'][$ini_embutida]['grid_j3x_vikevents_items']['embutida'])
+        if (!$_SESSION['sc_session'][$ini_embutida]['Sales-Snapshots']['embutida'])
         { 
            $script_case_init = $ini_embutida;
         }
    }
-   if (isset($_SESSION['scriptcase']['grid_j3x_vikevents_items']['protect_modal']) && !empty($_SESSION['scriptcase']['grid_j3x_vikevents_items']['protect_modal']))
+   if (isset($_SESSION['scriptcase']['Sales-Snapshots']['protect_modal']) && !empty($_SESSION['scriptcase']['Sales-Snapshots']['protect_modal']))
    {
-       $script_case_init = $_SESSION['scriptcase']['grid_j3x_vikevents_items']['protect_modal'];
+       $script_case_init = $_SESSION['scriptcase']['Sales-Snapshots']['protect_modal'];
    }
    if (!isset($script_case_init) || empty($script_case_init))
    {
@@ -4632,25 +6484,25 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
    }
    $salva_emb    = false;
    $salva_iframe = false;
-   $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['doc_word'] = false;
+   $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['doc_word'] = false;
    $_SESSION['scriptcase']['saida_word'] = false;
-   if (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['skip_charts']))
+   if (!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['skip_charts']))
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['skip_charts'] = false;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['skip_charts'] = false;
    }
    if (isset($_REQUEST['sc_create_charts']))
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['skip_charts'] = 'N' == $_REQUEST['sc_create_charts'];
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['skip_charts'] = 'N' == $_REQUEST['sc_create_charts'];
    }
-   if (isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_menu']))
+   if (isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_menu']))
    {
-       $salva_iframe = $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_menu'];
-       unset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_menu']);
+       $salva_iframe = $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_menu'];
+       unset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_menu']);
    }
-   if (isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida']))
+   if (isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida']))
    {
-       $salva_emb = $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'];
-       unset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida']);
+       $salva_emb = $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'];
+       unset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida']);
    }
    if (isset($nm_run_menu) && $nm_run_menu == 1 && !$salva_emb)
    {
@@ -4665,13 +6517,13 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
                 }
             }
         }
-        $_SESSION['scriptcase']['sc_apl_menu_atual'] = "grid_j3x_vikevents_items";
+        $_SESSION['scriptcase']['sc_apl_menu_atual'] = "Sales-Snapshots";
         $achou = false;
         if (isset($_SESSION['sc_session'][$script_case_init]))
         {
             foreach ($_SESSION['sc_session'][$script_case_init] as $nome_apl => $resto)
             {
-                if ($nome_apl == 'grid_j3x_vikevents_items' || $achou)
+                if ($nome_apl == 'Sales-Snapshots' || $achou)
                 {
                     unset($_SESSION['sc_session'][$script_case_init][$nome_apl]);
                 }
@@ -4691,63 +6543,63 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
                 }
             }
         }
-        $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_menu'] = true;
+        $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_menu'] = true;
    }
    else
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_menu'] = $salva_iframe;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_menu'] = $salva_iframe;
    }
-   $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'] = $salva_emb;
+   $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'] = $salva_emb;
 
-   if (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['initialize']))
+   if (!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['initialize']))
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['initialize'] = true;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['initialize'] = true;
    }
    elseif (!isset($_SERVER['HTTP_REFERER']))
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['initialize'] = false;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['initialize'] = false;
    }
-   elseif (false === strpos($_SERVER['HTTP_REFERER'], '/grid_j3x_vikevents_items/'))
+   elseif (false === strpos($_SERVER['HTTP_REFERER'], '/Sales-Snapshots/'))
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['initialize'] = true;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['initialize'] = true;
    }
    else
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['initialize'] = false;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['initialize'] = false;
    }
-   if ($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['initialize'])
+   if ($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['initialize'])
    {
-       unset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['tot_geral']);
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['contr_total_geral'] = "NAO";
+       unset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['tot_geral']);
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['contr_total_geral'] = "NAO";
    }
 
    $_POST['script_case_init'] = $script_case_init;
    if (isset($nmgp_opcao) && $nmgp_opcao == "busca" && isset($nmgp_orig_pesq))
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['orig_pesq'] = $nmgp_orig_pesq;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['orig_pesq'] = $nmgp_orig_pesq;
    }
-   if (!isset($nmgp_opcao) || empty($nmgp_opcao) || $nmgp_opcao == "grid" && (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['b_sair'])))
+   if (!isset($nmgp_opcao) || empty($nmgp_opcao) || $nmgp_opcao == "grid" && (!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['b_sair'])))
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['b_sair'] = true;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['b_sair'] = true;
    }
-   if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'grid_j3x_vikevents_items')
+   if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'Sales-Snapshots')
    {
-       $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan'] = true;
+       $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan'] = true;
         unset($_SESSION['scriptcase']['sc_outra_jan']);
    }
-   $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['menu_desenv'] = false;   
+   $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['menu_desenv'] = false;   
    if (!defined("SC_ERROR_HANDLER"))
    {
        define("SC_ERROR_HANDLER", 1);
-       include_once(dirname(__FILE__) . "/grid_j3x_vikevents_items_erro.php");
+       include_once(dirname(__FILE__) . "/Sales-Snapshots_erro.php");
    }
    $salva_tp_saida  = (isset($_SESSION['scriptcase']['sc_tp_saida']))  ? $_SESSION['scriptcase']['sc_tp_saida'] : "";
    $salva_url_saida  = (isset($_SESSION['scriptcase']['sc_url_saida'][$script_case_init])) ? $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] : "";
-   if (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_j3x_vikevents_items']))
+   if (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['Sales-Snapshots']))
    { 
        return;
    } 
-   if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'] && $nmgp_opcao != "formphp")
+   if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'] && $nmgp_opcao != "formphp")
    { 
        if ($nmgp_opcao == "change_lang" || $nmgp_opcao == "change_lang_res" || $nmgp_opcao == "change_lang_fil" || $nmgp_opcao == "force_lang")  
        { 
@@ -4763,9 +6615,9 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
            { 
                $nmgp_opcao  = "igual";  
            } 
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_change_lang'] = true;
-           unset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['tot_geral']);
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['contr_total_geral'] = "NAO";
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_change_lang'] = true;
+           unset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['tot_geral']);
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['contr_total_geral'] = "NAO";
            $Temp_lang = explode(";" , $nmgp_idioma);  
            if (isset($Temp_lang[0]) && !empty($Temp_lang[0]))  
            { 
@@ -4792,7 +6644,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
            } 
            $nmgp_schema = $nmgp_schema . "/" . $nmgp_schema;  
            $_SESSION['scriptcase']['str_schema_all'] = $nmgp_schema;
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['num_css'] = rand(0, 1000);
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['num_css'] = rand(0, 1000);
        } 
        if ($nmgp_opcao == "volta_grid")  
        { 
@@ -4800,11 +6652,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
        }   
        if (!empty($nmgp_opcao))  
        { 
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] = $nmgp_opcao ;  
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] = $nmgp_opcao ;  
        }   
        if (isset($nmgp_lig_edit_lapis)) 
        {
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['mostra_edit'] = $nmgp_lig_edit_lapis;
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['mostra_edit'] = $nmgp_lig_edit_lapis;
            unset($GLOBALS["nmgp_lig_edit_lapis"]) ;  
            if (isset($_SESSION['nmgp_lig_edit_lapis'])) 
            {
@@ -4813,27 +6665,27 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
        }
        if (isset($nmgp_outra_jan) && $nmgp_outra_jan == 'true')
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan'] = true;
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan'] = true;
        }
        $nm_saida = "";
-       if (isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['volta_redirect_apl']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['volta_redirect_apl']))
+       if (isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['volta_redirect_apl']) && !empty($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['volta_redirect_apl']))
        {
-           $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['volta_redirect_apl']; 
-           $nm_apl_dependente = $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['volta_redirect_tp']; 
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['volta_redirect_apl'] = "";
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['volta_redirect_tp'] = "";
-           $nm_url_saida = "grid_j3x_vikevents_items_fim.php"; 
+           $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['volta_redirect_apl']; 
+           $nm_apl_dependente = $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['volta_redirect_tp']; 
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['volta_redirect_apl'] = "";
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['volta_redirect_tp'] = "";
+           $nm_url_saida = "Sales-Snapshots_fim.php"; 
        
        }
-       elseif (substr($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'], 0, 7) != "grafico" && $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] != "pdf" ) 
+       elseif (substr($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'], 0, 7) != "grafico" && $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] != "pdf" ) 
        {
-           if (isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan'])
+           if (isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan'])
            {
                if ($nmgp_url_saida == "modal")
                {
-                   $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_modal'] = true;
+                   $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_modal'] = true;
                }
-               $nm_url_saida = "grid_j3x_vikevents_items_fim.php"; 
+               $nm_url_saida = "Sales-Snapshots_fim.php"; 
            }
            else
            {
@@ -4841,11 +6693,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
                $nm_url_saida = str_replace("_fim.php", ".php", $nm_url_saida);
                if (!empty($nmgp_url_saida)) 
                { 
-                   $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['retorno_cons'] = $nmgp_url_saida ; 
+                   $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['retorno_cons'] = $nmgp_url_saida ; 
                } 
-               if (!empty($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['retorno_cons'])) 
+               if (!empty($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['retorno_cons'])) 
                { 
-                   $nm_url_saida = $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['retorno_cons']  . "?script_case_init=" . NM_encode_input($script_case_init);  
+                   $nm_url_saida = $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['retorno_cons']  . "?script_case_init=" . NM_encode_input($script_case_init);  
                    $nm_apl_dependente = 1 ; 
                } 
                if (!empty($nm_url_saida)) 
@@ -4853,7 +6705,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
                    $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $nm_url_saida ; 
                } 
                $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $nm_url_saida; 
-               $nm_url_saida = "grid_j3x_vikevents_items_fim.php"; 
+               $nm_url_saida = "Sales-Snapshots_fim.php"; 
                $_SESSION['scriptcase']['sc_tp_saida'] = "P"; 
                if ($nm_apl_dependente == 1) 
                { 
@@ -4862,10 +6714,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
            } 
        }
 // 
-       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $nm_apl_dependente != 1 && substr($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'], 0, 7) != "grafico" && $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] != "pdf" ) 
+       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $nm_apl_dependente != 1 && substr($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'], 0, 7) != "grafico" && $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] != "pdf" ) 
        { 
             $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $_SESSION['scriptcase']['nm_sc_retorno']; 
-            $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['menu_desenv'] = true;   
+            $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['menu_desenv'] = true;   
        } 
        if (isset($nmgp_parms_ret)) 
        {
@@ -4878,74 +6730,74 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
            {
                $todo[2] = $sc_conv_var[strtolower($todo[2])];
            }
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['form_psq_ret']  = $todo[0];
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['campo_psq_ret'] = $todo[1];
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['dado_psq_ret']  = $todo[2];
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['js_apos_busca'] = $nm_evt_ret_busca;
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opc_psq'] = true;   
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['form_psq_ret']  = $todo[0];
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['campo_psq_ret'] = $todo[1];
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['dado_psq_ret']  = $todo[2];
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['js_apos_busca'] = $nm_evt_ret_busca;
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opc_psq'] = true;   
            if (isset($nmgp_iframe_ret)) 
            {
-               $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['iframe_ret_cap'] = $nmgp_iframe_ret;
+               $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['iframe_ret_cap'] = $nmgp_iframe_ret;
            }
        } 
-       elseif (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opc_psq']))
+       elseif (!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opc_psq']))
        {
-           $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opc_psq'] = false ;   
+           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opc_psq'] = false ;   
        } 
-       if (isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form'])
+       if (isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form'])
        {
-           if (!isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_full']) || !$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida_form_full'])
+           if (!isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_full']) || !$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida_form_full'])
            {
-               $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['mostra_edit'] = "N";   
+               $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['mostra_edit'] = "N";   
            } 
            $_SESSION['scriptcase']['sc_tp_saida']  = $salva_tp_saida;
            $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $salva_url_saida;
        } 
        $GLOBALS["NM_ERRO_IBASE"] = 0;  
-       if (isset($_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['sc_outra_jan'])
+       if (isset($_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['sc_outra_jan'])
        {
            $nm_apl_dependente = 0;
        }
-       $contr_grid_j3x_vikevents_items = new grid_j3x_vikevents_items_apl();
+       $contr_Sales_Snapshots = new Sales_Snapshots_apl();
 
       if ('ajax_autocomp' == $nmgp_opcao)
       {
           $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] = "busca";
-          $contr_grid_j3x_vikevents_items->NM_ajax_flag = true;
-          $contr_grid_j3x_vikevents_items->NM_ajax_opcao = $NM_ajax_opcao;
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] = "busca";
+          $contr_Sales_Snapshots->NM_ajax_flag = true;
+          $contr_Sales_Snapshots->NM_ajax_opcao = $NM_ajax_opcao;
       }
       if ('ajax_filter_save' == $nmgp_opcao)
       {
           $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] = "busca";
-          $contr_grid_j3x_vikevents_items->NM_ajax_flag = true;
-          $contr_grid_j3x_vikevents_items->NM_ajax_opcao = "ajax_filter_save";
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] = "busca";
+          $contr_Sales_Snapshots->NM_ajax_flag = true;
+          $contr_Sales_Snapshots->NM_ajax_opcao = "ajax_filter_save";
       }
       if ('ajax_filter_delete' == $nmgp_opcao)
       {
           $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] = "busca";
-          $contr_grid_j3x_vikevents_items->NM_ajax_flag = true;
-          $contr_grid_j3x_vikevents_items->NM_ajax_opcao = "ajax_filter_delete";
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] = "busca";
+          $contr_Sales_Snapshots->NM_ajax_flag = true;
+          $contr_Sales_Snapshots->NM_ajax_opcao = "ajax_filter_delete";
       }
       if ('ajax_filter_select' == $nmgp_opcao)
       {
           $nmgp_opcao = 'busca';
-          $_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['opcao'] = "busca";
-          $contr_grid_j3x_vikevents_items->NM_ajax_flag = true;
-          $contr_grid_j3x_vikevents_items->NM_ajax_opcao = "ajax_filter_select";
+          $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] = "busca";
+          $contr_Sales_Snapshots->NM_ajax_flag = true;
+          $contr_Sales_Snapshots->NM_ajax_opcao = "ajax_filter_select";
       }
-       $contr_grid_j3x_vikevents_items->controle();
+       $contr_Sales_Snapshots->controle();
    } 
-   if (!$_SESSION['sc_session'][$script_case_init]['grid_j3x_vikevents_items']['embutida'] && $nmgp_opcao == "formphp")
+   if (!$_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['embutida'] && $nmgp_opcao == "formphp")
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 0;  
-       $contr_grid_j3x_vikevents_items = new grid_j3x_vikevents_items_apl();
-       $contr_grid_j3x_vikevents_items->controle();
+       $contr_Sales_Snapshots = new Sales_Snapshots_apl();
+       $contr_Sales_Snapshots->controle();
    } 
 //
-   function nm_limpa_str_grid_j3x_vikevents_items(&$str)
+   function nm_limpa_str_Sales_Snapshots(&$str)
    {
        if (get_magic_quotes_gpc())
        {
@@ -4964,28 +6816,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
            }
        }
    }
-   function nm_protect_num_grid_j3x_vikevents_items($name, &$val)
+   function nm_protect_num_Sales_Snapshots($name, &$val)
    {
        if (empty($val))
        {
           return;
        }
        $Nm_numeric = array();
-       $Nm_numeric[] = "id";
-       $Nm_numeric[] = "tsend";
-       $Nm_numeric[] = "tsendiscr";
-       $Nm_numeric[] = "availnum";
-       $Nm_numeric[] = "price";
-       $Nm_numeric[] = "ts";
-       $Nm_numeric[] = "published";
-       $Nm_numeric[] = "archived";
-       $Nm_numeric[] = "origid";
-       $Nm_numeric[] = "origavailnum";
-       $Nm_numeric[] = "multiprices";
-       $Nm_numeric[] = "dayselection";
-       $Nm_numeric[] = "forfaitprice";
-       $Nm_numeric[] = "ownjuid";
-       $Nm_numeric[] = "tsinitsale";
+       $Nm_numeric[] = "j3x_vikevents_items_id";
+       $Nm_numeric[] = "j3x_vikevents_items_price";
+       $Nm_numeric[] = "j3x_vikevents_orders_iditem";
+       $Nm_numeric[] = "j3x_vikevents_orders_persons";
+       $Nm_numeric[] = "j3x_vikevents_orders_totpaid";
+       $Nm_numeric[] = "j3x_vikevents_orders_tot";
+       $Nm_numeric[] = "j3x_vikevents_orders_id";
        if (in_array($name, $Nm_numeric))
        {
            if (is_array($val))
@@ -5024,7 +6868,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_j3x_vikevents_items'][$path_d
            }
        }
    }
-   function grid_j3x_vikevents_items_pack_protect_string($sString)
+   function Sales_Snapshots_pack_protect_string($sString)
    {
       $sString = (string) $sString;
       if (!empty($sString))
