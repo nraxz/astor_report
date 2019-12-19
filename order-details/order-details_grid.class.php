@@ -3788,7 +3788,7 @@ $_SESSION['scriptcase']['order-details']['contr_erro'] = 'off';
  if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['order-details']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['order-details']['Ind_lig_mult']++;
        $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_ticket_detail_@scinf_tickets']) ? $this->Ini->sc_lig_target['C_@scinf_ticket_detail_@scinf_tickets'] : (isset($this->Ini->sc_lig_target['C_@scinf_ticket_detail']) ? $this->Ini->sc_lig_target['C_@scinf_ticket_detail'] : null);
        if (isset($this->Ini->sc_lig_md5["tickets"]) && $this->Ini->sc_lig_md5["tickets"] == "S") {
-           $Parms_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->iditem) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->id) . "*scoutNMSC_modal*scinok*scout";
+           $Parms_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->iditem) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->id) . "*scoutSC_glo_par_passvalue*scinpassvalue*scoutNMSC_modal*scinok*scout";
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['order-details']['dashboard_info']['under_dashboard'] && isset($linkTarget))
            {
                if ('' != $Parms_Lig)
@@ -3800,7 +3800,7 @@ $_SESSION['scriptcase']['order-details']['contr_erro'] = 'off';
            $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@order-details@SC_par@" . md5($Parms_Lig);
            $_SESSION['sc_session'][$this->Ini->sc_page]['order-details']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
        } else {
-           $Md5_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->iditem) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->id) . "*scoutNMSC_modal*scinok*scout";
+           $Md5_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->iditem) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->id) . "*scoutSC_glo_par_passvalue*scinpassvalue*scoutNMSC_modal*scinok*scout";
        }
    $nm_saida->saida("<a id=\"id_sc_field_ticket_detail_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_tickets_cons . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : 'modal') . "', 'inicio', '800', '800', '', 'tickets', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_ticket_detail_grid_line . "\" style=\"" . $this->Css_Cmp['css_ticket_detail_grid_line'] . "\">" . $conteudo . "</a>\r\n");
 } else {

@@ -562,18 +562,20 @@ class Sales_Snapshots_grid
    } 
        ob_start(); 
    $_SESSION['scriptcase']['Sales-Snapshots']['contr_erro'] = 'on';
- $passvalue = $_POST["postvalue"];
-
-if($passvalue !== 'thisisastorreport2'){
+if (!isset($_SESSION['passvalue'])) {$_SESSION['passvalue'] = "";}
+if (!isset($this->sc_temp_passvalue)) {$this->sc_temp_passvalue = (isset($_SESSION['passvalue'])) ? $_SESSION['passvalue'] : "";}
+ if($this->sc_temp_passvalue !== 'thisisastorreport'){
 		
 
-			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+			 if (isset($this->sc_temp_passvalue)) {$_SESSION['passvalue'] = $this->sc_temp_passvalue;}
+ if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
  {
 $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('redirect') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
  };
 
 	
 	}
+if (isset($this->sc_temp_passvalue)) {$_SESSION['passvalue'] = $this->sc_temp_passvalue;}
 $_SESSION['scriptcase']['Sales-Snapshots']['contr_erro'] = 'off'; 
        $this->SC_Buf_onInit = ob_get_clean();; 
 
@@ -3614,7 +3616,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf'])
  if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Ind_lig_mult']++;
        $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons_@scinf_tickets']) ? $this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons_@scinf_tickets'] : (isset($this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons']) ? $this->Ini->sc_lig_target['C_@scinf_j3x_vikevents_orders_persons'] : null);
        if (isset($this->Ini->sc_lig_md5["tickets"]) && $this->Ini->sc_lig_md5["tickets"] == "S") {
-           $Parms_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_items_id) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_orders_id) . "*scoutNMSC_modal*scinok*scout";
+           $Parms_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_items_id) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_orders_id) . "*scoutSC_glo_par_passvalue*scinpassvalue*scoutNMSC_modal*scinok*scout";
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['dashboard_info']['under_dashboard'] && isset($linkTarget))
            {
                if ('' != $Parms_Lig)
@@ -3626,7 +3628,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['proc_pdf'])
            $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@Sales-Snapshots@SC_par@" . md5($Parms_Lig);
            $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
        } else {
-           $Md5_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_items_id) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_orders_id) . "*scoutNMSC_modal*scinok*scout";
+           $Md5_Lig = "nmgp_lig_edit_lapis*scinS*scoutglo_item*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_items_id) . "*scoutglo_oid*scin" . str_replace("'", "@aspass@", $this->j3x_vikevents_orders_id) . "*scoutSC_glo_par_passvalue*scinpassvalue*scoutNMSC_modal*scinok*scout";
        }
    $nm_saida->saida("<a id=\"id_sc_field_j3x_vikevents_orders_persons_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_tickets_cons . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : 'modal') . "', 'inicio', '440', '630', '', 'tickets', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_j3x_vikevents_orders_persons_grid_line . "\" style=\"" . $this->Css_Cmp['css_j3x_vikevents_orders_persons_grid_line'] . "\">" . $conteudo . "</a>\r\n");
 } else {

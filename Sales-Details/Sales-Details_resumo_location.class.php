@@ -365,18 +365,20 @@ class Sales_Details_resumo
       $this->nm_where_dinamico = "";
        ob_start(); 
       $_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'on';
- $passvalue = $_POST["postvalue"];
-
-if($passvalue !== 'thisisastorreport'){
+if (!isset($_SESSION['passvalue'])) {$_SESSION['passvalue'] = "";}
+if (!isset($this->sc_temp_passvalue)) {$this->sc_temp_passvalue = (isset($_SESSION['passvalue'])) ? $_SESSION['passvalue'] : "";}
+ if($this->sc_temp_passvalue !== 'thisisastorreport'){
 		
 
-			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+			 if (isset($this->sc_temp_passvalue)) {$_SESSION['passvalue'] = $this->sc_temp_passvalue;}
+ if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
  {
 $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('redirect') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
  };
 
 	
 	}
+if (isset($this->sc_temp_passvalue)) {$_SESSION['passvalue'] = $this->sc_temp_passvalue;}
 $_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'off'; 
        $this->SC_Buf_onInit = ob_get_clean();; 
          if  (!empty($this->nm_where_dinamico)) 
@@ -4751,18 +4753,20 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['doc_word'])
      $this->nm_order_dinamico = array();
      $this->nm_where_dinamico = "";
      $_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'on';
- $passvalue = $_POST["postvalue"];
-
-if($passvalue !== 'thisisastorreport'){
+if (!isset($_SESSION['passvalue'])) {$_SESSION['passvalue'] = "";}
+if (!isset($this->sc_temp_passvalue)) {$this->sc_temp_passvalue = (isset($_SESSION['passvalue'])) ? $_SESSION['passvalue'] : "";}
+ if($this->sc_temp_passvalue !== 'thisisastorreport'){
 		
 
-			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+			 if (isset($this->sc_temp_passvalue)) {$_SESSION['passvalue'] = $this->sc_temp_passvalue;}
+ if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
  {
 $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('redirect') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
  };
 
 	
 	}
+if (isset($this->sc_temp_passvalue)) {$_SESSION['passvalue'] = $this->sc_temp_passvalue;}
 $_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'off'; 
      if  (!empty($this->nm_where_dinamico)) 
      {   

@@ -214,7 +214,7 @@ class Sales_Snapshots_ini
       $this->nm_hr_criacao   = "092851"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20191219"; 
-      $this->nm_hr_ult_alt   = "095349"; 
+      $this->nm_hr_ult_alt   = "110812"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -897,8 +897,20 @@ class Sales_Snapshots_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQJsHABYVWXGDMrYVcFKV5X7HMFUHQNwZSBqHAN7V5BqHgrKDkXKHEFqHMBiDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKHArCDurmDoXGHQFYDQFaHIBOD5F7HgrwVcXKH5XCHMraHQNwZ1FGHINaV5X7HgNOHErsH5FGZuB/DcBiDQBqD1NKD5F7DMzGVIBsHEX7HIXGDcFYZ1FGD1NaD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIvsVWFaDMvOZSNiDWJeHIX7HQNmZSBOD1NaV5X7HgNOVkJqH5FYHMJwHQNwZ9F7HAvCD5F7DMrYVcBUDWBmVEraHQBiZ1BOD1zGV5X7HgBYHEJqH5F/HIXGHQJKZ9F7HIvsV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgNKHENiDWXCHMBiHQJeDQFaHIvsD5F7DMBOV9FeDWBmVENUDcFYH9BqD1zGV5X7HgNOVkJqH5FYHIBiHQXsZ9XGHAvmD5F7DMvODkBsHEFGVENUHQNwH9BODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgBeDkB/HEB3DoB/HQFYDQJwHANOV5JwHgrKDkFCDWJeVoB/D9BsZkFUHArKHQraDEBeHEXeDuFYVoB/D9NwZ9rqHANKD5BOHuBOVcBUDurGVErqHQNGZkFUZ1BeHuXGDMzGHEJGH5F/HMBqDcJeDQX7DSrwD5JwDMrwDkFCDWBmVEFGHQFYH9FaHIBeZMBODEvsZSJGDWr/DoB/D9XsZSFGD1NKV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raDMBYVIBsDWFaHIJeHQBsZ1BOD1rwHQF7HgvCHArsDWBmDoBOHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiDcNwH9FaD1rwD5BqHgBOVkXeDWX7HMX7DcJeZSBiZ1rwVWXGDMvOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSJqH5FYDoraD9XsDQJsHABYV5BqDMrwVcB/H5FqDoJsDcBqZ1FaHArKD5JeDEBeHEFiV5FaZuFaD9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcBUDWFaVoraD9BsZSFaD1rKV5BqDEBOHEFiV5FaHMJsD9NmH9FGD1BOVWBqHgrKVIBsDWFaHIBiHQXGZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NwDQJsHABYV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWXKVEFGHQNmZkBiHAvCD5BOHgBYHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMNOVIBODuX7HMFUDcFYZSBqZ1BeHQJsHgNOHArsH5F/VoXGDcBwDQFGHIrwHQB/HuBOVcFeHEFGVErqD9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmH9X7HArYV5BOHgrKVcFCH5FqDoX7DcBwZ1X7D1rwV5XGDMBYHEXeDuJeVoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZSFGHIrKD5B/DMrYVcXKDur/HIFGHQNwH9BOHAzGZMBqDEBeHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveZSXeDWXCHIF7HQJKDuBqHABYV5FUHgvsVcBODuB7VEFGHQNwVIJsDSrYHuFaDErKVkXeDWFqDoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVorqDcJUZ1BOZ1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeHuX7DMBYHEXeDuFYVoB/D9NwZ9rqZ1BYHQF7HuNOVIBODWFaVorqD9XOH9B/HIveD5FaDEvsHEBUH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5BqDMBYHEJGDuJeHIBOHQXOH9X7DSrwV5BqHgvOVcBODWJeHMF7D9JmZSFaHAN7HQFUHgvsZSJGDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZkFGHINKD5JeHgNOHErCDuX/VoFGDcXGDQB/D1veHuJwDMrYVcFeDuB7DoXGHQXGZ1BiD1zGZMFaDMveHErsH5BmVoFGHQNwH9BiDSrwHQF7HgrwVcFeH5B7VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DurmZuJsHQBiZ9XGHANOHQBODMvOVIB/H5B7DoXGHQXGZSBOD1rwHuJsHgrKDkB/DWB3VoFGHQXODQBqHAvCVWJwDMBYVcB/H5XKDoXGHQBqZ1BOD1rKHQJeHgBeDkB/DurmDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQNwZ1X7HANOHuFUHgBYHErCDurmVoFGHQFYDuFaHAvCVWJsHgrwDkBsH5XKDoXGHQXGZSBOD1rwHQFUHgBODkXKDWrGVoFGHQBiZSBiDSNaVWJsDMrYDkB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQJmVIJsDSvmD5FaHgNOHEBUDWr/DoB/DcBwZSFGHANOV5FUHuNOV9FiDWXCHMFaD9JmZ1B/HIrwV5FaDErKDkBsDWBmVoJeD9FYDQBqHIvsVWJeDMNaV9FiV5X7HIX7DcJUZ1FaD1rKHuBODMBYHEXeHEFaVoB/HQXGZSFGHAvCVWBqDMrwDkFCDuX7VEF7D9BiH9FaHAN7D5FaDEBOZSJGH5BmDoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUHQNmH9BiHArYHQrqDMNOVcB/H5FqHMBOHQFYZkBiHAvsD5BqHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoF7HQBqZkBiHAzGD5XGHgveHArsHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFKV5F/HIX7HQNwZkFGDSNOHQXGHgBYHErCH5FGDoXGHQJeDQFUHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1NOD5NUDErKVkXeDWFqDoXGD9JKDQBOHAveHQF7HuvmVcFKDWFaDoX7D9JmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
+      if (isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['initialize'])  
+      { 
+          $_SESSION['scriptcase']['Sales-Snapshots']['contr_erro'] = 'on';
+if (!isset($_SESSION['passvalue'])) {$_SESSION['passvalue'] = "";}
+if (!isset($this->sc_temp_passvalue)) {$this->sc_temp_passvalue = (isset($_SESSION['passvalue'])) ? $_SESSION['passvalue'] : "";}
+ $passvalue = $_POST["postvalue"];
+ if (isset($passvalue)) {$this->sc_temp_passvalue = $passvalue;}
+;
+if (isset($this->sc_temp_passvalue)) {$_SESSION['passvalue'] = $this->sc_temp_passvalue;}
+$_SESSION['scriptcase']['Sales-Snapshots']['contr_erro'] = 'off'; 
+          $_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['initialize'] = false;
+      } 
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
       {
@@ -1011,6 +1023,10 @@ class Sales_Snapshots_ini
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['Sales-Snapshots']['embutida_init']) 
       {
+          if (!isset($_SESSION['passvalue'])) 
+          {
+              $this->nm_falta_var .= "passvalue; ";
+          }
       }
 // 
       if (!isset($_SESSION['scriptcase']['glo_tpbanco']))
@@ -3273,6 +3289,11 @@ class Sales_Snapshots_apl
                    }
               }
           } 
+          if (isset($passvalue)) 
+          {
+              $_SESSION['passvalue'] = $passvalue;
+              nm_limpa_str_Sales_Snapshots($_SESSION["passvalue"]);
+          }
       } 
       if ($Parms_form_pdf)
       { 
@@ -6304,6 +6325,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][1
    {
        $nmgp_parms = "";
    }
+   if (isset($passvalue)) 
+   {
+       $_SESSION['passvalue'] = $passvalue;
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -6420,6 +6445,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][1
                     $Tmp_par   = $cadapar[0];
                     $$Tmp_par = $cadapar[1];
                 }
+           }
+           if (isset($passvalue)) 
+           {
+               $_SESSION['passvalue'] = $passvalue;
+               nm_limpa_str_Sales_Snapshots($_SESSION["passvalue"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -6654,6 +6684,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots'][$path_doc_md5][1
        { 
            $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['opcao'] = $nmgp_opcao ;  
        }   
+       if (isset($_POST["passvalue"])) 
+       {
+           $_SESSION["passvalue"] = $_POST["passvalue"];
+           nm_limpa_str_Sales_Snapshots($_SESSION["passvalue"]);
+       }
+       if (isset($_GET["passvalue"])) 
+       {
+           $_SESSION["passvalue"] = $_GET["passvalue"];
+           nm_limpa_str_Sales_Snapshots($_SESSION["passvalue"]);
+       }
+       if (!isset($_SESSION["passvalue"])) 
+       {
+           $_SESSION["passvalue"] = "";
+       }
        if (isset($nmgp_lig_edit_lapis)) 
        {
           $_SESSION['sc_session'][$script_case_init]['Sales-Snapshots']['mostra_edit'] = $nmgp_lig_edit_lapis;
