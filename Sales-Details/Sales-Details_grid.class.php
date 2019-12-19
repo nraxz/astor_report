@@ -535,6 +535,22 @@ class Sales_Details_grid
    { 
        $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['opcao'] = "muda_qt_linhas";
    } 
+       ob_start(); 
+   $_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'on';
+ $passvalue = $_POST["postvalue"];
+
+if($passvalue !== 'thisisastorreport'){
+		
+
+			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+ {
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('redirect') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
+ };
+
+	
+	}
+$_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'off'; 
+       $this->SC_Buf_onInit = ob_get_clean();; 
 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['dashboard_info']['under_dashboard'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['dashboard_info']['maximized']) {
        $tmpDashboardApp = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['dashboard_info']['dashboard_app'];
@@ -2015,6 +2031,10 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
   }
            $nm_saida->saida("  </style>\r\n");
        }
+       if (!empty($this->SC_Buf_onInit))
+       { 
+       $nm_saida->saida("" . $this->SC_Buf_onInit . "\r\n");
+       } 
        $nm_saida->saida("  </HEAD>\r\n");
    } 
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['embutida'] && $this->Ini->nm_ger_css_emb)
@@ -6349,6 +6369,144 @@ $nm_saida->saida("             }\r\n");
       }
       $nm_campo = $trab_saida;
    } 
+   function nmgp_redireciona_form($nm_apl_dest, $nm_apl_retorno, $nm_apl_parms, $nm_target="", $alt_modal=0, $larg_modal=0, $opc="")
+   {
+      if (is_array($nm_apl_parms))
+      {
+          $tmp_parms = "";
+          foreach ($nm_apl_parms as $par => $val)
+          {
+              $par = trim($par);
+              $val = trim($val);
+              $tmp_parms .= str_replace(".", "_", $par) . "?#?";
+              if (substr($val, 0, 1) == "$")
+              {
+                  $tmp_parms .= $$val;
+              }
+              elseif (substr($val, 0, 1) == "{")
+              {
+                  $val        = substr($val, 1, -1);
+                  $tmp_parms .= $this->$val;
+              }
+              elseif (substr($val, 0, 1) == "[")
+              {
+                  $tmp_parms .= $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details'][substr($val, 1, -1)];
+              }
+              else
+              {
+                  $tmp_parms .= $val;
+              }
+              $tmp_parms .= "?@?";
+          }
+          $nm_apl_parms = $tmp_parms;
+      }
+      $target = (empty($nm_target)) ? "_self" : $nm_target;
+      if (strtolower(substr($nm_apl_dest, 0, 7)) == "http://" || strtolower(substr($nm_apl_dest, 0, 8)) == "https://" || strtolower(substr($nm_apl_dest, 0, 3)) == "../")
+      {
+          echo "<SCRIPT language=\"javascript\">";
+          if (strtolower($target) == "_blank")
+          {
+              echo "window.open ('" . $nm_apl_dest . "');";
+              echo "</SCRIPT>";
+              return;
+          }
+          else
+          {
+              echo "window.location='" . $nm_apl_dest . "';";
+              echo "</SCRIPT>";
+              exit;
+          }
+      }
+      $dir = explode("/", $nm_apl_dest);
+      if (count($dir) == 1)
+      {
+          $nm_apl_dest = str_replace(".php", "", $nm_apl_dest);
+          $nm_apl_dest = $this->Ini->path_link . $nm_apl_dest . "/" . $nm_apl_dest . ".php";
+      }
+      if ($nm_target == "modal")
+      {
+          if (!empty($nm_apl_parms))
+          {
+              $nm_apl_parms = str_replace("?#?", "*scin", $nm_apl_parms);
+              $nm_apl_parms = str_replace("?@?", "*scout", $nm_apl_parms);
+              $nm_apl_parms = "nmgp_parms=" . $nm_apl_parms . "&";
+          }
+          $par_modal = "?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&nmgp_outra_jan=true&nmgp_url_saida=modal&NMSC_modal=ok&";
+           if ((isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['embutida_form_full']) && $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['embutida_form_full']) || (isset($this->grid_emb_form_full) && $this->grid_emb_form_full))
+           {
+              $this->redir_modal = "$(function() { parent.tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
+           }
+           else
+           {
+              $this->redir_modal = "$(function() { tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
+           }
+          return;
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['iframe_print']) && $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['iframe_print'] )
+      {
+          $target = "_parent";
+      }
+   ?>
+     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+      <HTML>
+      <HEAD>
+      <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
+?>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0," />
+<?php
+}
+?>
+       <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+       <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+       <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+       <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+       <META http-equiv="Pragma" content="no-cache"/>
+      </HEAD>
+      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+      <BODY>
+   <form name="Fredir" method="post" 
+                     target="_self"> 
+     <input type="hidden" name="nmgp_parms" value="<?php echo NM_encode_input($nm_apl_parms) ?>"/>
+<?php
+   if ($target == "_blank")
+   {
+?>
+       <input type="hidden" name="nmgp_outra_jan" value="true"/> 
+<?php
+   }
+   else
+   {
+?>
+     <input type="hidden" name="nmgp_url_saida" value="<?php echo NM_encode_input($nm_apl_retorno) ?>">
+     <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page) ?>"/> 
+     <input type="hidden" name="script_case_session" value="<?php echo NM_encode_input(session_id());?>"/>
+<?php
+   }
+?>
+   </form> 
+      <SCRIPT type="text/javascript">
+          window.onload = function(){
+             submit_Fredir();
+          };
+          function submit_Fredir()
+          {
+              document.Fredir.target = "<?php echo $target ?>"; 
+              document.Fredir.action = "<?php echo $nm_apl_dest ?>";
+              document.Fredir.submit();
+          }
+      </SCRIPT>
+      </BODY>
+      </HTML>
+   <?php
+      if ($target != "_blank")
+      {
+          exit;
+      }
+   }
  function check_btns()
  {
  }

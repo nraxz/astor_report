@@ -154,6 +154,25 @@ class Sales_Snapshots_rtf
               $this->j3x_vikevents_items_price = substr($this->j3x_vikevents_items_price, 0, $tmp_pos);
           }
       } 
+      $this->nm_where_dinamico = "";
+      $_SESSION['scriptcase']['Sales-Snapshots']['contr_erro'] = 'on';
+ $passvalue = $_POST["postvalue"];
+
+if($passvalue !== 'thisisastorreport2'){
+		
+
+			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+ {
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('redirect') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
+ };
+
+	
+	}
+$_SESSION['scriptcase']['Sales-Snapshots']['contr_erro'] = 'off'; 
+      if  (!empty($this->nm_where_dinamico)) 
+      {   
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['where_pesq'] .= $this->nm_where_dinamico;
+      }   
       $this->arr_export = array('label' => array(), 'lines' => array());
       $this->arr_span   = array();
 
@@ -294,6 +313,13 @@ class Sales_Snapshots_rtf
       } 
       $nmgp_order_by = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Snapshots']['order_grid'];
       $nmgp_select .= $nmgp_order_by; 
+      if (!empty($this->Ini->nm_col_dinamica)) 
+      {
+          foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+          {
+              $nmgp_select = str_replace($nm_cada_col, $nm_nova_col, $nmgp_select); 
+          }
+      }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select_count;
       $rt = $this->Db->Execute($nmgp_select_count);
       if ($rt === false && !$rt->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1)

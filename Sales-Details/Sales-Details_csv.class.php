@@ -192,6 +192,25 @@ class Sales_Details_csv
           }
           $this->start_at_2 = $Busca_temp['start_at_input_2']; 
       } 
+      $this->nm_where_dinamico = "";
+      $_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'on';
+ $passvalue = $_POST["postvalue"];
+
+if($passvalue !== 'thisisastorreport'){
+		
+
+			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+ {
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('redirect') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
+ };
+
+	
+	}
+$_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'off'; 
+      if  (!empty($this->nm_where_dinamico)) 
+      {   
+          $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['where_pesq'] .= $this->nm_where_dinamico;
+      }   
       $this->arr_export = array('label' => array(), 'lines' => array());
       $this->arr_span   = array();
 
@@ -304,6 +323,13 @@ class Sales_Details_csv
       } 
       $nmgp_order_by = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['order_grid'];
       $nmgp_select .= $nmgp_order_by; 
+      if (!empty($this->Ini->nm_col_dinamica)) 
+      {
+          foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+          {
+              $nmgp_select = str_replace($nm_cada_col, $nm_nova_col, $nmgp_select); 
+          }
+      }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select_count;
       $rt = $this->Db->Execute($nmgp_select_count);
       if ($rt === false && !$rt->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1)

@@ -362,6 +362,27 @@ class Sales_Details_resumo
        $start_at_2 = $Busca_temp['start_at_input_2']; 
        $this->start_at_2 = $Busca_temp['start_at_input_2']; 
      } 
+      $this->nm_where_dinamico = "";
+       ob_start(); 
+      $_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'on';
+ $passvalue = $_POST["postvalue"];
+
+if($passvalue !== 'thisisastorreport'){
+		
+
+			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+ {
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('redirect') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
+ };
+
+	
+	}
+$_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'off'; 
+       $this->SC_Buf_onInit = ob_get_clean();; 
+         if  (!empty($this->nm_where_dinamico)) 
+         {   
+             $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['where_pesq'] .= $this->nm_where_dinamico;
+         }
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['pesq_tab_label']))
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['pesq_tab_label'] = "";
@@ -3336,6 +3357,10 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        $nm_saida->saida("   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" />\r\n");
 }
 
+      if (!empty($this->SC_Buf_onInit))
+      { 
+          $nm_saida->saida("" . $this->SC_Buf_onInit . "\r\n");
+      } 
       $nm_saida->saida("</HEAD>\r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['responsive_chart']['active']) {
           $summary_width = "width=\"100%\"";
@@ -4724,6 +4749,25 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['doc_word'])
      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['where_pesq_filtro'];
      $this->nm_field_dinamico = array();
      $this->nm_order_dinamico = array();
+     $this->nm_where_dinamico = "";
+     $_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'on';
+ $passvalue = $_POST["postvalue"];
+
+if($passvalue !== 'thisisastorreport'){
+		
+
+			 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+ {
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('redirect') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
+ };
+
+	
+	}
+$_SESSION['scriptcase']['Sales-Details']['contr_erro'] = 'off'; 
+     if  (!empty($this->nm_where_dinamico)) 
+     {   
+         $_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['where_pesq'] .= $this->nm_where_dinamico;
+     }   
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
@@ -4741,7 +4785,21 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['doc_word'])
      $campos_order = "";
      $format       = $this->Ini->Get_Gb_date_format('', 'location');
      $campos_order = $this->Ini->Get_date_order_groupby("location", 'asc', $format, $campos_order);
+     if (!empty($this->Ini->nm_order_dinamico)) 
+     {
+         foreach ($this->Ini->nm_order_dinamico as $nm_cada_col => $nm_nova_col)
+         {
+              $nmgp_order_by = str_replace($nm_cada_col, $nm_nova_col, $nmgp_order_by); 
+         }
+     }
      $nmgp_select .= $nmgp_order_by; 
+     if (!empty($this->Ini->nm_col_dinamica)) 
+     {
+         foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+         {
+                  $nmgp_select = str_replace($nm_cada_col, $nm_nova_col, $nmgp_select); 
+         }
+     }
      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
      $rs_res = $this->Db->Execute($nmgp_select) ; 
      if ($rs_res === false && !$rs_graf->EOF) 
@@ -5256,6 +5314,10 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['doc_word'])
        $title_look = substr($this->Db->qstr($title), 1, -1); 
        $nmgp_def_dados = array(); 
        $nm_comando = "select distinct title from " . $this->Ini->nm_tabela . " where title = '$title_look' order by title"; 
+       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+       {
+           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+       }
        $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
        $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
@@ -5447,6 +5509,10 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['Sales-Details']['doc_word'])
        $title_look = substr($this->Db->qstr($title), 1, -1); 
        $nmgp_def_dados = array(); 
        $nm_comando = "select distinct title from " . $this->Ini->nm_tabela . " where  title like '%" . $title . "%' order by title"; 
+       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+       {
+           $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+       }
        $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
        $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       if ($rs = $this->Db->SelectLimit($nm_comando, 10, 0)) 
